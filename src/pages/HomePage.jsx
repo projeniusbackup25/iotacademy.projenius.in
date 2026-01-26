@@ -5,6 +5,7 @@ import hero1 from "../images/heroimg.jpeg";
 import hero2 from "../images/heroimg.jpeg";
 import hero3 from "../images/heroimg.jpeg";
 import hero4 from "../images/heroimg.jpeg";
+
 import PromoPopup from "../component/Popup";
 import HowWeTeach from "../component/HowWeTeach";
 import ProductsSection from "../component/ProductsSection";
@@ -14,59 +15,57 @@ import FAQSection from "../component/FAQSection";
 import Footer from "../component/Footer";
 import Navbar from "../component/NavBar";
 import Workshop from "../component/Workshop";
-import ChatBot from "../component/ChatBot";   // ✅ ADDED
+import ChatBot from "../component/ChatBot";
 
+/* ✅ STATIC CONSTANTS (ESLint-safe) */
 const slides = [hero1, hero2, hero3, hero4];
+const SLIDE_COUNT = slides.length;
+const EXTENDED_LENGTH = SLIDE_COUNT + 2;
 
 export default function HomePage() {
   const [index, setIndex] = useState(1);
   const [transition, setTransition] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
+  const [showBot, setShowBot] = useState(false);
 
-  const [showBot, setShowBot] = useState(false); // ✅ ADDED
+  const extendedSlides = [
+    slides[SLIDE_COUNT - 1],
+    ...slides,
+    slides[0],
+  ];
 
-  const extendedSlides = [slides[slides.length - 1], ...slides, slides[0]];
-
+  /* 🔹 Promo popup */
   useEffect(() => {
-  const timer = setTimeout(() => {
-    setShowPopup(true);
-  }, 7000); // 7 seconds after every reload
+    const timer = setTimeout(() => setShowPopup(true), 7000);
+    return () => clearTimeout(timer);
+  }, []);
 
-  return () => clearTimeout(timer);
-}, []);
-
-
-
+  /* 🔹 Auto slide */
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prev) => prev + 1);
     }, 5000);
-
     return () => clearInterval(timer);
   }, []);
 
-
-  const SLIDE_COUNT = slides.length;
-
-  
+  /* 🔹 Loop correction (NO dependency warnings) */
   useEffect(() => {
-  if (index === extendedSlides.length - 1) {
-    setTimeout(() => {
-      setTransition(false);
-      setIndex(1);
-    }, 1200);
-  }
+    if (index === EXTENDED_LENGTH - 1) {
+      setTimeout(() => {
+        setTransition(false);
+        setIndex(1);
+      }, 1200);
+    }
 
-  if (index === 0) {
-    setTimeout(() => {
-      setTransition(false);
-      setIndex(SLIDE_COUNT);
-    }, 1200);
-  }
-}, [index, extendedSlides.length]);
+    if (index === 0) {
+      setTimeout(() => {
+        setTransition(false);
+        setIndex(SLIDE_COUNT);
+      }, 1200);
+    }
+  }, [index]);
 
-
-
+  /* 🔹 Re-enable animation */
   useEffect(() => {
     if (!transition) {
       setTimeout(() => setTransition(true), 50);
@@ -127,7 +126,7 @@ export default function HomePage() {
 
       <Footer />
 
-      {/* 🔥 CHATBOT BUTTON */}
+      {/* 💬 Chat Button */}
       <button
         style={{
           position: "fixed",
@@ -148,7 +147,6 @@ export default function HomePage() {
         💬
       </button>
 
-      {/* 🔥 CHATBOT POPUP */}
       {showBot && <ChatBot onClose={() => setShowBot(false)} />}
       {showPopup && <PromoPopup onClose={() => setShowPopup(false)} />}
     </>
