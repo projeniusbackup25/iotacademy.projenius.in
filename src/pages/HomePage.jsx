@@ -46,19 +46,20 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    if (index === extendedSlides.length - 1) {
-      setTimeout(() => {
-        setTransition(false);
-        setIndex(1);
-      }, 1200);
-    }
-    if (index === 0) {
-      setTimeout(() => {
-        setTransition(false);
-        setIndex(slides.length);
-      }, 1200);
-    }
-  }, [index]);
+  if (index === extendedSlides.length - 1) {
+    setTimeout(() => {
+      setTransition(false);
+      setIndex(1);
+    }, 1200);
+  }
+  if (index === 0) {
+    setTimeout(() => {
+      setTransition(false);
+      setIndex(slides.length);
+    }, 1200);
+  }
+}, [index, extendedSlides.length, slides.length]);
+
 
   useEffect(() => {
     if (!transition) {
