@@ -11,7 +11,7 @@ export default function ChatBot({ onClose }) {
         </button>
 
         <iframe
-          src="https://www.chatbase.co/chatbot-iframe/Wm-dA3YC_cv_XcaIu3WOD"
+          src="https://www.chatbase.co/chatbot-iframe/PpCU6yUtfFHv_62dQQoN9"
           width="100%"
           style={{ height: "100%", minHeight: "420px", border: "none" }}
           frameBorder="0"
