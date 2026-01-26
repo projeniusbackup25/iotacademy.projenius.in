@@ -45,6 +45,10 @@ export default function HomePage() {
     return () => clearInterval(timer);
   }, []);
 
+
+  const SLIDE_COUNT = slides.length;
+
+  
   useEffect(() => {
   if (index === extendedSlides.length - 1) {
     setTimeout(() => {
@@ -52,13 +56,15 @@ export default function HomePage() {
       setIndex(1);
     }, 1200);
   }
+
   if (index === 0) {
     setTimeout(() => {
       setTransition(false);
-      setIndex(slides.length);
+      setIndex(SLIDE_COUNT);
     }, 1200);
   }
-}, [index, extendedSlides.length, slides.length]);
+}, [index, extendedSlides.length]);
+
 
 
   useEffect(() => {
