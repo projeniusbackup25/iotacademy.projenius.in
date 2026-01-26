@@ -1,0 +1,160 @@
+.teach-section {
+  padding: 90px 10%;
+  background: #f8fafc;
+}
+
+.teach-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* VIDEO */
+.video-box {
+  position: relative;
+}
+
+.preview-tag {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.video-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+}
+
+.video-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+
+.hours-box {
+  position: absolute;
+  bottom: -25px;
+  right: -25px;
+  background: white;
+  padding: 16px 20px;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  text-align: center;
+}
+
+.hours-box b {
+  color: #2563eb;
+  font-size: 18px;
+}
+
+.hours-box span {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* CONTENT */
+.teach-content .section-tag {
+  color: #2563eb;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 13px;
+}
+
+.teach-content h2 {
+  margin-top: 15px;
+  font-size: 38px;
+  color: #0f172a;
+}
+
+.teach-content h2 span {
+  color: #2563eb;
+}
+
+.teach-content p {
+  margin-top: 18px;
+  font-size: 17px;
+  color: #475569;
+}
+
+.teach-content ul {
+  margin-top: 25px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.teach-content li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-size: 16px;
+  color: #0f172a;
+}
+
+.teach-content li::before {
+  content: "✔";
+  background: #2563eb;
+  color: white;
+  padding: 6px;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .teach-container {
+    grid-template-columns: 1fr;
+  }
+
+  .hours-box {
+    right: 10px;
+    bottom: -15px;
+  }
+}
+
+.teach-cta-btn {
+  margin-top: 28px;
+  padding: 14px 34px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 10px 25px rgba(37,99,235,0.35);
+}
+
+.teach-cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 35px rgba(124,58,237,0.45);
+}
+
+/* BORDER WRAPPER */
+.video-border {
+  padding: 14px;
+  border-radius: 22px;
+  border: 2px solid transparent;
+  transition: all 0.35s ease;
+}
+
+/* HOVER EFFECT (like 2nd image) */
+.video-border:hover {
+  border-color: #2563eb;
+  box-shadow:
+    0 0 0 2px rgba(37, 99, 235, 0.6),
+    0 0 30px rgba(124, 58, 237, 0.4);
+}
+
+

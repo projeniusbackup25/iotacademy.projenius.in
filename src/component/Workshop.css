@@ -1,0 +1,151 @@
+.ws-section {
+  background: #ffffff;
+  padding: 110px 24px;
+  text-align: center;
+}
+
+/* TITLE */
+.ws-title {
+  font-size: 44px;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.ws-sub {
+  max-width: 620px;
+  margin: 14px auto 40px;
+  color: #64748b;
+  font-size: 16px;
+}
+
+/* TOGGLE */
+.ws-toggle {
+  display: inline-flex;
+  background: #f1f5f9;
+  padding: 6px;
+  border-radius: 40px;
+  margin-bottom: 60px;
+}
+
+.ws-toggle button {
+  border: none;
+  padding: 12px 28px;
+  border-radius: 40px;
+  background: transparent;
+  color: #475569;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.ws-toggle button.active {
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  color: white;
+  box-shadow: 0 8px 20px rgba(37,99,235,0.35);
+}
+
+/* GRID */
+.ws-grid {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 36px;
+}
+
+/* CARD */
+.ws-card {
+  background: #ffffff;
+  border-radius: 22px;
+  overflow: hidden;
+  transition: 0.35s ease;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+  border: 0.9px solid #000;
+}
+
+.ws-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 60px rgba(28, 192, 246, 0.688);
+}
+
+/* IMAGE */
+.ws-img {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.ws-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(0,0,0,0.65);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* BODY */
+.ws-body {
+  padding: 24px;
+  text-align: left;
+}
+
+.ws-body h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+.ws-body p {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.ws-meta {
+  margin: 18px 0;
+  display: flex;
+  gap: 18px;
+  font-size: 13px;
+  color: #475569;
+}
+
+/* BUTTON */
+.ws-btn {
+  width: 100%;
+  border: none;
+  padding: 13px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.ws-btn:hover {
+  opacity: 0.9;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .ws-title {
+    font-size: 32px;
+  }
+
+  .ws-sub {
+    font-size: 14px;
+  }
+}
+
+.ws-section {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: 1s ease;
+}
+
+.ws-section.show {
+  opacity: 1;
+  transform: translateY(0);
+}

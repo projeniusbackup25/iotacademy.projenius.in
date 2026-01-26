@@ -1,0 +1,226 @@
+.products-section {
+  padding: 100px 20px;
+  background: linear-gradient(180deg, #f5faff, #ffffff);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: 1s ease;
+}
+
+.products-section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-tag {
+  color: #8b5cf6;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.section-title {
+  font-size: 42px;
+  margin-top: 10px;
+}
+
+.section-title span {
+  color: #2563eb;
+}
+
+.section-sub {
+  margin-top: 10px;
+  color: #64748b;
+}
+
+/* GRID */
+.product-grid {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+/* ================= CARD ================= */
+.product-card {
+  background: white;
+  border-radius: 26px;
+  padding: 32px;
+  text-align: left;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+  transition:
+    transform 0.45s cubic-bezier(.4,0,.2,1),
+    box-shadow 0.45s ease;
+  position: relative;
+  z-index: 1;
+  border: 1.5px solid #000;
+}
+
+.product-card:hover {
+  transform: translateY(-14px) scale(1.02);
+  box-shadow: 0 40px 90px rgba(0,0,0,0.15);
+}
+
+
+/* ===== PREMIUM ANIMATED BORDER ===== */
+.product-card::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 30px;
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
+  background-size: 300% 300%;
+  animation: borderFlow 5s linear infinite;
+  z-index: -1;
+}
+
+.product-card:hover::before {
+  opacity: 1;
+}
+
+/* COLOR THEMES FOR BORDER */
+.product-card.blue::before {
+  background-image: linear-gradient(120deg, #2563eb, #38bdf8, #2563eb);
+}
+
+.product-card.purple::before {
+  background-image: linear-gradient(120deg, #7c3aed, #c084fc, #7c3aed);
+}
+
+.product-card.gold::before {
+  background-image: linear-gradient(120deg, #f59e0b, #fde047, #f59e0b);
+}
+
+@keyframes borderFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* ================= TOP ================= */
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-box {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* BADGE */
+.badge {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* LIST */
+.product-card h3 {
+  margin: 25px 0 15px;
+  font-size: 22px;
+}
+
+.product-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.product-card li {
+  margin-bottom: 10px;
+  color: #475569;
+  position: relative;
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+.product-card li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #22c55e;
+}
+
+/* BUTTON */
+.outline-btn {
+  margin-top: 25px;
+  background: transparent;
+  border: 2px solid;
+  padding: 12px;
+  width: 100%;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.outline-btn:hover {
+  background: currentColor;
+  color: white !important;
+}
+
+/* COLOR THEMES */
+.blue .icon-box { background: #dbeafe; color: #2563eb; }
+.blue .badge { background: #dbeafe; color: #2563eb; }
+.blue .outline-btn { border-color: #2563eb; color: #2563eb; }
+
+.purple .icon-box { background: #ede9fe; color: #7c3aed; }
+.purple .badge { background: #ede9fe; color: #7c3aed; }
+.purple .outline-btn { border-color: #7c3aed; color: #7c3aed; }
+
+.gold .icon-box { background: #fff7ed; color: #f59e0b; }
+.gold .badge { background: #fff7ed; color: #f59e0b; }
+.gold .outline-btn { border-color: #f59e0b; color: #f59e0b; }
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animate content */
+.product-card h3,
+.product-card ul,
+.product-card .outline-btn {
+  transition: transform 0.45s ease, opacity 0.45s ease;
+}
+
+.product-card:hover h3 {
+  transform: translateY(-6px);
+}
+
+.product-card:hover ul {
+  transform: translateY(-4px);
+}
+
+.product-card:hover .outline-btn {
+  transform: translateY(6px);
+}
+
+.icon-box {
+  transition: transform 0.45s ease;
+}
+
+.product-card:hover .icon-box {
+  transform: rotate(-8deg) scale(1.15);
+}
+.outline-btn {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.product-card:hover .outline-btn {
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+.product-card:hover::before {
+  opacity: 1;
+  animation: borderFlow 3s linear infinite;
+}

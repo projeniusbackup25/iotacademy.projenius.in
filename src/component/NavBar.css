@@ -1,0 +1,93 @@
+.nav-wrap {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1000;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.06);
+}
+
+.navbar {
+  max-width: 100%;
+  margin: auto;
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LEFT BRAND */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 80px;
+}
+
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #000; /* black border */
+   border-radius: 128px; 
+}
+
+
+.brand-text {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* RIGHT */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+/* LINKS */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 28px;
+  font-weight: 500;
+  color: #475569;
+}
+
+.nav-links li {
+  cursor: pointer;
+}
+
+.nav-links li:hover {
+  color: #2563eb;
+}
+
+/* LOGIN */
+.login-btn {
+  background: linear-gradient(135deg, #38bdf8, #a855f7);
+  border: none;
+  padding: 10px 26px;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  box-shadow: 0 12px 35px rgba(56,189,248,0.45);
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-links a:hover {
+  color: #2563eb; /* or your theme color */
+}

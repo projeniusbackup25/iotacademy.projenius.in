@@ -1,0 +1,211 @@
+.lp-section {
+  padding: 100px 20px;
+  background: #f8fcff;
+  text-align: center;
+}
+
+.lp-tag {
+  color: #00c2ff;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.lp-title {
+  font-size: 42px;
+  margin-top: 12px;
+}
+
+.lp-title span {
+  background: linear-gradient(90deg, #00b3ff, #6366f1);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* WRAPPER */
+.lp-wrapper {
+  margin-top: 80px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+/* LINE */
+.lp-line {
+  position: absolute;
+  top: 46px;
+  left: 5%;
+  height: 4px;
+  width: 0%;
+  background: linear-gradient(90deg, #38bdf8, #6366f1);
+  z-index: 0;
+  transition: width 1.2s ease;
+}
+
+.line-animate {
+  width: 90%;
+}
+
+/* STEP */
+.lp-step {
+  width: 18%;
+  z-index: 2;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease;
+}
+
+.step-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* CARD – DEFAULT (ALREADY HOVER COLOR) */
+.lp-card {
+  width: 110px;
+  height: 110px;
+  margin: auto;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  transition:
+    transform 0.45s cubic-bezier(.4,0,.2,1),
+    box-shadow 0.45s ease;
+}
+
+/* Hover – animation only */
+.lp-card:hover {
+  transform: translateY(-14px) scale(1.06);
+}
+
+/* BLUE – Card 1 */
+.lp-card.blue {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  box-shadow:
+    0 18px 35px rgba(59,130,246,0.35),
+    0 0 0 6px rgba(99,102,241,0.12);
+}
+
+.lp-card.blue:hover {
+  box-shadow:
+    0 32px 60px rgba(59,130,246,0.55),
+    0 0 0 10px rgba(99,102,241,0.18);
+}
+
+/* PURPLE – Card 2 */
+.lp-card.purple {
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  box-shadow:
+    0 18px 35px rgba(168,85,247,0.35),
+    0 0 0 6px rgba(124,58,237,0.12);
+}
+
+.lp-card.purple:hover {
+  box-shadow:
+    0 32px 60px rgba(168,85,247,0.55),
+    0 0 0 10px rgba(124,58,237,0.18);
+}
+
+/* YELLOW – Card 3 */
+.lp-card.yellow {
+  background: linear-gradient(135deg, #facc15, #f59e0b);
+  box-shadow:
+    0 18px 35px rgba(250,204,21,0.35),
+    0 0 0 6px rgba(245,158,11,0.12);
+}
+
+.lp-card.yellow:hover {
+  box-shadow:
+    0 32px 60px rgba(250,204,21,0.55),
+    0 0 0 10px rgba(245,158,11,0.18);
+}
+ 
+
+/* ICON */
+.lp-icon {
+  font-size: 34px;
+  color: white;
+  transition: transform 0.45s ease;
+}
+
+.lp-card:hover .lp-icon {
+  transform: translateY(-6px) scale(1.25);
+}
+
+/* NUMBER BADGE */
+.lp-number {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 28px;
+  height: 28px;
+  background: #22c55e;
+  color: white;
+  border-radius: 50%;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.45s ease;
+}
+
+.lp-card:hover .lp-number {
+  transform: rotate(20deg) scale(1.2);
+}
+
+
+/* TEXT */
+.lp-step h4 {
+  margin-top: 18px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.lp-step p {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.lp-cta-btn {
+  margin-top: 60px;
+  background: linear-gradient(135deg, #2563eb, #6366f1);
+  color: white;
+  border: none;
+  padding: 16px 36px;
+  border-radius: 999px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 10px 30px rgba(37,99,235,0.4);
+}
+
+.lp-cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(37,99,235,0.5);
+}
+
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .lp-wrapper {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .lp-line {
+    display: none;
+  }
+
+  .lp-step {
+    width: 100%;
+  }
+}
+
+
