@@ -33,9 +33,10 @@ export default function ContactPage() {
 
  const handleSubmit = async () => {
   if (!form.name || !form.phone || !form.email || !form.message) {
-    setStatus("Please fill all required fields.");
-    return;
-  }
+  setPopupState("error");
+  return;
+}
+
 
   setPopupState("loading");
 
