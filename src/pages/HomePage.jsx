@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./HomePage.css";
 
 import hero1 from "../images/heroimg.jpeg";
@@ -17,10 +17,9 @@ import Navbar from "../component/NavBar";
 import Workshop from "../component/Workshop";
 import ChatBot from "../component/ChatBot";
 
-/* ✅ STATIC CONSTANTS (ESLint-safe) */
+/* ✅ STATIC DATA */
 const slides = [hero1, hero2, hero3, hero4];
 const SLIDE_COUNT = slides.length;
-const EXTENDED_LENGTH = SLIDE_COUNT + 2;
 
 export default function HomePage() {
   const [index, setIndex] = useState(1);
@@ -28,11 +27,11 @@ export default function HomePage() {
   const [showPopup, setShowPopup] = useState(false);
   const [showBot, setShowBot] = useState(false);
 
-  const extendedSlides = [
-    slides[SLIDE_COUNT - 1],
-    ...slides,
-    slides[0],
-  ];
+  /* ✅ MEMOIZED (prevents re-render bugs) */
+  const extendedSlides = useMemo(
+    () => [slides[SLIDE_COUNT - 1], ...slides, slides[0]],
+    []
+  );
 
   /* 🔹 Promo popup */
   useEffect(() => {
@@ -45,30 +44,36 @@ export default function HomePage() {
     const timer = setInterval(() => {
       setIndex((prev) => prev + 1);
     }, 5000);
+
     return () => clearInterval(timer);
   }, []);
 
-  /* 🔹 Loop correction (NO dependency warnings) */
+  /* 🔹 Loop correction (CI-safe) */
   useEffect(() => {
-    if (index === EXTENDED_LENGTH - 1) {
-      setTimeout(() => {
+    let timer;
+
+    if (index === extendedSlides.length - 1) {
+      timer = setTimeout(() => {
         setTransition(false);
         setIndex(1);
       }, 1200);
     }
 
     if (index === 0) {
-      setTimeout(() => {
+      timer = setTimeout(() => {
         setTransition(false);
         setIndex(SLIDE_COUNT);
       }, 1200);
     }
-  }, [index]);
+
+    return () => clearTimeout(timer);
+  }, [index, extendedSlides.length]);
 
   /* 🔹 Re-enable animation */
   useEffect(() => {
     if (!transition) {
-      setTimeout(() => setTransition(true), 50);
+      const timer = setTimeout(() => setTransition(true), 50);
+      return () => clearTimeout(timer);
     }
   }, [transition]);
 

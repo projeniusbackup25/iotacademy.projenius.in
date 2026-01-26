@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+
 import Login from "./pages/LoginPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import UserDashboard from "./pages/UserDashboard";
@@ -8,11 +9,19 @@ import ContactPage from "./pages/ContactPage";
 function App() {
   return (
     <Routes>
-      <Route path="/home" element={<HomePage />} />
+      {/* ✅ ROOT ROUTE */}
+      <Route path="/" element={<HomePage />} />
+
+      {/* OPTIONAL: redirect /home → / */}
+      <Route path="/home" element={<Navigate to="/" replace />} />
+
       <Route path="/login" element={<Login />} />
       <Route path="/admindashboard" element={<AdminDashboard />} />
       <Route path="/userdashboard" element={<UserDashboard />} />
       <Route path="/contactpage" element={<ContactPage />} />
+
+      {/* ✅ 404 SAFETY */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
