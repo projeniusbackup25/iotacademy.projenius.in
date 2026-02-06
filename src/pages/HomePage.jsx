@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./HomePage.css";
-import { useNavigate } from "react-router-dom";
 
 import hero1 from "../images/heroimg.jpeg";
 import hero2 from "../images/heroimg.jpeg";
@@ -28,7 +27,6 @@ export default function HomePage() {
   const [transition, setTransition] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
   const [showBot, setShowBot] = useState(false);
-  const navigate = useNavigate();
 
   /* ✅ MEMOIZED (prevents re-render bugs) */
   const extendedSlides = useMemo(
@@ -113,28 +111,27 @@ export default function HomePage() {
           </p>
 
           <div className="hero-actions">
-            
-  <button
-    className="btn-primary"
-    onClick={() =>
-      document.getElementById("workshopkit")?.scrollIntoView({
-        behavior: "smooth",
-      })
-    }
-  >
-    Explore Learning Kits →
-  </button>
+            <button
+              className="btn-primary"
+              onClick={() =>
+                document.getElementById("workshopkit")?.scrollIntoView({
+                  behavior: "smooth",
+                })
+              }
+            >
+              Explore Learning Kits →
+            </button>
 
-  <button
-    className="btn-secondary"
-    onClick={() =>
-      document.getElementById("how")?.scrollIntoView({
-        behavior: "smooth",
-      })
-    }
-  >
-    ▶ Watch Demo
-  </button>
+            <button
+              className="btn-secondary"
+              onClick={() =>
+                document.getElementById("how")?.scrollIntoView({
+                  behavior: "smooth",
+                })
+              }
+            >
+              ▶ Watch Demo
+            </button>
           </div>
 
           <div className="hero-stats">
