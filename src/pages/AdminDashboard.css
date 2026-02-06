@@ -198,3 +198,50 @@ html, body {
   justify-content: space-between;
   padding: 14px 0;
 }
+
+/* SETTINGS DROPDOWN */
+
+.settings-wrapper {
+  position: relative;
+  margin-left: 15px;
+}
+
+.settings-icon {
+  font-size: 20px;
+  cursor: pointer;
+  color: #555;
+}
+
+.settings-icon:hover {
+  color: #2563eb;
+}
+
+.settings-dropdown {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  width: 220px;
+  background: white;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  z-index: 999;
+}
+
+.settings-dropdown p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.settings-dropdown hr {
+  margin: 10px 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+
+.login-time {
+  font-size: 13px;
+  color: #555;
+}
+

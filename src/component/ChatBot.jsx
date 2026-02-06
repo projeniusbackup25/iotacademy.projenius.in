@@ -1,25 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ChatBot.css";
 
-export default function ChatBot({ onClose }) {
+const QUESTIONS = [
+  "How can I help you?",
+  "Need help choosing an IoT course?",
+  "Looking for the right learning kit?",
+  "Want guidance to start your IoT journey?",
+  "Have questions about workshops?",
+  "Not sure where to begin?",
+  "Need expert IoT guidance?"
+];
+
+export default function ChatBot() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [cloudText, setCloudText] = useState(QUESTIONS[0]);
+
+  // Change question every 5 seconds (only when closed)
+  useEffect(() => {
+    if (isOpen) return;
+
+    const interval = setInterval(() => {
+      setCloudText((prev) => {
+        let next;
+        do {
+          next = QUESTIONS[Math.floor(Math.random() * QUESTIONS.length)];
+        } while (next === prev);
+        return next;
+      });
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isOpen]);
+
   return (
-    <div className="chatbot-container">
-      <div className="chat-iframe-wrapper">
+    <>
+      {/* ☁️ CLOUD */}
+      {!isOpen && (
+        <div className="help-cloud">
+          {cloudText}
+        </div>
+      )}
 
-        <button className="chatbot-close-btn" onClick={onClose}>
-          ✖
+      {/* 💬 CHAT ICON */}
+      {!isOpen && (
+        <button
+          className="chat-launcher"
+          onClick={() => setIsOpen(true)}
+        >
+          💬
         </button>
+      )}
 
-        <iframe
-          src="https://www.chatbase.co/chatbot-iframe/PpCU6yUtfFHv_62dQQoN9"
-          width="100%"
-          style={{ height: "100%", minHeight: "420px", border: "none" }}
-          frameBorder="0"
-          allow="clipboard-write"
-          title="Projenius Chatbot"
-        ></iframe>
+      {/* 🤖 CHATBOT */}
+      {isOpen && (
+        <div className="chatbot-container">
+          <button
+            className="chatbot-close-btn"
+            onClick={() => setIsOpen(false)}
+          >
+            ✖
+          </button>
 
-      </div>
-    </div>
+          <iframe
+            src="https://www.chatbase.co/chatbot-iframe/PpCU6yUtfFHv_62dQQoN9"
+            title="Projenius Chatbot"
+            allow="clipboard-write"
+          />
+        </div>
+      )}
+    </>
   );
 }

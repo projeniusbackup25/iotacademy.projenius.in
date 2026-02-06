@@ -5,7 +5,11 @@ import AdminDashboard from "./pages/AdminDashboard";
 import UserDashboard from "./pages/UserDashboard";
 import HomePage from "./pages/HomePage";
 import ContactPage from "./pages/ContactPage";
-
+import WorkshopKit from "./component/WorkshopKits";
+import PaymentPage from "./pages/PaymentPage";
+import PreviewPage from "./pages/PreviewPage";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 function App() {
   return (
     <Routes>
@@ -19,6 +23,11 @@ function App() {
       <Route path="/admindashboard" element={<AdminDashboard />} />
       <Route path="/userdashboard" element={<UserDashboard />} />
       <Route path="/contactpage" element={<ContactPage />} />
+      <Route path="/preview/:level" element={<PreviewPage />} />
+       <Route path="/payment/:level" element={<PaymentPage />} />
+       <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/workshopkit" element={<WorkshopKit />} />
 
       {/* ✅ 404 SAFETY */}
       <Route path="*" element={<Navigate to="/" replace />} />

@@ -3,11 +3,6 @@
   font-family: "Segoe UI", sans-serif;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
-}
-
 .login-page {
   height: 100vh;
   display: flex;
@@ -39,38 +34,54 @@ html, body {
 
 .login-left input {
   width: 100%;
-  padding: 14px 16px;
+  padding: 14px 18px;
   margin-bottom: 18px;
   border-radius: 10px;
   border: 1px solid #cbd5e1;
   font-size: 14px;
-  outline: none;
-  transition: 0.2s;
 }
 
-.login-left input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+/* PASSWORD */
+.password-wrapper {
+  position: relative;
 }
 
+.password-wrapper input {
+  padding-right: 48px;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #64748b;
+  font-size: 18px;
+}
+
+/* ERROR */
 .error {
   color: #dc2626;
   font-size: 13px;
   margin-bottom: 8px;
 }
 
+/* FORGOT PASSWORD – FIXED */
 .forgot {
+  display: block;
   text-align: right;
   font-size: 13px;
   color: #2563eb;
-  cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
+  text-decoration: none;
 }
 
 .forgot:hover {
   text-decoration: underline;
 }
 
+/* BUTTON */
 .login-left button {
   width: 100%;
   padding: 14px;
@@ -81,25 +92,22 @@ html, body {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-.login-left button:hover {
-  opacity: 0.9;
-}
-
-/* RIGHT */
+/* RIGHT – CORRECT IMAGE FIT */
+/* RIGHT – IMAGE MUST FILL FULL SECTION */
 .login-right {
   width: 50%;
-  background: linear-gradient(135deg, #eff6ff, #dbeafe);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .login-right img {
-  width: 80%;
-  max-width: 420px;
+  width: 85;
+  height: 85%;
+  object-fit: cover;  
+  margin: 50px; /* 🔥 THIS IS THE KEY */
+  display: block;
 }
 
 /* MOBILE */
@@ -115,6 +123,6 @@ html, body {
   }
 
   .login-right img {
-    width: 60%;
+    height: 300px;
   }
 }

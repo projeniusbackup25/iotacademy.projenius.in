@@ -1,41 +1,63 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 import "./LoginPage.css";
-import iotImg from "../images/iot-illustration.webp"; // put your IoT image here
-
-const ADMIN_NUMBER = "9025476322";
+import iotImg from "../images/login_page_img.jpeg";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function Login() {
   const navigate = useNavigate();
+
   const [phone, setPhone] = useState("");
-  const [mpin, setMpin] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const handleLogin = async (e) => {
+  e.preventDefault();
+  setError("");
+  setLoading(true);
 
-    if (phone.length !== 10) {
-      setError("Enter valid 10-digit mobile number");
-      return;
-    }
+  try {
+    const res = await axios.post(
+      `${process.env.REACT_APP_API_BASE_URL}/api/auth/login`,
+      { phone, password }
+    );
 
-    if (mpin.length !== 4) {
-      setError("MPIN must be 4 digits");
-      return;
-    }
+    // 🔐 Save common auth data
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("role", res.data.role);
 
-    setError("");
+    // 🔑 ADMIN LOGIN
+    if (res.data.role === "admin") {
+      localStorage.setItem("adminName", res.data.admin.name);
+      localStorage.setItem("adminEmail", res.data.admin.email);
+      localStorage.setItem("loginTime", new Date().toLocaleString());
 
-    if (phone === ADMIN_NUMBER) {
       navigate("/admindashboard");
-    } else {
+    }
+
+    // 👤 USER LOGIN
+    else {
+      localStorage.setItem("userName", res.data.user.name);
+      localStorage.setItem("userPhone", res.data.user.phone);
+      localStorage.setItem("loginTime", new Date().toLocaleString());
       navigate("/userdashboard");
     }
-  };
+
+  } catch (err) {
+    setError(err.response?.data?.message || "Login failed");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 
   return (
     <div className="login-page">
-      {/* LEFT SIDE - FORM */}
+      {/* LEFT */}
       <div className="login-left">
         <h2>Projenius IoT Login</h2>
         <p className="sub-text">Login to start your smart learning journey</p>
@@ -49,23 +71,36 @@ export default function Login() {
             onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}
           />
 
-          <input
-            type="password"
-            placeholder="4 Digit MPIN"
-            maxLength="4"
-            value={mpin}
-            onChange={(e) => setMpin(e.target.value.replace(/\D/g, ""))}
-          />
+          {/* PASSWORD */}
+          <div className="password-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <span
+              className="eye-icon"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
 
           {error && <p className="error">{error}</p>}
 
-          <div className="forgot">Forgot MPIN?</div>
+          <Link to="/forgot-password" className="forgot">
+            Forgot Password?
+          </Link>
 
-          <button type="submit">Sign In</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Signing in..." : "Sign In"}
+          </button>
         </form>
       </div>
 
-      {/* RIGHT SIDE - IMAGE */}
+      {/* RIGHT */}
       <div className="login-right">
         <img src={iotImg} alt="IoT Illustration" />
       </div>

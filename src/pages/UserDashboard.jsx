@@ -1,11 +1,52 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./UserDashboard.css";
+import { useNavigate } from "react-router-dom";
+import { FaCog } from "react-icons/fa";
 
 export default function UserDashboard() {
+  const navigate = useNavigate();
+
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [loginTime, setLoginTime] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
+
+  const menuRef = useRef(null);
+
+  /* 🔐 Load user data */
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    if (role !== "user") {
+      navigate("/login");
+      return;
+    }
+
+    setUserName(localStorage.getItem("userName") || "Student");
+    setUserEmail(localStorage.getItem("userEmail") || "");
+    setLoginTime(localStorage.getItem("loginTime") || "Unknown");
+  }, [navigate]);
+
+  /* ❌ Close dropdown on outside click */
+  useEffect(() => {
+    const handler = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setShowMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  /* 🚪 Logout */
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
   return (
     <div className="ud-layout">
 
-      {/* SIDEBAR */}
+      {/* ================= SIDEBAR ================= */}
       <aside className="ud-sidebar">
         <div className="ud-logo">
           <div className="logo-box">⚙</div>
@@ -27,20 +68,42 @@ export default function UserDashboard() {
         <button className="upgrade-btn">✨ Upgrade Bundle</button>
       </aside>
 
-      {/* MAIN */}
+      {/* ================= MAIN ================= */}
       <main className="ud-main">
 
         {/* TOP BAR */}
         <div className="ud-top">
           <div>
             <span className="welcome">Welcome back,</span>
-            <h3>John! 👋</h3>
+            <h3>{userName}! 👋</h3>
           </div>
 
           <div className="ud-actions">
             <span className="notify">🔔</span>
-            <div className="avatar"></div>
-            <button className="logout">Logout</button>
+
+            {/* SETTINGS DROPDOWN */}
+            <div className="settings-wrapper" ref={menuRef}>
+              <FaCog
+                className="settings-icon"
+                onClick={() => setShowMenu(!showMenu)}
+              />
+
+              {showMenu && (
+                <div className="settings-dropdown">
+                  <p><b>{userName}</b></p>
+                  <p>{userEmail}</p>
+                  <hr />
+                  <p className="login-time">
+                    🕒 Logged in at<br />
+                    <small>{loginTime}</small>
+                  </p>
+
+                  <button className="logout-btn" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -80,10 +143,8 @@ export default function UserDashboard() {
           </div>
         </div>
 
-        {/* STATS + CONTINUE */}
+        {/* STATS */}
         <div className="ud-grid">
-
-          {/* PROGRESS */}
           <div className="stat-box">
             <h4>Your Progress</h4>
 
@@ -96,7 +157,6 @@ export default function UserDashboard() {
             </div>
           </div>
 
-          {/* CONTINUE */}
           <div className="stat-box">
             <h4>Continue Learning</h4>
 
@@ -111,7 +171,6 @@ export default function UserDashboard() {
               </div>
             </div>
           </div>
-
         </div>
 
       </main>

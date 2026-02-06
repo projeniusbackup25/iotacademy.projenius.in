@@ -10,6 +10,9 @@
   align-items: center;
 }
 
+
+
+
 /* VIDEO */
 .video-box {
   position: relative;
@@ -27,30 +30,49 @@
 }
 
 .video-frame {
+  position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+  padding-top: 56.25%; /* 16:9 */
+  background: #000;
 }
 
 .video-frame iframe {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   border: none;
 }
 
+.video-border {
+  padding: 0;
+  border-radius: 22px;
+  border: 2px solid transparent;
+  overflow: hidden;
+  transition: all 0.35s ease;
+}
 
 .hours-box {
   position: absolute;
   bottom: -25px;
-  right: -25px;
+  margin-right: 70px;
   background: white;
-  padding: 16px 20px;
+  padding: 18px 22px;
   border-radius: 14px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.12);
   text-align: center;
+  right: -60px;
+
 }
+
+@media (max-width: 900px) {
+  .hours-box {
+    right: 0;
+    bottom: -15px;
+  }
+}
+
+
 
 .hours-box b {
   color: #2563eb;
@@ -65,9 +87,9 @@
 /* CONTENT */
 .teach-content .section-tag {
   color: #2563eb;
-  font-weight: 600;
+  font-weight: 1000;
   letter-spacing: 1px;
-  font-size: 13px;
+  font-size: 30px;
 }
 
 .teach-content h2 {
@@ -105,7 +127,7 @@
   content: "✔";
   background: #2563eb;
   color: white;
-  padding: 6px;
+  padding: 10px;
   border-radius: 50%;
   font-size: 12px;
 }

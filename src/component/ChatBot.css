@@ -1,32 +1,74 @@
+/* 💬 CHAT ICON */
+.chat-launcher {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #0ea5e9, #22d3ee);
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+}
+
+/* ☁️ FLOATING CLOUD */
+.help-cloud {
+  position: fixed;
+  bottom: 90px;
+  right: 90px;
+  max-width: 260px;
+  padding: 12px 16px;
+  background: white;
+  color: #111827;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: cloudFloat 3s ease-in-out infinite;
+  z-index: 9999;
+  pointer-events: none; /* 🔥 VERY IMPORTANT */
+}
+
+/* ☁️ FLOAT ANIMATION */
+@keyframes cloudFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+/* 🤖 CHAT WINDOW */
 .chatbot-container {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 400px;
-  max-height: 80vh;
-  background: none;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  z-index: 9999;
+  width: 380px;
+  height: 520px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  z-index: 10001;
+  overflow: hidden;
 }
 
-/* CLOSE BUTTON */
+/* ❌ CLOSE BUTTON */
 .chatbot-close-btn {
   position: absolute;
   top: 8px;
   right: 10px;
   background: none;
   border: none;
-  color: white;
   font-size: 18px;
   cursor: pointer;
   z-index: 10;
 }
 
 /* IFRAME */
-.chat-iframe-wrapper {
-  flex: 1;
-  overflow: hidden;
+.chatbot-container iframe {
+  width: 100%;
   height: 100%;
+  border: none;
 }

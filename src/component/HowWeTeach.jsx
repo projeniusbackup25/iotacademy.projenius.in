@@ -16,12 +16,13 @@ export default function HowWeTeach() {
 
           <div className="video-frame">
             <iframe
-              src="https://www.youtube.com/watch?v=LxfPqd9UWwM"
+              src="https://www.youtube.com/embed/1adzVmNh078?si=gfI4n-ehpsL8Jwda" 
               title="Course Preview"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
+            
             </div>
 </div>
 

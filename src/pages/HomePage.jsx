@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./HomePage.css";
+import { useNavigate } from "react-router-dom";
 
 import hero1 from "../images/heroimg.jpeg";
 import hero2 from "../images/heroimg.jpeg";
@@ -16,6 +17,7 @@ import Footer from "../component/Footer";
 import Navbar from "../component/NavBar";
 import Workshop from "../component/Workshop";
 import ChatBot from "../component/ChatBot";
+import WorkshopKit from "../component/WorkshopKits";
 
 /* ✅ STATIC DATA */
 const slides = [hero1, hero2, hero3, hero4];
@@ -26,6 +28,7 @@ export default function HomePage() {
   const [transition, setTransition] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
   const [showBot, setShowBot] = useState(false);
+  const navigate = useNavigate();
 
   /* ✅ MEMOIZED (prevents re-render bugs) */
   const extendedSlides = useMemo(
@@ -110,8 +113,28 @@ export default function HomePage() {
           </p>
 
           <div className="hero-actions">
-            <button className="btn-primary">Explore Learning Kits →</button>
-            <button className="btn-secondary">▶ Watch Demo</button>
+            
+  <button
+    className="btn-primary"
+    onClick={() =>
+      document.getElementById("workshopkit")?.scrollIntoView({
+        behavior: "smooth",
+      })
+    }
+  >
+    Explore Learning Kits →
+  </button>
+
+  <button
+    className="btn-secondary"
+    onClick={() =>
+      document.getElementById("how")?.scrollIntoView({
+        behavior: "smooth",
+      })
+    }
+  >
+    ▶ Watch Demo
+  </button>
           </div>
 
           <div className="hero-stats">
@@ -123,6 +146,7 @@ export default function HomePage() {
       </section>
 
       <section id="how"><HowWeTeach /></section>
+      <section id="workshopkit"><WorkshopKit /></section>
       <section id="product"><ProductsSection /></section>
       <section id="workshop"><Workshop /></section>
       <section id="learn"><LearningPath /></section>
