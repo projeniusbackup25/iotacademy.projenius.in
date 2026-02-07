@@ -2,6 +2,14 @@
   background: #ffffff;
   padding: 110px 24px;
   text-align: center;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: 1s ease;
+}
+
+.ws-section.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* TITLE */
@@ -29,7 +37,10 @@
 
 .ws-toggle button {
   border: none;
-  padding: 12px 28px;
+  padding: 14px 48px;
+  min-width: 320px;
+  min-height: 65px;
+  font-size: 15px;
   border-radius: 40px;
   background: transparent;
   color: #475569;
@@ -38,10 +49,15 @@
   font-weight: 500;
 }
 
+.ws-toggle {
+  gap: 8px;
+}
+
+
 .ws-toggle button.active {
   background: linear-gradient(135deg, #2563eb, #06b6d4);
   color: white;
-  box-shadow: 0 8px 20px rgba(37,99,235,0.35);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
 }
 
 /* GRID */
@@ -49,9 +65,17 @@
   max-width: 1100px;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, minmax(320px, 1fr));
   gap: 36px;
+  justify-content: center;
 }
+
+@media (max-width: 900px) {
+  .ws-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 /* CARD */
 .ws-card {
@@ -59,13 +83,13 @@
   border-radius: 22px;
   overflow: hidden;
   transition: 0.35s ease;
-  box-shadow: 0 12px 35px rgba(0,0,0,0.08);
-  border: 0.9px solid #000;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+  border: 1px solid #000;
 }
 
 .ws-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 25px 60px rgba(28, 192, 246, 0.688);
+  box-shadow: 0 25px 60px rgba(28, 192, 246, 0.65);
 }
 
 /* IMAGE */
@@ -80,7 +104,7 @@
   position: absolute;
   top: 14px;
   left: 14px;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0, 0, 0, 0.65);
   color: white;
   padding: 6px 14px;
   border-radius: 20px;
@@ -128,6 +152,15 @@
   opacity: 0.9;
 }
 
+/* BIG CHAT / SCROLL BUTTON */
+.chat-button,
+.scroll-button {
+  width: 68px;
+  height: 68px;
+  font-size: 28px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
 /* MOBILE */
 @media (max-width: 768px) {
   .ws-title {
@@ -137,15 +170,4 @@
   .ws-sub {
     font-size: 14px;
   }
-}
-
-.ws-section {
-  opacity: 0;
-  transform: translateY(60px);
-  transition: 1s ease;
-}
-
-.ws-section.show {
-  opacity: 1;
-  transform: translateY(0);
 }

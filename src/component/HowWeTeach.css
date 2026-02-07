@@ -5,10 +5,11 @@
 
 .teach-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.3fr 1fr; /* video gets more space */
   gap: 60px;
   align-items: center;
 }
+
 
 
 
@@ -84,13 +85,19 @@
   color: #64748b;
 }
 
-/* CONTENT */
-.teach-content .section-tag {
-  color: #2563eb;
-  font-weight: 1000;
+
+.section-tag {
+  display: block;
+  text-align: center;
+  color: #2563eb !important;
+  font-weight: 700 !important;
   letter-spacing: 1px;
-  font-size: 30px;
+  font-size: 32px;
 }
+
+
+
+
 
 .teach-content h2 {
   margin-top: 15px;
@@ -178,5 +185,4 @@
     0 0 0 2px rgba(37, 99, 235, 0.6),
     0 0 30px rgba(124, 58, 237, 0.4);
 }
-
 

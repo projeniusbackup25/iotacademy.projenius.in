@@ -10,6 +10,10 @@ import PaymentPage from "./pages/PaymentPage";
 import PreviewPage from "./pages/PreviewPage";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import AboutPage from "./pages/AboutPage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+
 function App() {
   return (
     <Routes>
@@ -28,6 +32,9 @@ function App() {
        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/workshopkit" element={<WorkshopKit />} />
+        <Route path="/about" element={<AboutPage/>} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy/>} />
+        <Route path="/termsofservice" element={<TermsOfService/>} />
 
       {/* ✅ 404 SAFETY */}
       <Route path="*" element={<Navigate to="/" replace />} />

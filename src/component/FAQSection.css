@@ -13,9 +13,10 @@
 }
 
 .faq-sub {
-  color: #38bdf8;
-  letter-spacing: 2px;
-  font-weight: 600;
+  color: #2563eb;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  font-size: 30px;
 }
 
 .faq-title {

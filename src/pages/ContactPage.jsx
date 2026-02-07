@@ -112,10 +112,14 @@ export default function ContactPage() {
                 <FaPhoneAlt />
                 <a href="tel:+918925450473">+91 89254 50473</a>
               </div>
+              <div>
+                <FaPhoneAlt />
+                <a href="tel:+919025476322">+91 90254 76322</a>
+              </div>
 
               <div>
                 <FaMapMarkerAlt />
-                Madurai, Tamil Nadu, India
+                <a >Plot no 3, 16, Erikarai St, Velmurugan Nagar, Madurai, Tamil Nadu 625016, India</a>
               </div>
             </div>
           </div>

@@ -22,8 +22,9 @@ export default function LearningPath() {
     { id: 5, title: "Real Projects", sub: "Experience", icon: "🛠️", color: "purple" },
   ];
 
-  const scrollToPricing = () => {
-    document.getElementById("pricing")?.scrollIntoView({
+  /* ✅ SCROLLS TO WorkshopKit SECTION IN HomePage */
+  const scrollToWorkshopKit = () => {
+    document.getElementById("workshopkit")?.scrollIntoView({
       behavior: "smooth",
     });
   };
@@ -31,6 +32,7 @@ export default function LearningPath() {
   return (
     <section ref={sectionRef} className="lp-section">
       <p className="lp-tag">YOUR PATH</p>
+
       <h2 className="lp-title">
         Your IoT <span>Learning Journey</span>
       </h2>
@@ -40,11 +42,10 @@ export default function LearningPath() {
 
         {steps.map((step, i) => (
           <div
+            key={step.id}
             className={`lp-step ${visible ? "step-animate" : ""}`}
             style={{ transitionDelay: `${i * 0.2}s` }}
-            key={step.id}
           >
-            {/* 🔥 ONLY THIS LINE CHANGED */}
             <div className={`lp-card ${step.color}`}>
               <span className="lp-number">{step.id}</span>
               <div className="lp-icon">{step.icon}</div>
@@ -56,7 +57,7 @@ export default function LearningPath() {
         ))}
       </div>
 
-      <button className="lp-cta-btn" onClick={scrollToPricing}>
+      <button className="lp-cta-btn" onClick={scrollToWorkshopKit}>
         Choose Your Learning Plan →
       </button>
     </section>

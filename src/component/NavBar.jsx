@@ -31,7 +31,7 @@ export default function Navbar() {
             <li><a href="#workshopkit">LearningKits</a></li>
             <li><a href="#product">Products</a></li>
             <li><a href="#workshop">Workshops</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="about">About</a></li>
             <li><a href="contactpage">Contact</a></li>
 
           </ul>

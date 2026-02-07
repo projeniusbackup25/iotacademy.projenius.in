@@ -4,6 +4,7 @@ import "./HowWeTeach.css";
 export default function HowWeTeach() {
   return (
     <section className="teach-section">
+      <span className="section-tag">HOW WE TEACH</span>
 
       <div className="teach-container">
 
@@ -37,7 +38,7 @@ export default function HowWeTeach() {
         {/* CONTENT SIDE */}
         <div className="teach-content">
 
-          <span className="section-tag">HOW WE TEACH</span>
+          
 
           <h2>
             Our Teaching Method — <br />

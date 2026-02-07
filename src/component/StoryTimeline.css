@@ -1,0 +1,118 @@
+.journey-section {
+  height: 420vh;
+  background: #f8fafc;
+}
+
+.journey-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* LEFT PANEL */
+.journey-left {
+  width: 360px;
+  min-width: 360px;
+  padding-left: 5vw;
+  background: #f8fafc;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.journey-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+.journey-left h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.journey-left span {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.journey-year {
+  margin-top: 24px;
+  font-size: 96px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+/* RIGHT TRACK */
+.journey-track {
+  display: flex;
+  gap: 80px;
+  padding-left: 10vw;
+  padding-right: 8vw;
+  transition: transform 0.12s ease-out;
+}
+
+.journey-card {
+  width: 420px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 22px;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    filter 0.6s ease,
+    box-shadow 0.6s ease;
+}
+
+/* ACTIVE */
+.journey-card.is-active {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+  box-shadow:
+    0 40px 80px rgba(0, 0, 0, 0.12),
+    0 0 30px rgba(99, 102, 241, 0.35);
+}
+
+/* NEAR (before & after) */
+.journey-card.is-near {
+  opacity: 0.6;
+  transform: scale(0.96);
+  filter: blur(0.6px);
+}
+
+/* FAR */
+.journey-card.is-faded {
+  opacity: 1;
+  transform: scale(0.92);
+  /* filter: blur(1.4px); */
+}
+
+.journey-image {
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.journey-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.journey-card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.journey-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #475569;
+}

@@ -8,11 +8,11 @@
 }
 
 .workshop-tag {
-  color: #38bdf8;
-  font-weight: 600;
-  font-size: 18px;   /* ⬅ increased */
+  color: #2563eb;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  font-size: 30px;
   margin-bottom: 10px;
-  letter-spacing: 1px; /* optional – makes it premium */
   text-transform: uppercase; /* optional */
 }
 

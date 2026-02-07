@@ -1,0 +1,44 @@
+.about-hero {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.about-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.about-hero-content {
+  max-width: 900px;
+  padding: 20px;
+}
+
+.about-hero-content h1 {
+  font-size: 56px;
+  font-weight: 700;
+}
+
+.highlight {
+  color: #2563eb;
+}
+
+.about-hero-sub {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.about-hero-badge {
+  margin-top: 30px;
+  padding: 14px 22px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+}

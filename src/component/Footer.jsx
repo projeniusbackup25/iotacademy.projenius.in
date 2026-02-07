@@ -98,6 +98,8 @@ const handleSubscribe = async () => {
             <li><a href="#workshop">Workshops</a></li>
             <li><a href="#about">About Us</a></li>
             <li><a href="#faq">FAQ</a></li>
+            <li><a href="contact">Contact</a></li>
+            <li><a href="#faq">LearningKits</a></li>
           </ul>
         </div>
 
@@ -140,8 +142,8 @@ const handleSubscribe = async () => {
     <p>© 2025 ProJenius. All rights reserved.</p>
 
     <div className="footer-links">
-      <Link to="/privacy">Privacy Policy</Link>
-      <Link to="/terms">Terms of Service</Link>
+      <Link to="/privacypolicy">Privacy Policy</Link>
+      <Link to="/termsofservice">Terms of Service</Link>
     </div>
   </div>
 

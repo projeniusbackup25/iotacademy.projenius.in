@@ -1,0 +1,117 @@
+.vm-section {
+  padding: 80px 6%;
+  background: #ffffff;
+  font-family: "Inter", sans-serif;
+}
+
+.vm-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 60px;
+}
+
+.vm-header h1 {
+  font-size: 40px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.vm-header p {
+  margin-top: 12px;
+  font-size: 16px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.vm-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 32px;
+}
+
+.vm-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 36px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.35s ease;
+  position: relative;
+}
+
+/* 🔥 Blue Glow Hover Effect */
+.vm-card:hover {
+  border-color: #2563eb;
+  box-shadow:
+    0 0 0 1px #2563eb,
+    0 0 25px rgba(37, 99, 235, 0.35),
+    0 20px 40px rgba(37, 99, 235, 0.15);
+  transform: translateY(-6px);
+}
+
+.vm-icon {
+  width: 56px;
+  height: 56px;
+  background: rgba(37, 99, 235, 0.1);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563eb;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+.vm-card h2 {
+  font-size: 26px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 14px;
+}
+
+.vm-desc {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.vm-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.vm-list li {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.vm-list li svg {
+  color: #2563eb;
+  font-size: 20px;
+  margin-top: 4px;
+}
+
+.vm-list h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.vm-list span {
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .vm-header h1 {
+    font-size: 32px;
+  }
+
+  .vm-card {
+    padding: 28px;
+  }
+}

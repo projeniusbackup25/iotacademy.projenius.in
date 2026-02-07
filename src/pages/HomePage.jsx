@@ -143,10 +143,12 @@ export default function HomePage() {
       </section>
 
       <section id="how"><HowWeTeach /></section>
+      
       <section id="workshopkit"><WorkshopKit /></section>
-      <section id="product"><ProductsSection /></section>
+      
       <section id="workshop"><Workshop /></section>
       <section id="learn"><LearningPath /></section>
+      <section id="product"><ProductsSection /></section>
       <section id="testi"><Testimonials /></section>
       <section id="faq"><FAQSection /></section>
 
