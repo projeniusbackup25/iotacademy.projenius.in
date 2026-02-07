@@ -117,10 +117,14 @@ export default function ContactPage() {
                 <a href="tel:+919025476322">+91 90254 76322</a>
               </div>
 
-              <div>
-                <FaMapMarkerAlt />
-                <a >Plot no 3, 16, Erikarai St, Velmurugan Nagar, Madurai, Tamil Nadu 625016, India</a>
-              </div>
+             <div>
+  <FaMapMarkerAlt />
+  <span>
+    Plot no 3, 16, Erikarai St, Velmurugan Nagar, Madurai,
+    Tamil Nadu 625016, India
+  </span>
+</div>
+
             </div>
           </div>
 
