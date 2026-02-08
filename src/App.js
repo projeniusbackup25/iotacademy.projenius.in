@@ -14,6 +14,14 @@ import AboutPage from "./pages/AboutPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 
+import UserVideo from "./pages/UserVideo";
+import UserProject from "./pages/UserProject";
+import UserDownload from "./pages/UserDownload";
+import Certificate from "./pages/Certificate";
+import OrderHistory from "./pages/OrderPage";
+import CoursesPage from "./pages/CoursePage";
+import ReportsPage from "./pages/ReportsPage";
+
 function App() {
   return (
     <Routes>
@@ -35,6 +43,15 @@ function App() {
         <Route path="/about" element={<AboutPage/>} />
         <Route path="/privacypolicy" element={<PrivacyPolicy/>} />
         <Route path="/termsofservice" element={<TermsOfService/>} />
+
+
+      <Route path="/uservideo" element={<UserVideo />} />
+      <Route path="/userproject" element={<UserProject />} />
+      <Route path="/userdownload" element={<UserDownload />} />
+      <Route path="/certificate" element={<Certificate />} />
+      <Route path="/orders" element={<OrderHistory />} />
+      <Route path="/coursepage" element={<CoursesPage />} /> 
+      <Route path="/reportspage" element={<ReportsPage />} /> 
 
       {/* ✅ 404 SAFETY */}
       <Route path="*" element={<Navigate to="/" replace />} />

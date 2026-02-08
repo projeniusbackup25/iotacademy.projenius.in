@@ -1,0 +1,217 @@
+.up-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f6f9ff;
+}
+
+/* ================= SIDEBAR ================= */
+.up-sidebar {
+  width: 260px;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding: 24px;
+}
+
+.up-logo {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.logo-box {
+  background: #2563eb;
+  color: white;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.up-logo small {
+  color: #64748b;
+}
+
+.up-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.up-menu li {
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  color: #475569;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.up-menu li:hover {
+  background: #eef2ff;
+}
+
+.up-menu .active {
+  background: #2563eb;
+  color: white;
+}
+
+/* ================= MAIN ================= */
+.up-main {
+  flex: 1;
+  padding: 32px;
+}
+
+.up-sub {
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+/* ================= STATS ================= */
+.up-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.up-stat-card {
+  background: #ffffff; /* 🔥 same as normal cards */
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.up-stat-card h3 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* ✔ ONLY text color differences */
+.green {
+  color: #2563eb; /* changed from green → primary blue */
+}
+
+.blue {
+  color: #2563eb;
+}
+
+.gray {
+  color: #64748b;
+}
+
+/* ================= GRID ================= */
+.up-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* ================= PROJECT CARD ================= */
+.up-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.up-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.07);
+}
+
+.up-card h4 {
+  margin-bottom: 8px;
+}
+
+.level {
+  display: inline-block;
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.up-card p {
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 16px;
+}
+
+/* ================= FOOTER ================= */
+.up-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+/* ✔ Subtle Success */
+.submitted {
+  background: #f0fdf4;
+  color: #166534;
+}
+
+/* ✔ Subtle In Progress */
+.inprogress {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* ✔ Neutral */
+.notstarted {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.up-footer button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.up-footer button:hover {
+  background: #1d4ed8;
+}
+
+/* ================= HIGHLIGHTS (PROJECT CARDS ONLY) ================= */
+/* ✔ Completed project */
+.up-card.green {
+  border-bottom: 4px solid #86efac;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f0fdf4 100%
+  );
+}
+
+/* ✔ In-progress project */
+.up-card.blue {
+  border-bottom: 4px solid #93c5fd;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #eff6ff 100%
+  );
+}
+
+/* ================= LOCKED ================= */
+.locked {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.locked-text {
+  font-size: 12px;
+  color: #64748b;
+}

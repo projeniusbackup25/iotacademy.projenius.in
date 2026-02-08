@@ -1,11 +1,14 @@
+/* ================= WORKSHOP SECTION ================= */
+
 .workshop-section {
   padding: 90px 20px;
   background: radial-gradient(circle at top, #f7fbff, #ffffff);
   text-align: center;
   margin: 0;
   border: 0;
-  padding: 0;
 }
+
+/* ================= TAG ================= */
 
 .workshop-tag {
   color: #2563eb;
@@ -13,9 +16,10 @@
   letter-spacing: 1px;
   font-size: 30px;
   margin-bottom: 10px;
-  text-transform: uppercase; /* optional */
+  text-transform: uppercase;
 }
 
+/* ================= TITLES ================= */
 
 .workshop-title {
   font-size: 42px;
@@ -35,6 +39,8 @@
   line-height: 1.6;
 }
 
+/* ================= GRID ================= */
+
 .workshop-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -42,6 +48,8 @@
   max-width: 1200px;
   margin: auto;
 }
+
+/* ================= CARD ================= */
 
 .kit-card {
   border-radius: 22px;
@@ -57,14 +65,14 @@
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at top right, rgba(255,255,255,.35), transparent 60%);
-  pointer-events: none;   /* 🔥 THIS IS THE FIX */
+  pointer-events: none;
 }
-
-
 
 .kit-card:hover {
   transform: translateY(-12px) scale(1.02);
 }
+
+/* ================= THEMES ================= */
 
 .beginner {
   background: linear-gradient(180deg, #fff7ed, #fff);
@@ -82,6 +90,8 @@
   color: #fff;
 }
 
+/* ================= ICON ================= */
+
 .kit-icon {
   width: 48px;
   height: 48px;
@@ -93,20 +103,11 @@
   margin-bottom: 18px;
 }
 
-.yellow {
-  background: linear-gradient(135deg, #facc15, #fb923c);
-  color: #fff;
-}
+.yellow { background: linear-gradient(135deg, #facc15, #fb923c); color: #fff; }
+.blue   { background: linear-gradient(135deg, #0ea5e9, #22d3ee); color: #fff; }
+.purple { background: linear-gradient(135deg, #8b5cf6, #ec4899); color: #fff; }
 
-.blue {
-  background: linear-gradient(135deg, #0ea5e9, #22d3ee);
-  color: #fff;
-}
-
-.purple {
-  background: linear-gradient(135deg, #8b5cf6, #ec4899);
-  color: #fff;
-}
+/* ================= TEXT ================= */
 
 .kit-card h3 {
   font-size: 26px;
@@ -119,9 +120,7 @@
   margin-bottom: 12px;
 }
 
-.advanced .kit-role {
-  color: #cbd5f5;
-}
+.advanced .kit-role { color: #cbd5f5; }
 
 .kit-desc {
   font-size: 15px;
@@ -129,9 +128,9 @@
   margin-bottom: 20px;
 }
 
-.advanced .kit-desc {
-  color: #cbd5f5;
-}
+.advanced .kit-desc { color: #cbd5f5; }
+
+/* ================= LIST ALIGN FIX ================= */
 
 .kit-card ul {
   list-style: none;
@@ -140,24 +139,24 @@
 }
 
 .kit-card li {
-  padding-left: 26px;
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 10px;
   margin-bottom: 14px;
   font-size: 14px;
   color: #4b5563;
-  position: relative;
 }
 
-.advanced li {
-  color: #dbeafe;
-}
+.advanced li { color: #dbeafe; }
 
 .kit-card li::before {
   content: "✦";
-  position: absolute;
-  left: 0;
   color: #38bdf8;
   font-weight: bold;
+  margin-top: 2px;
 }
+
+/* ================= BUTTON ================= */
 
 .btn-gradient {
   width: 100%;
@@ -171,19 +170,79 @@
   color: #fff;
 }
 
-.btn-gradient.yellow {
-  background: linear-gradient(90deg, #facc15, #22c55e);
-}
-
-.btn-gradient.blue {
-  background: linear-gradient(90deg, #0ea5e9, #22d3ee);
-}
-
-.btn-gradient.purple {
-  background: linear-gradient(90deg, #8b5cf6, #ec4899);
-}
+.btn-gradient.yellow { background: linear-gradient(90deg, #facc15, #22c55e); }
+.btn-gradient.blue   { background: linear-gradient(90deg, #0ea5e9, #22d3ee); }
+.btn-gradient.purple { background: linear-gradient(90deg, #8b5cf6, #ec4899); }
 
 .btn-gradient:hover {
   transform: scale(1.04);
   filter: brightness(1.1);
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1024px) {
+
+  .workshop-section {
+    padding: 70px 18px;
+  }
+
+  .workshop-title {
+    font-size: 34px;
+  }
+
+  .workshop-tag {
+    font-size: 24px;
+  }
+
+  .workshop-subtitle {
+    margin-bottom: 50px;
+  }
+
+  .workshop-grid {
+    gap: 24px;
+  }
+
+  .kit-card {
+    padding: 30px 26px;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 640px) {
+
+  .workshop-section {
+    padding: 60px 16px;
+  }
+
+  .workshop-title {
+    font-size: 26px;
+  }
+
+  .workshop-tag {
+    font-size: 20px;
+  }
+
+  .workshop-subtitle {
+    font-size: 14px;
+    margin-bottom: 36px;
+  }
+
+  .kit-card {
+    padding: 26px 20px;
+  }
+
+  .kit-card h3 {
+    font-size: 20px;
+  }
+
+  .kit-desc {
+    font-size: 14px;
+  }
+
+  .btn-gradient {
+    font-size: 14px;
+    padding: 12px;
+  }
 }

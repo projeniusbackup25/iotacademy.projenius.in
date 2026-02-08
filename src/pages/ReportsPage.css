@@ -1,0 +1,104 @@
+.reports-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.stat-card h3 {
+  font-size: 28px;
+  margin: 8px 0;
+}
+
+.positive {
+  color: #16a34a;
+  font-weight: 500;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 20px;
+}
+
+.chart-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Donut placeholder */
+.donut-placeholder {
+  width: 220px;
+  height: 220px;
+  margin: 20px auto;
+  border-radius: 50%;
+  background: conic-gradient(
+    #22c55e 0% 45%,
+    #3b82f6 45% 80%,
+    #f59e0b 80% 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-center {
+  width: 130px;
+  height: 130px;
+  background: #fff;
+  border-radius: 50%;
+  text-align: center;
+  padding-top: 40px;
+}
+
+.legend {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 12px;
+}
+
+.green { color: #22c55e; }
+.blue { color: #3b82f6; }
+.orange { color: #f59e0b; }
+
+/* Line chart placeholder */
+.line-placeholder {
+  height: 160px;
+  background: linear-gradient(180deg, #eef2ff, #fff);
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 12px;
+  color: #64748b;
+}
+
+.revenue-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.filter-btn {
+  background: #f1f5f9;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+}

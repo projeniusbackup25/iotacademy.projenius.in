@@ -1,0 +1,126 @@
+.ud-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f6f9ff;
+}
+
+/* SIDEBAR */
+.ud-sidebar {
+  width: 250px;
+  background: white;
+  padding: 24px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.ud-sidebar h3 {
+  margin-bottom: 4px;
+}
+
+.ud-sidebar small {
+  color: #64748b;
+}
+
+.ud-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+.ud-sidebar li {
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #475569;
+}
+
+.ud-sidebar li:hover {
+  background: #eef2ff;
+}
+
+.ud-sidebar .active {
+  background: #2563eb;
+  color: white;
+}
+
+/* MAIN */
+.ud-main {
+  flex: 1;
+  padding: 32px;
+}
+
+.ud-sub {
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+/* FILTERS */
+.ud-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.ud-filters button {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #f1f5f9;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.ud-filters .active {
+  background: #2563eb;
+  color: white;
+}
+
+/* LIST */
+.ud-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* CARD */
+.ud-card {
+  background: white;
+  padding: 18px 22px;
+  border-radius: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.ud-left {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.ud-icon {
+  font-size: 26px;
+  background: #eef2ff;
+  padding: 12px;
+  border-radius: 14px;
+}
+
+.ud-card h4 {
+  margin-bottom: 4px;
+}
+
+.ud-card p {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* DOWNLOAD BUTTON */
+.download-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+}

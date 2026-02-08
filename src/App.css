@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+/* GLOBAL MOBILE SAFETY FIX */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}

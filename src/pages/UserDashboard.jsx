@@ -46,27 +46,59 @@ export default function UserDashboard() {
   return (
     <div className="ud-layout">
 
-      {/* ================= SIDEBAR ================= */}
-      <aside className="ud-sidebar">
-        <div className="ud-logo">
-          <div className="logo-box">⚙</div>
-          <div>
-            <b>IoT Learn</b>
-            <small>Student Portal</small>
-          </div>
-        </div>
+     <aside className="ud-sidebar">
 
-        <ul className="ud-menu">
-          <li className="active">📘 My Course</li>
-          <li>🎥 Videos</li>
-          <li>🛠 Projects</li>
-          <li>⬇ Downloads</li>
-          <li>🎓 Certificate</li>
-          <li>❓ Support</li>
-        </ul>
+  <div className="ud-logo">
+    <div className="logo-box">⚙</div>
+    <div>
+      <b>IoT Learn</b>
+      <small>Student Portal</small>
+    </div>
+  </div>
 
-        <button className="upgrade-btn">✨ Upgrade Bundle</button>
-      </aside>
+  <ul className="ud-menu">
+    <li
+      className={window.location.pathname === "/userdashboard" ? "active" : ""}
+      onClick={() => (window.location.href = "/userdashboard")}
+    >
+      📘 My Course
+    </li>
+
+    <li
+      className={window.location.pathname === "/uservideo" ? "active" : ""}
+      onClick={() => (window.location.href = "/uservideo")}
+    >
+      🎥 Videos
+    </li>
+
+    <li
+      className={window.location.pathname === "/userproject" ? "active" : ""}
+      onClick={() => (window.location.href = "/userproject")}
+    >
+      🛠 Projects
+    </li>
+
+    <li
+      className={window.location.pathname === "/userdownload" ? "active" : ""}
+      onClick={() => (window.location.href = "/userdownload")}
+    >
+      ⬇ Downloads
+    </li>
+
+    <li
+      className={window.location.pathname === "/certificate" ? "active" : ""}
+      onClick={() => (window.location.href = "/certificate")}
+    >
+      🎓 Certificate
+    </li>
+
+    <li>❓ Support</li>
+  </ul>
+
+  <button className="upgrade-btn">✨ Upgrade Bundle</button>
+
+</aside>
+
 
       {/* ================= MAIN ================= */}
       <main className="ud-main">

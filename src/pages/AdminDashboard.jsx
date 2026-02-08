@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./AdminDashboard.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FaCog } from "react-icons/fa";
 
 export default function AdminDashboard() {
@@ -11,6 +11,7 @@ export default function AdminDashboard() {
   const [showMenu, setShowMenu] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
   const menuRef = useRef(null);
 
   /* 🔐 Load admin data */
@@ -43,9 +44,13 @@ export default function AdminDashboard() {
     navigate("/login");
   };
 
+  /* 🚀 Navigation helper */
+  const goTo = (path) => {
+    navigate(path);
+  };
+
   return (
     <div className="dash-layout">
-
       {/* SIDEBAR */}
       <aside className={`dash-sidebar ${collapse ? "mini" : ""}`}>
         <div className="side-head">
@@ -55,10 +60,33 @@ export default function AdminDashboard() {
         </div>
 
         <ul className="side-menu">
-          <li className="active">Dashboard</li>
-          <li>Order History</li>
-          <li>Courses & Videos</li>
-          <li>Reports</li>
+          <li
+            className={location.pathname === "/admindashboard" ? "active" : ""}
+            onClick={() => goTo("/admindashboard")}
+          >
+            Dashboard
+          </li>
+
+          <li
+            className={location.pathname === "/orders" ? "active" : ""}
+            onClick={() => goTo("/orders")}
+          >
+            Order History
+          </li>
+
+          <li
+            className={location.pathname === "/coursepage" ? "active" : ""}
+            onClick={() => goTo("/coursepage")}
+          >
+            Courses & Videos
+          </li>
+
+          <li
+            className={location.pathname === "/reportspage" ? "active" : ""}
+            onClick={() => goTo("/reportspage")}
+          >
+            Reports
+          </li>
         </ul>
 
         <div className="side-logout" onClick={handleLogout}>
@@ -68,7 +96,6 @@ export default function AdminDashboard() {
 
       {/* MAIN */}
       <main className="dash-main">
-
         {/* TOP BAR */}
         <div className="dash-top">
           <h2>Dashboard</h2>

@@ -1,3 +1,7 @@
+/* =========================
+   BASE — DESKTOP (UNCHANGED)
+========================= */
+
 .journey-section {
   height: 420vh;
   background: #f8fafc;
@@ -13,6 +17,7 @@
 }
 
 /* LEFT PANEL */
+
 .journey-left {
   width: 360px;
   min-width: 360px;
@@ -49,12 +54,15 @@
 }
 
 /* RIGHT TRACK */
+
 .journey-track {
   display: flex;
   gap: 80px;
   padding-left: 10vw;
   padding-right: 8vw;
-  transition: transform 0.12s ease-out;
+
+  /* smooth movement */
+  transition: transform 0.25s cubic-bezier(.22,.61,.36,1);
 }
 
 .journey-card {
@@ -79,7 +87,7 @@
     0 0 30px rgba(99, 102, 241, 0.35);
 }
 
-/* NEAR (before & after) */
+/* NEAR */
 .journey-card.is-near {
   opacity: 0.6;
   transform: scale(0.96);
@@ -90,7 +98,6 @@
 .journey-card.is-faded {
   opacity: 1;
   transform: scale(0.92);
-  /* filter: blur(1.4px); */
 }
 
 .journey-image {
@@ -115,4 +122,129 @@
   font-size: 14px;
   line-height: 1.6;
   color: #475569;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1024px) {
+
+  .journey-section {
+    height: 540vh; /* slower scroll */
+  }
+
+  .journey-left {
+    width: 260px;
+    min-width: 260px;
+    padding-left: 4vw;
+  }
+
+  .journey-year {
+    font-size: 64px;
+  }
+
+  .journey-track {
+    gap: 50px;
+    padding-left: 6vw;
+  }
+
+  .journey-card {
+    width: 340px;
+  }
+
+  .journey-image {
+    height: 180px;
+  }
+}
+
+/* =========================
+   MOBILE — FIXED & SMOOTH
+========================= */
+
+@media (max-width: 768px) {
+
+  /* ✅ Correct scroll length */
+  .journey-section {
+    height: 520vh;
+  }
+
+  .journey-sticky {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 16px;
+  }
+
+  /* CENTER LEFT PANEL */
+  .journey-left {
+    width: 100%;
+    min-width: auto;
+    padding-left: 0;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+
+  .journey-avatar {
+    width: 72px;
+    height: 72px;
+  }
+
+  .journey-left h4 {
+    font-size: 14px;
+  }
+
+  .journey-left span {
+    font-size: 12px;
+  }
+
+  .journey-year {
+    font-size: 42px;
+    margin-top: 10px;
+  }
+
+  /* ✅ IMPORTANT FIX — start from first card */
+  .journey-track {
+    gap: 24px;
+    padding-left: 0;     /* 🔥 KEY FIX */
+    padding-right: 20px;
+    margin-left: 0;      /* 🔥 KEY FIX */
+  }
+
+  .journey-card {
+    width: 260px;
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .journey-image {
+    height: 140px;
+  }
+
+  .journey-card h3 {
+    font-size: 15px;
+  }
+
+  .journey-card p {
+    font-size: 13px;
+  }
+}
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 420px) {
+
+  .journey-section {
+    height: 560vh; /* extra smooth */
+  }
+
+  .journey-card {
+    width: 220px;
+  }
+
+  .journey-year {
+    font-size: 34px;
+  }
 }
