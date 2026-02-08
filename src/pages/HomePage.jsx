@@ -1,10 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 
-import hero1 from "../images/heroimg.jpeg";
-import hero2 from "../images/heroimg.jpeg";
-import hero3 from "../images/heroimg.jpeg";
-import hero4 from "../images/heroimg.jpeg";
+import heroVideo from "../images/heroVideo.mp4"; // your video file
 
 import PromoPopup from "../component/Popup";
 import HowWeTeach from "../component/HowWeTeach";
@@ -18,83 +15,30 @@ import Workshop from "../component/Workshop";
 import ChatBot from "../component/ChatBot";
 import WorkshopKit from "../component/WorkshopKits";
 
-/* ✅ STATIC DATA */
-const slides = [hero1, hero2, hero3, hero4];
-const SLIDE_COUNT = slides.length;
-
 export default function HomePage() {
-  const [index, setIndex] = useState(1);
-  const [transition, setTransition] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
   const [showBot, setShowBot] = useState(false);
 
-  /* ✅ MEMOIZED (prevents re-render bugs) */
-  const extendedSlides = useMemo(
-    () => [slides[SLIDE_COUNT - 1], ...slides, slides[0]],
-    []
-  );
-
-  /* 🔹 Promo popup */
+  /* 🔹 Promo popup after 7 seconds */
   useEffect(() => {
     const timer = setTimeout(() => setShowPopup(true), 7000);
     return () => clearTimeout(timer);
   }, []);
 
-  /* 🔹 Auto slide */
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => prev + 1);
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  /* 🔹 Loop correction (CI-safe) */
-  useEffect(() => {
-    let timer;
-
-    if (index === extendedSlides.length - 1) {
-      timer = setTimeout(() => {
-        setTransition(false);
-        setIndex(1);
-      }, 1200);
-    }
-
-    if (index === 0) {
-      timer = setTimeout(() => {
-        setTransition(false);
-        setIndex(SLIDE_COUNT);
-      }, 1200);
-    }
-
-    return () => clearTimeout(timer);
-  }, [index, extendedSlides.length]);
-
-  /* 🔹 Re-enable animation */
-  useEffect(() => {
-    if (!transition) {
-      const timer = setTimeout(() => setTransition(true), 50);
-      return () => clearTimeout(timer);
-    }
-  }, [transition]);
-
   return (
     <>
       <Navbar />
 
+      {/* ================= HERO SECTION ================= */}
       <section className="hero-wrapper" id="home">
-        <div
-          className={`hero-track ${transition ? "animate" : ""}`}
-          style={{ transform: `translateX(-${index * 100}%)` }}
-        >
-          {extendedSlides.map((img, i) => (
-            <div
-              key={i}
-              className="hero-slide"
-              style={{ backgroundImage: `url(${img})` }}
-            />
-          ))}
-        </div>
+        <video
+          className="hero-video"
+          src={heroVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
 
         <div className="hero-overlay">
           <h1>
@@ -142,10 +86,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ================= SECTIONS ================= */}
       <section id="how"><HowWeTeach /></section>
-      
       <section id="workshopkit"><WorkshopKit /></section>
-      
       <section id="workshop"><Workshop /></section>
       <section id="learn"><LearningPath /></section>
       <section id="product"><ProductsSection /></section>
