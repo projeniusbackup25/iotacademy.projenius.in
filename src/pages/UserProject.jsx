@@ -1,9 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+
 import "./UserProject.css";
 
 export default function UserProject() {
-  const navigate = useNavigate();
+  
 
   return (
     <div className="up-layout">

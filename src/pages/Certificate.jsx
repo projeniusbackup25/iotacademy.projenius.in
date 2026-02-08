@@ -1,9 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+
 import "./Certificate.css";
 
 export default function Certificate() {
-  const navigate = useNavigate(); // ✅ FIX
+
   const overallProgress = 68;
 
   return (

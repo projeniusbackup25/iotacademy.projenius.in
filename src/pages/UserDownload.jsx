@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import "./UserDownload.css";
 
 const files = [
@@ -43,7 +43,7 @@ const files = [
 
 export default function UserDownloads() {
   const [filter, setFilter] = useState("All");
-  const navigate = useNavigate();
+  
 
   const filteredFiles =
     filter === "All"

@@ -1,9 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+
 import "./UserVideo.css";
 
 export default function UserVideo() {
-  const navigate = useNavigate();
+ 
 
   return (
     <div className="vd-layout">
