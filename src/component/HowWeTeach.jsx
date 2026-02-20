@@ -9,36 +9,32 @@ export default function HowWeTeach() {
       <div className="teach-container">
 
         {/* VIDEO SIDE */}
-       <div className="video-border">
-  <div className="video-box">
+        <div className="video-border">
+          <div className="video-box">
 
+            <span className="preview-tag">Course Preview</span>
 
-          <span className="preview-tag">Course Preview</span>
-
-          <div className="video-frame">
-            <iframe
-              src="https://www.youtube.com/embed/1adzVmNh078?si=gfI4n-ehpsL8Jwda" 
-              title="Course Preview"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-            
+            <div className="video-frame">
+              <iframe
+                src="https://www.youtube.com/embed/1adzVmNh078?si=gfI4n-ehpsL8Jwda"
+                title="Course Preview"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
             </div>
-</div>
 
+            {/* ✅ NOW EXACTLY BELOW VIDEO */}
+            <div className="hours-box">
+              <b>100+ Hours </b>
+              <span>  Video Content</span>
+            </div>
 
-          <div className="hours-box">
-            <b>100+ Hours</b>
-            <span>Video Content</span>
           </div>
-
         </div>
 
         {/* CONTENT SIDE */}
         <div className="teach-content">
-
-          
 
           <h2>
             Our Teaching Method — <br />
@@ -62,7 +58,9 @@ export default function HowWeTeach() {
           <button
             className="teach-cta-btn"
             onClick={() => {
-              document.getElementById("product")?.scrollIntoView({ behavior: "smooth" });
+              document
+                .getElementById("product")
+                ?.scrollIntoView({ behavior: "smooth" });
             }}
           >
             Start Your Learning Journey →
@@ -71,7 +69,6 @@ export default function HowWeTeach() {
         </div>
 
       </div>
-
     </section>
   );
 }

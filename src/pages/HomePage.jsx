@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./HomePage.css";
 
-import heroVideo from "../images/heroVideo.mp4"; // your video file
+import heroVideo from "../images/heroVideo.mp4";
 
 import PromoPopup from "../component/Popup";
 import HowWeTeach from "../component/HowWeTeach";
@@ -18,12 +18,35 @@ import WorkshopKit from "../component/WorkshopKits";
 export default function HomePage() {
   const [showPopup, setShowPopup] = useState(false);
   const [showBot, setShowBot] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const videoRef = useRef(null);
 
   /* 🔹 Promo popup after 7 seconds */
   useEffect(() => {
     const timer = setTimeout(() => setShowPopup(true), 7000);
     return () => clearTimeout(timer);
   }, []);
+
+  /* 🔹 Ensure video starts muted (browser-safe autoplay) */
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+    }
+  }, []);
+
+  /* 🔊 Toggle video audio */
+  const toggleAudio = () => {
+    if (videoRef.current) {
+      const newMutedState = !isMuted;
+      videoRef.current.muted = newMutedState;
+      setIsMuted(newMutedState);
+
+      if (!newMutedState) {
+        videoRef.current.play(); // ensures audio starts
+      }
+    }
+  };
 
   return (
     <>
@@ -32,13 +55,36 @@ export default function HomePage() {
       {/* ================= HERO SECTION ================= */}
       <section className="hero-wrapper" id="home">
         <video
+          ref={videoRef}
           className="hero-video"
           src={heroVideo}
           autoPlay
           loop
-          muted
           playsInline
         />
+
+        {/* 🔊 AUDIO TOGGLE BUTTON */}
+        <button
+          onClick={toggleAudio}
+            className="audio-toggle-btn"
+          style={{
+            position: "absolute",
+            top: "20px",
+            right: "20px",
+            width: "44px",
+            height: "44px",
+            borderRadius: "50%",
+            background: "rgba(0,0,0,0.6)",
+            border: "1px solid #2563eb",
+            color: "#fff",
+            fontSize: "18px",
+            cursor: "pointer",
+            zIndex: 10,
+          }}
+          aria-label="Toggle video sound"
+        >
+          {isMuted ? "🔇" : "🔊"}
+        </button>
 
         <div className="hero-overlay">
           <h1>
@@ -124,6 +170,7 @@ export default function HomePage() {
   );
 }
 
+/* ================= STAT COMPONENT ================= */
 function Stat({ value, label }) {
   return (
     <div className="hero-stat-card">

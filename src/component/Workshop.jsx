@@ -3,7 +3,7 @@ import "./Workshop.css";
 
 import img1 from "../images/projenius_logo.png";
 import img2 from "../images/projenius_logo.png";
-import img3 from "../images/SRM.jpeg"
+import img3 from "../images/SRM.jpeg";
 
 /* GET COMING SUNDAY */
 const getComingSunday = () => {
@@ -124,6 +124,7 @@ export default function WorkshopsSection() {
                 <span>⏰ {item.time}</span>
               </div>
 
+              {/* ✅ ONLY CHANGE IS HERE */}
               <button
                 className="ws-btn"
                 onClick={() => {
@@ -134,7 +135,7 @@ export default function WorkshopsSection() {
                   }
                 }}
               >
-                View Gallery
+                {type === "online" ? "Enroll Now" : "View Gallery"}
               </button>
             </div>
           </div>

@@ -125,12 +125,14 @@
 /* ================= SUBSCRIBE ================= */
 .sub-box {
   display: flex;
+  align-items: center;
   background: #0f1a3a;
   border-radius: 30px;
   margin-top: 14px;
   overflow: hidden;
 }
 
+/* INPUT MUST ALWAYS BE INTERACTIVE */
 .sub-box input {
   flex: 1;
   border: none;
@@ -139,16 +141,25 @@
   background: transparent;
   color: white;
   min-width: 0;
+  z-index: 1;              /* ✅ stays above */
 }
 
+/* BUTTON MUST NEVER OVERLAP INPUT */
 .sub-box button {
   border: none;
-  padding: 12px 26px;
+  padding: 12px 22px;
   background: linear-gradient(135deg, #38bdf8, #a855f7);
   color: white;
   cursor: pointer;
   white-space: nowrap;
+
+  flex-shrink: 0;          /* ✅ critical */
+  width: 90px;             /* ✅ fixed width */
+  text-align: center;
+  z-index: 0;              /* ✅ stays behind input */
 }
+
+
 
 /* ================= FOOTER BOTTOM ================= */
 .footer-bottom {
