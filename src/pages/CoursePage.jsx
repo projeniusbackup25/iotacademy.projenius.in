@@ -4,71 +4,77 @@ import { FaTrash } from "react-icons/fa";
 import "./CoursePage.css";
 import "./AdminDashboard.css";
 
-/* 🔗 BACKEND URL */
 const API = "https://iotacademy-backend.onrender.com";
 
+/* 🔗 COURSE → SUBCATEGORY MAP */
 const coursesData = [
   {
     title: "Beginner IoT Fundamentals",
     description: "Learn the basics of IoT, sensors, and microcontrollers",
     level: "Beginner",
+    subCategory: "html",
   },
   {
     title: "Intermediate Sensor Integration",
     description: "Deep dive into sensor data collection and processing",
     level: "Intermediate",
+    subCategory: "css",
   },
   {
     title: "Advanced Cloud IoT Systems",
     description: "Build enterprise-grade IoT solutions with cloud integration",
     level: "Advanced",
+    subCategory: "js",
   },
 ];
 
-const CoursePage = () => {
+export default function CoursePage() {
   const [activeTab, setActiveTab] = useState("All");
   const [openIndex, setOpenIndex] = useState(null);
   const [collapse, setCollapse] = useState(false);
-  
 
-  /* 🔥 VIDEO STATES */
-  const [videos, setVideos] = useState([]);
+  /* 🔥 VIDEO STATE PER COURSE */
+  const [videosByCategory, setVideosByCategory] = useState({});
   const [title, setTitle] = useState("");
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem("token");
-
   const navigate = useNavigate();
   const location = useLocation();
 
   /* ================= FETCH VIDEOS ================= */
-  const fetchVideos = async (level) => {
+  const fetchVideos = async (subCategory) => {
     try {
       const res = await fetch(
-        `${API}/api/videos?subCategory=${level.toLowerCase()}`
+        `${API}/api/videos?subCategory=${subCategory}`
       );
-
       if (!res.ok) throw new Error("Fetch failed");
 
       const data = await res.json();
-      setVideos(data);
+      setVideosByCategory((prev) => ({
+        ...prev,
+        [subCategory]: data,
+      }));
     } catch (err) {
-      console.error("Video fetch failed:", err);
-      setVideos([]);
+      console.error("Fetch failed:", err);
+      setVideosByCategory((prev) => ({
+        ...prev,
+        [subCategory]: [],
+      }));
     }
   };
 
   /* ================= UPLOAD VIDEO ================= */
-  const uploadVideo = async (level) => {
+  const uploadVideo = async (subCategory) => {
     if (!title || !file) {
-      alert("Enter title & select file");
+      alert("Enter title & choose video");
       return;
     }
 
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("subCategory", level.toLowerCase());
+    formData.append("subCategory", subCategory);
     formData.append("video", file);
 
     try {
@@ -76,9 +82,7 @@ const CoursePage = () => {
 
       const res = await fetch(`${API}/api/videos/upload`, {
         method: "POST",
-        headers: {
-          Authorization: token,
-        },
+        headers: { Authorization: token },
         body: formData,
       });
 
@@ -86,37 +90,33 @@ const CoursePage = () => {
 
       setTitle("");
       setFile(null);
-      fetchVideos(level);
+      fetchVideos(subCategory);
     } catch (err) {
-      alert("Upload failed");
       console.error(err);
+      alert("Upload failed");
     } finally {
       setLoading(false);
     }
   };
 
   /* ================= DELETE VIDEO ================= */
-  const deleteVideo = async (id, level) => {
+  const deleteVideo = async (id, subCategory) => {
     if (!window.confirm("Delete this video?")) return;
 
     try {
       const res = await fetch(`${API}/api/videos/${id}`, {
         method: "DELETE",
-        headers: {
-          Authorization: token,
-        },
+        headers: { Authorization: token },
       });
 
       if (!res.ok) throw new Error("Delete failed");
 
-      fetchVideos(level);
+      fetchVideos(subCategory);
     } catch (err) {
       alert("Delete failed");
-      console.error(err);
     }
   };
 
-  /* ================= FILTER COURSES ================= */
   const filteredCourses =
     activeTab === "All"
       ? coursesData
@@ -124,7 +124,7 @@ const CoursePage = () => {
 
   return (
     <div className="admin-layout">
-      {/* ================= SIDEBAR ================= */}
+      {/* SIDEBAR */}
       <aside className={`dash-sidebar ${collapse ? "mini" : ""}`}>
         <div className="side-head">
           <div className="logo-box">⚙</div>
@@ -133,56 +133,24 @@ const CoursePage = () => {
         </div>
 
         <ul className="side-menu">
-          <li
-            className={location.pathname === "/admindashboard" ? "active" : ""}
-            onClick={() => navigate("/admindashboard")}
-          >
-            Dashboard
-          </li>
-
-          <li
-            className={location.pathname === "/orders" ? "active" : ""}
-            onClick={() => navigate("/orders")}
-          >
-            Order History
-          </li>
-
-          <li
-            className={location.pathname === "/coursepage" ? "active" : ""}
-            onClick={() => navigate("/coursepage")}
-          >
-            Courses & Videos
-          </li>
-
-          <li
-            className={location.pathname === "/reportspage" ? "active" : ""}
-            onClick={() => navigate("/reportspage")}
-          >
-            Reports
-          </li>
+          <li onClick={() => navigate("/admindashboard")}>Dashboard</li>
+          <li onClick={() => navigate("/orders")}>Order History</li>
+          <li className="active">Courses & Videos</li>
+          <li onClick={() => navigate("/reportspage")}>Reports</li>
         </ul>
 
-        <div
-          className="side-logout"
-          onClick={() => {
-            localStorage.clear();
-            navigate("/login");
-          }}
-        >
+        <div className="side-logout" onClick={() => {
+          localStorage.clear();
+          navigate("/login");
+        }}>
           Logout
         </div>
       </aside>
 
-      {/* ================= MAIN ================= */}
+      {/* MAIN */}
       <main className="admin-content">
-        <div className="page-header">
-          <div>
-            <h2>Courses & Videos</h2>
-            <p>Manage your learning content</p>
-          </div>
-        </div>
+        <h2>Courses & Videos</h2>
 
-        {/* Tabs */}
         <div className="tabs">
           {["All", "Beginner", "Intermediate", "Advanced"].map((tab) => (
             <button
@@ -195,7 +163,6 @@ const CoursePage = () => {
           ))}
         </div>
 
-        {/* Course Cards */}
         <div className="course-list">
           {filteredCourses.map((course, index) => (
             <div className="course-card" key={index}>
@@ -212,72 +179,55 @@ const CoursePage = () => {
                 </div>
               </div>
 
-              <div className="course-actions">
-                ✏️ 🗑️
-                <span
-                  className="dropdown-toggle"
-                  onClick={() => {
-                    setOpenIndex(openIndex === index ? null : index);
-                    fetchVideos(course.level);
-                  }}
-                >
-                  {openIndex === index ? "⌃" : "⌄"}
-                </span>
+              <span
+                className="dropdown-toggle"
+                onClick={() => {
+                  setOpenIndex(openIndex === index ? null : index);
+                  fetchVideos(course.subCategory);
+                }}
+              >
+                {openIndex === index ? "⌃" : "⌄"}
+              </span>
 
-                {openIndex === index && (
-                  <div className="course-dropdown">
-                    <div className="dropdown-header">
-                      <span>Videos</span>
-                    </div>
+              {openIndex === index && (
+                <div className="course-dropdown">
+                  <input
+                    placeholder="Video title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                  <input
+                    type="file"
+                    accept="video/*"
+                    onChange={(e) => setFile(e.target.files[0])}
+                  />
+                  <button
+                    disabled={loading}
+                    onClick={() => uploadVideo(course.subCategory)}
+                  >
+                    {loading ? "Uploading..." : "Upload"}
+                  </button>
 
-                    {/* Add Video */}
-                    <div className="dropdown-item">
-                      <input
-                        type="text"
-                        placeholder="Video title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                      />
-                      <input
-                        type="file"
-                        accept="video/*"
-                        onChange={(e) => setFile(e.target.files[0])}
-                      />
-                      <button
-                        onClick={() => uploadVideo(course.level)}
-                        disabled={loading}
-                      >
-                        {loading ? "Uploading..." : "Upload"}
-                      </button>
-                    </div>
-
-                    {/* Video List */}
-                    <div className="video-list">
-                      {videos.length === 0 ? (
-                        <div>No videos</div>
-                      ) : (
-                        videos.map((v) => (
-                          <div className="video-row" key={v._id}>
-                            <span>🎬 {v.title}</span>
-                            <FaTrash
-                              className="video-delete"
-                              onClick={() =>
-                                deleteVideo(v._id, course.level)
-                              }
-                            />
-                          </div>
-                        ))
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
+                  {(videosByCategory[course.subCategory] || []).length === 0 ? (
+                    <p>No videos</p>
+                  ) : (
+                    videosByCategory[course.subCategory].map((v) => (
+                      <div key={v._id} className="video-row">
+                        🎬 {v.title}
+                        <FaTrash
+                          onClick={() =>
+                            deleteVideo(v._id, course.subCategory)
+                          }
+                        />
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
             </div>
           ))}
         </div>
       </main>
     </div>
   );
-};
-
-export default CoursePage;
+}

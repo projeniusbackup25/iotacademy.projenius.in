@@ -1,25 +1,34 @@
 import React, { useEffect, useState } from "react";
 import "./UserVideo.css";
 
-const API_BASE = "https://iotacademy-backend.onrender.com";
+const API = "https://iotacademy-backend.onrender.com";
+
+/* 🔗 SUBCATEGORIES TO FETCH */
+const SUB_CATEGORIES = ["html", "css", "js"];
 
 export default function UserVideo() {
   const [videos, setVideos] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
-  /* 🎥 Fetch videos */
+  /* 🎥 FETCH ALL VIDEOS */
   useEffect(() => {
-    const fetchVideos = async () => {
+    const fetchAllVideos = async () => {
       try {
-        const res = await fetch(`${API_BASE}/api/videos`);
-        const data = await res.json();
+        let allVideos = [];
 
-        if (res.ok) {
-          setVideos(data);
-        } else {
-          console.error("Video fetch failed");
+        for (const category of SUB_CATEGORIES) {
+          const res = await fetch(
+            `${API}/api/videos?subCategory=${category}`
+          );
+
+          if (!res.ok) continue;
+
+          const data = await res.json();
+          allVideos = [...allVideos, ...data];
         }
+
+        setVideos(allVideos);
       } catch (err) {
         console.error("Error fetching videos:", err);
       } finally {
@@ -27,10 +36,10 @@ export default function UserVideo() {
       }
     };
 
-    fetchVideos();
+    fetchAllVideos();
   }, []);
 
-  /* 🔍 Filter videos */
+  /* 🔍 SEARCH FILTER */
   const filteredVideos = videos.filter((v) =>
     v.title.toLowerCase().includes(search.toLowerCase())
   );
@@ -96,7 +105,7 @@ export default function UserVideo() {
               key={video._id}
               title={video.title}
               videoUrl={video.videoUrl}
-              level="Beginner"
+              level={video.subCategory.toUpperCase()}
               status="Pending"
             />
           ))}
@@ -106,7 +115,7 @@ export default function UserVideo() {
   );
 }
 
-/* 🎞 Video Card */
+/* 🎞 VIDEO CARD */
 function VideoCard({ title, videoUrl, level, status }) {
   return (
     <div className="vd-card">
