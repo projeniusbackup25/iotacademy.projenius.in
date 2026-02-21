@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./AdminDashboard.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaCog, FaTrash, FaPlus } from "react-icons/fa";
 
 export default function AdminDashboard() {
