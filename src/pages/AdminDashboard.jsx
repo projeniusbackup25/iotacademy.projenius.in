@@ -3,27 +3,31 @@ import "./AdminDashboard.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaCog, FaTrash, FaPlus } from "react-icons/fa";
 
-const API = process.env.REACT_APP_API_URL;
+/* ✅ SAFE API URL (LOCAL + PRODUCTION) */
+const API =
+  process.env.REACT_APP_API_URL ||
+  "https://iotacademy-backend.onrender.com";
 
 export default function AdminDashboard() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const menuRef = useRef(null);
+
   const [collapse, setCollapse] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+
   const [adminName, setAdminName] = useState("");
   const [adminEmail, setAdminEmail] = useState("");
   const [loginTime, setLoginTime] = useState("");
-  const [showMenu, setShowMenu] = useState(false);
 
   const [videos, setVideos] = useState([]);
   const [showUpload, setShowUpload] = useState(false);
   const [title, setTitle] = useState("");
   const [videoFile, setVideoFile] = useState(null);
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  const menuRef = useRef(null);
-
   const token = localStorage.getItem("token");
 
-  /* 🔐 AUTH CHECK */
+  /* 🔐 ADMIN AUTH CHECK */
   useEffect(() => {
     const role = localStorage.getItem("role");
     if (role !== "admin") {
@@ -38,23 +42,39 @@ export default function AdminDashboard() {
     fetchVideos();
   }, [navigate]);
 
-  /* 📥 FETCH VIDEOS */
+  /* 📥 FETCH VIDEOS (DEFENSIVE) */
   const fetchVideos = async () => {
     try {
       const res = await fetch(
         `${API}/api/videos?subCategory=html`
       );
-      const data = await res.json();
-      setVideos(data);
+
+      if (!res.ok) {
+        console.error("Video fetch failed:", res.status);
+        setVideos([]);
+        return;
+      }
+
+      const text = await res.text();
+
+      if (!text || text.startsWith("<")) {
+        console.error("Invalid response (HTML instead of JSON)");
+        setVideos([]);
+        return;
+      }
+
+      const data = JSON.parse(text);
+      setVideos(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error("Error loading videos", err);
+      setVideos([]);
     }
   };
 
   /* ➕ UPLOAD VIDEO */
   const uploadVideo = async () => {
     if (!title || !videoFile) {
-      alert("Title & video required");
+      alert("Title and video are required");
       return;
     }
 
@@ -64,16 +84,13 @@ export default function AdminDashboard() {
     formData.append("video", videoFile);
 
     try {
-      const res = await fetch(
-        `${API}/api/videos/upload`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`   // ✅ FIXED
-          },
-          body: formData
-        }
-      );
+      const res = await fetch(`${API}/api/videos/upload`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}` // ✅ FIXED
+        },
+        body: formData
+      });
 
       if (!res.ok) throw new Error("Upload failed");
 
@@ -91,15 +108,12 @@ export default function AdminDashboard() {
     if (!window.confirm("Delete this video?")) return;
 
     try {
-      const res = await fetch(
-        `${API}/api/videos/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`   // ✅ FIXED
-          }
+      const res = await fetch(`${API}/api/videos/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}` // ✅ FIXED
         }
-      );
+      });
 
       if (!res.ok) throw new Error("Delete failed");
 
@@ -109,7 +123,7 @@ export default function AdminDashboard() {
     }
   };
 
-  /* ❌ CLOSE DROPDOWN */
+  /* ❌ CLOSE SETTINGS DROPDOWN */
   useEffect(() => {
     const handler = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -137,8 +151,10 @@ export default function AdminDashboard() {
         </div>
 
         <ul className="side-menu">
-          <li className={location.pathname === "/coursepage" ? "active" : ""}
-              onClick={() => navigate("/coursepage")}>
+          <li
+            className={location.pathname === "/coursepage" ? "active" : ""}
+            onClick={() => navigate("/coursepage")}
+          >
             Courses & Videos
           </li>
         </ul>
@@ -190,7 +206,9 @@ export default function AdminDashboard() {
             </div>
           )}
 
-          {videos.length === 0 && <p>No videos uploaded</p>}
+          {videos.length === 0 && (
+            <p style={{ marginTop: "10px" }}>No videos uploaded</p>
+          )}
 
           {videos.map((v) => (
             <div className="video-row" key={v._id}>
