@@ -119,10 +119,10 @@ export default function ContactPage() {
 
              <div>
   <FaMapMarkerAlt />
-  <span>
+  <a>
     Plot no 3, 16, Erikarai St, Velmurugan Nagar, Madurai,
     Tamil Nadu 625016, India
-  </span>
+  </a>
 </div>
 
             </div>

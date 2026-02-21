@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./AdminDashboard.css";
 import { useNavigate, useLocation } from "react-router-dom";
-import { FaCog } from "react-icons/fa";
+import { FaCog, FaTrash, FaPlus } from "react-icons/fa";
 
 export default function AdminDashboard() {
   const [collapse, setCollapse] = useState(false);
@@ -10,9 +10,16 @@ export default function AdminDashboard() {
   const [loginTime, setLoginTime] = useState("");
   const [showMenu, setShowMenu] = useState(false);
 
+  const [videos, setVideos] = useState([]);
+  const [showUpload, setShowUpload] = useState(false);
+  const [title, setTitle] = useState("");
+  const [videoFile, setVideoFile] = useState(null);
+
   const navigate = useNavigate();
   const location = useLocation();
   const menuRef = useRef(null);
+
+  const token = localStorage.getItem("token");
 
   /* 🔐 Load admin data */
   useEffect(() => {
@@ -25,9 +32,82 @@ export default function AdminDashboard() {
     setAdminName(localStorage.getItem("adminName") || "Admin");
     setAdminEmail(localStorage.getItem("adminEmail") || "");
     setLoginTime(localStorage.getItem("loginTime") || "Unknown");
+
+    fetchVideos();
   }, [navigate]);
 
-  /* ❌ Close dropdown on outside click */
+  /* 📥 Fetch videos from backend */
+  const fetchVideos = async () => {
+    try {
+      const res = await fetch(
+        "https://iotacademy-backend.onrender.com/api/videos?subCategory=html"
+      );
+      const data = await res.json();
+      setVideos(data);
+    } catch (err) {
+      console.error("Failed to load videos", err);
+    }
+  };
+
+  /* ➕ Upload video */
+  const uploadVideo = async () => {
+    if (!title || !videoFile) {
+      alert("Title and video required");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("subCategory", "html");
+    formData.append("video", videoFile);
+
+    try {
+      const res = await fetch(
+        "https://iotacademy-backend.onrender.com/api/videos/upload",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+          body: formData
+        }
+      );
+
+      if (!res.ok) throw new Error("Upload failed");
+
+      setTitle("");
+      setVideoFile(null);
+      setShowUpload(false);
+      fetchVideos();
+    } catch (err) {
+      alert("Upload error");
+    }
+  };
+
+  /* 🗑 Delete video */
+  const deleteVideo = async (id) => {
+    if (!window.confirm("Delete this video?")) return;
+
+    try {
+      const res = await fetch(
+        `https://iotacademy-backend.onrender.com/api/videos/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      if (!res.ok) throw new Error("Delete failed");
+
+      fetchVideos();
+    } catch (err) {
+      alert("Delete error");
+    }
+  };
+
+  /* ❌ Close dropdown */
   useEffect(() => {
     const handler = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -44,11 +124,6 @@ export default function AdminDashboard() {
     navigate("/login");
   };
 
-  /* 🚀 Navigation helper */
-  const goTo = (path) => {
-    navigate(path);
-  };
-
   return (
     <div className="dash-layout">
       {/* SIDEBAR */}
@@ -60,33 +135,7 @@ export default function AdminDashboard() {
         </div>
 
         <ul className="side-menu">
-          <li
-            className={location.pathname === "/admindashboard" ? "active" : ""}
-            onClick={() => goTo("/admindashboard")}
-          >
-            Dashboard
-          </li>
-
-          <li
-            className={location.pathname === "/orders" ? "active" : ""}
-            onClick={() => goTo("/orders")}
-          >
-            Order History
-          </li>
-
-          <li
-            className={location.pathname === "/coursepage" ? "active" : ""}
-            onClick={() => goTo("/coursepage")}
-          >
-            Courses & Videos
-          </li>
-
-          <li
-            className={location.pathname === "/reportspage" ? "active" : ""}
-            onClick={() => goTo("/reportspage")}
-          >
-            Reports
-          </li>
+          <li className="active">Courses & Videos</li>
         </ul>
 
         <div className="side-logout" onClick={handleLogout}>
@@ -96,111 +145,57 @@ export default function AdminDashboard() {
 
       {/* MAIN */}
       <main className="dash-main">
-        {/* TOP BAR */}
         <div className="dash-top">
-          <h2>Dashboard</h2>
+          <h2>Courses & Videos</h2>
 
-          <div className="top-right">
-            <div className="search-box">
-              🔍 <input placeholder="Search..." />
-            </div>
+          <div className="settings-wrapper" ref={menuRef}>
+            <FaCog onClick={() => setShowMenu(!showMenu)} />
+            {showMenu && (
+              <div className="settings-dropdown">
+                <b>{adminName}</b>
+                <p>{adminEmail}</p>
+                <small>{loginTime}</small>
+              </div>
+            )}
+          </div>
+        </div>
 
-            <span className="notify">🔔</span>
+        {/* VIDEO PANEL */}
+        <div className="panel-box">
+          <div className="video-header">
+            <h4>HTML Videos</h4>
+            <button onClick={() => setShowUpload(!showUpload)}>
+              <FaPlus /> Add Video
+            </button>
+          </div>
 
-            {/* SETTINGS DROPDOWN */}
-            <div className="settings-wrapper" ref={menuRef}>
-              <FaCog
-                className="settings-icon"
-                onClick={() => setShowMenu(!showMenu)}
+          {showUpload && (
+            <div className="upload-box">
+              <input
+                placeholder="Video title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               />
-
-              {showMenu && (
-                <div className="settings-dropdown">
-                  <p><b>{adminName}</b></p>
-                  <p>{adminEmail}</p>
-                  <hr />
-                  <p className="login-time">
-                    🕒 Logged in at<br />
-                    <small>{loginTime}</small>
-                  </p>
-                </div>
-              )}
+              <input
+                type="file"
+                accept="video/mp4"
+                onChange={(e) => setVideoFile(e.target.files[0])}
+              />
+              <button onClick={uploadVideo}>Upload</button>
             </div>
-          </div>
-        </div>
+          )}
 
-        {/* HEADER */}
-        <h3>Welcome back, {adminName}!</h3>
-        <p className="date">
-          {new Date().toLocaleDateString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </p>
-
-        {/* STAT CARDS */}
-        <div className="stat-grid">
-          <Stat title="Total Orders" value="1,234" color="blue" />
-          <Stat title="Active Students" value="892" color="sky" />
-          <Stat title="Total Revenue" value="$45,678" color="purple" />
-        </div>
-
-        {/* PANELS */}
-        <div className="panel-grid">
-          <div className="panel-box">
-            <h4>Recent Orders</h4>
-            <Order name="John Doe" kit="Arduino Starter Kit" price="$149" />
-            <Order name="Jane Smith" kit="Raspberry Pi Kit" price="$199" />
-            <Order name="Mike Johnson" kit="ESP32 Bundle" price="$89" />
-            <Order name="Sarah Wilson" kit="Complete IoT Kit" price="$299" />
-          </div>
-
-          <div className="panel-box">
-            <h4>Performance Overview</h4>
-            <Perf label="Approval Rate" value="94.5%" />
-            <Perf label="Course Completion" value="78.2%" />
-            <Perf label="Avg. Response Time" value="2.4 hrs" />
-          </div>
+          {videos.map((v) => (
+            <div className="video-row" key={v._id}>
+              <span>{v.title}</span>
+              <FaTrash
+                className="delete-icon"
+                onClick={() => deleteVideo(v._id)}
+              />
+            </div>
+          ))}
         </div>
       </main>
-    </div>
-  );
-}
-
-/* COMPONENTS */
-
-function Stat({ title, value, color }) {
-  return (
-    <div className={`stat-card ${color}`}>
-      <div className="stat-left">
-        <span>{title}</span>
-        <h2>{value}</h2>
-        <p>+ from last month</p>
-      </div>
-      <div className="stat-icon">📊</div>
-    </div>
-  );
-}
-
-function Order({ name, kit, price }) {
-  return (
-    <div className="order-row">
-      <div>
-        <b>{name}</b>
-        <small>{kit}</small>
-      </div>
-      <span>{price}</span>
-    </div>
-  );
-}
-
-function Perf({ label, value }) {
-  return (
-    <div className="perf-row">
-      <span>{label}</span>
-      <b>{value}</b>
     </div>
   );
 }

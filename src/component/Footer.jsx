@@ -48,7 +48,7 @@ const handleSubscribe = async () => {
       process.env.REACT_APP_EMAILJS_SERVICE,
       process.env.REACT_APP_EMAILJS_TEMPLATE,
       { user_email: email },
-      process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+      process.env.REACT_APP_EMAILJS_PUBLIC_KEY_FOOTER
     );
 
     // ✅ Silent success
