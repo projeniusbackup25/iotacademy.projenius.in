@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./AdminDashboard.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { FaCog, FaTrash, FaPlus } from "react-icons/fa";
+
+const API = process.env.REACT_APP_API_URL;
 
 export default function AdminDashboard() {
   const [collapse, setCollapse] = useState(false);
@@ -21,7 +23,7 @@ export default function AdminDashboard() {
 
   const token = localStorage.getItem("token");
 
-  /* 🔐 Load admin data */
+  /* 🔐 AUTH CHECK */
   useEffect(() => {
     const role = localStorage.getItem("role");
     if (role !== "admin") {
@@ -36,23 +38,23 @@ export default function AdminDashboard() {
     fetchVideos();
   }, [navigate]);
 
-  /* 📥 Fetch videos from backend */
+  /* 📥 FETCH VIDEOS */
   const fetchVideos = async () => {
     try {
       const res = await fetch(
-        "https://iotacademy-backend.onrender.com/api/videos?subCategory=html"
+        `${API}/api/videos?subCategory=html`
       );
       const data = await res.json();
       setVideos(data);
     } catch (err) {
-      console.error("Failed to load videos", err);
+      console.error("Error loading videos", err);
     }
   };
 
-  /* ➕ Upload video */
+  /* ➕ UPLOAD VIDEO */
   const uploadVideo = async () => {
     if (!title || !videoFile) {
-      alert("Title and video required");
+      alert("Title & video required");
       return;
     }
 
@@ -63,11 +65,11 @@ export default function AdminDashboard() {
 
     try {
       const res = await fetch(
-        "https://iotacademy-backend.onrender.com/api/videos/upload",
+        `${API}/api/videos/upload`,
         {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`   // ✅ FIXED
           },
           body: formData
         }
@@ -80,21 +82,21 @@ export default function AdminDashboard() {
       setShowUpload(false);
       fetchVideos();
     } catch (err) {
-      alert("Upload error");
+      alert("Upload failed");
     }
   };
 
-  /* 🗑 Delete video */
+  /* 🗑 DELETE VIDEO */
   const deleteVideo = async (id) => {
     if (!window.confirm("Delete this video?")) return;
 
     try {
       const res = await fetch(
-        `https://iotacademy-backend.onrender.com/api/videos/${id}`,
+        `${API}/api/videos/${id}`,
         {
           method: "DELETE",
           headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`   // ✅ FIXED
           }
         }
       );
@@ -103,11 +105,11 @@ export default function AdminDashboard() {
 
       fetchVideos();
     } catch (err) {
-      alert("Delete error");
+      alert("Delete failed");
     }
   };
 
-  /* ❌ Close dropdown */
+  /* ❌ CLOSE DROPDOWN */
   useEffect(() => {
     const handler = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -118,7 +120,7 @@ export default function AdminDashboard() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  /* 🚪 Logout */
+  /* 🚪 LOGOUT */
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
@@ -135,7 +137,10 @@ export default function AdminDashboard() {
         </div>
 
         <ul className="side-menu">
-          <li className="active">Courses & Videos</li>
+          <li className={location.pathname === "/coursepage" ? "active" : ""}
+              onClick={() => navigate("/coursepage")}>
+            Courses & Videos
+          </li>
         </ul>
 
         <div className="side-logout" onClick={handleLogout}>
@@ -152,7 +157,7 @@ export default function AdminDashboard() {
             <FaCog onClick={() => setShowMenu(!showMenu)} />
             {showMenu && (
               <div className="settings-dropdown">
-                <b>{adminName}</b>
+                <p><b>{adminName}</b></p>
                 <p>{adminEmail}</p>
                 <small>{loginTime}</small>
               </div>
@@ -184,6 +189,8 @@ export default function AdminDashboard() {
               <button onClick={uploadVideo}>Upload</button>
             </div>
           )}
+
+          {videos.length === 0 && <p>No videos uploaded</p>}
 
           {videos.map((v) => (
             <div className="video-row" key={v._id}>
