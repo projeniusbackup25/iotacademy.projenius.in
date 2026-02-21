@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import "./CoursePage.css";
 import "./AdminDashboard.css";
@@ -41,7 +41,7 @@ export default function CoursePage() {
 
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  const location = useLocation();
+  
 
   /* ================= FETCH VIDEOS ================= */
   const fetchVideos = async (subCategory) => {
