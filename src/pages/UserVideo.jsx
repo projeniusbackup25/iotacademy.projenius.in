@@ -1,120 +1,119 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import "./UserVideo.css";
 
+const API_BASE = "https://iotacademy-backend.onrender.com";
+
 export default function UserVideo() {
- 
+  const [videos, setVideos] = useState([]);
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  /* 🎥 Fetch videos */
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/videos`);
+        const data = await res.json();
+
+        if (res.ok) {
+          setVideos(data);
+        } else {
+          console.error("Video fetch failed");
+        }
+      } catch (err) {
+        console.error("Error fetching videos:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVideos();
+  }, []);
+
+  /* 🔍 Filter videos */
+  const filteredVideos = videos.filter((v) =>
+    v.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="vd-layout">
+      {/* SIDEBAR */}
+      <aside className="ud-sidebar">
+        <div className="ud-logo">
+          <div className="logo-box">⚙</div>
+          <div>
+            <b>IoT Learn</b>
+            <small>Student Portal</small>
+          </div>
+        </div>
 
-     <aside className="ud-sidebar">
+        <ul className="ud-menu">
+          <li onClick={() => (window.location.href = "/userdashboard")}>
+            📘 My Course
+          </li>
+          <li className="active">🎥 Videos</li>
+          <li onClick={() => (window.location.href = "/userproject")}>
+            🛠 Projects
+          </li>
+          <li onClick={() => (window.location.href = "/userdownload")}>
+            ⬇ Downloads
+          </li>
+          <li onClick={() => (window.location.href = "/certificate")}>
+            🎓 Certificate
+          </li>
+          <li>❓ Support</li>
+        </ul>
 
-  <div className="ud-logo">
-    <div className="logo-box">⚙</div>
-    <div>
-      <b>IoT Learn</b>
-      <small>Student Portal</small>
-    </div>
-  </div>
-
-  <ul className="ud-menu">
-    <li
-      className={window.location.pathname === "/userdashboard" ? "active" : ""}
-      onClick={() => (window.location.href = "/userdashboard")}
-    >
-      📘 My Course
-    </li>
-
-    <li
-      className={window.location.pathname === "/uservideo" ? "active" : ""}
-      onClick={() => (window.location.href = "/uservideo")}
-    >
-      🎥 Videos
-    </li>
-
-    <li
-      className={window.location.pathname === "/userproject" ? "active" : ""}
-      onClick={() => (window.location.href = "/userproject")}
-    >
-      🛠 Projects
-    </li>
-
-    <li
-      className={window.location.pathname === "/userdownload" ? "active" : ""}
-      onClick={() => (window.location.href = "/userdownload")}
-    >
-      ⬇ Downloads
-    </li>
-
-    <li
-      className={window.location.pathname === "/certificate" ? "active" : ""}
-      onClick={() => (window.location.href = "/certificate")}
-    >
-      🎓 Certificate
-    </li>
-
-    <li>❓ Support</li>
-  </ul>
-
-  <button className="upgrade-btn">✨ Upgrade Bundle</button>
-
-</aside>
-
+        <button className="upgrade-btn">✨ Upgrade Bundle</button>
+      </aside>
 
       {/* MAIN */}
       <main className="vd-main">
-
         <h2>Video Lessons</h2>
         <p className="vd-sub">
           Watch and learn from our comprehensive video library.
         </p>
 
-        {/* SEARCH BAR */}
+        {/* SEARCH */}
         <div className="vd-search">
-          <input placeholder="Search videos..." />
+          <input
+            placeholder="Search videos..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
 
         {/* VIDEO GRID */}
         <div className="vd-grid">
-          <VideoCard
-            title="Introduction to IoT: What is the Internet of Things?"
-            duration="12:45"
-            status="Completed"
-            level="Beginner"
-          />
-          <VideoCard
-            title="Understanding Microcontrollers: Arduino vs ESP32"
-            duration="18:30"
-            status="Completed"
-            level="Beginner"
-          />
-          <VideoCard
-            title="Sensor Basics: Temperature, Humidity, and Motion"
-            duration="15:20"
-            status="Completed"
-            level="Beginner"
-          />
-          <VideoCard
-            title="Setting Up Your First IoT Project"
-            duration="22:10"
-            status="Pending"
-            level="Beginner"
-          />
-        </div>
+          {loading && <p>Loading videos...</p>}
 
+          {!loading && filteredVideos.length === 0 && (
+            <p>No videos available</p>
+          )}
+
+          {filteredVideos.map((video) => (
+            <VideoCard
+              key={video._id}
+              title={video.title}
+              videoUrl={video.videoUrl}
+              level="Beginner"
+              status="Pending"
+            />
+          ))}
+        </div>
       </main>
     </div>
   );
 }
 
-function VideoCard({ title, duration, status, level }) {
+/* 🎞 Video Card */
+function VideoCard({ title, videoUrl, level, status }) {
   return (
     <div className="vd-card">
-      <div className="vd-thumb">
-        ▶
-        <span className="vd-time">{duration}</span>
-      </div>
+      <video className="vd-thumb" controls>
+        <source src={videoUrl} type="video/mp4" />
+        Your browser does not support video.
+      </video>
 
       <h4>{title}</h4>
 
@@ -127,4 +126,3 @@ function VideoCard({ title, duration, status, level }) {
     </div>
   );
 }
- 

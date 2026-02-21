@@ -29,6 +29,7 @@ const CoursePage = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [openIndex, setOpenIndex] = useState(null);
   const [collapse, setCollapse] = useState(false);
+  
 
   /* 🔥 VIDEO STATES */
   const [videos, setVideos] = useState([]);
