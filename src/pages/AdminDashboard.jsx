@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./AdminDashboard.css";
-import { useNavigate} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FaCog, FaTrash, FaPlus } from "react-icons/fa";
 
 const API = process.env.REACT_APP_API_URL;
@@ -18,7 +18,7 @@ export default function AdminDashboard() {
   const [videoFile, setVideoFile] = useState(null);
 
   const navigate = useNavigate();
-  // const location = useLocation();
+  const location = useLocation();
   const menuRef = useRef(null);
 
   const token = localStorage.getItem("token");
