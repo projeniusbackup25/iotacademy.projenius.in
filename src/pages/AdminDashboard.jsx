@@ -1,113 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./AdminDashboard.css";
 import { useNavigate, useLocation } from "react-router-dom";
-import { FaTrash } from "react-icons/fa";
-
-/* 🔗 BACKEND URL (FIXED) */
-const API = "https://iotacademy-backend.onrender.com";
+import { FaCog } from "react-icons/fa";
 
 export default function AdminDashboard() {
+  const [collapse, setCollapse] = useState(false);
+  const [adminName, setAdminName] = useState("");
+  const [adminEmail, setAdminEmail] = useState("");
+  const [loginTime, setLoginTime] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
+  const menuRef = useRef(null);
 
-  const [videos, setVideos] = useState([]);
-  const [title, setTitle] = useState("");
-  const [file, setFile] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [collapse, setCollapse] = useState(false);
-
-  const token = localStorage.getItem("token");
-
-  /* 🔐 ADMIN GUARD */
+  /* 🔐 Load admin data */
   useEffect(() => {
-    if (!token || localStorage.getItem("role") !== "admin") {
+    const role = localStorage.getItem("role");
+    if (role !== "admin") {
       navigate("/login");
-    }
-  }, [navigate, token]);
-
-  /* 📥 FETCH VIDEOS */
-  const fetchVideos = async () => {
-    try {
-      const res = await fetch(`${API}/api/videos?subCategory=html`);
-
-      if (!res.ok) throw new Error("Fetch failed");
-
-      const data = await res.json();
-      setVideos(data);
-    } catch (err) {
-      console.error("Video fetch failed:", err);
-      setVideos([]);
-    }
-  };
-
-  useEffect(() => {
-    fetchVideos();
-  }, []);
-
-  /* ⬆ UPLOAD VIDEO */
-  const uploadVideo = async () => {
-    if (!title || !file) {
-      alert("Enter title & select file");
       return;
     }
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("subCategory", "html");
-    formData.append("video", file);
+    setAdminName(localStorage.getItem("adminName") || "Admin");
+    setAdminEmail(localStorage.getItem("adminEmail") || "");
+    setLoginTime(localStorage.getItem("loginTime") || "Unknown");
+  }, [navigate]);
 
-    try {
-      setLoading(true);
+  /* ❌ Close dropdown on outside click */
+  useEffect(() => {
+    const handler = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setShowMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
-      const res = await fetch(`${API}/api/videos/upload`, {
-        method: "POST",
-        headers: {
-          Authorization: token,
-        },
-        body: formData,
-      });
-
-      if (!res.ok) throw new Error("Upload failed");
-
-      setTitle("");
-      setFile(null);
-      fetchVideos();
-    } catch (err) {
-      alert("Upload failed");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  /* 🗑 DELETE VIDEO */
-  const deleteVideo = async (id) => {
-    if (!window.confirm("Delete this video?")) return;
-
-    try {
-      const res = await fetch(`${API}/api/videos/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: token,
-        },
-      });
-
-      if (!res.ok) throw new Error("Delete failed");
-
-      fetchVideos();
-    } catch (err) {
-      alert("Delete failed");
-      console.error(err);
-    }
-  };
-
-  /* 🚪 LOGOUT */
-  const logout = () => {
+  /* 🚪 Logout */
+  const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
   };
 
-  /* 🔁 Navigation Helper */
+  /* 🚀 Navigation helper */
   const goTo = (path) => {
     navigate(path);
   };
@@ -152,54 +89,118 @@ export default function AdminDashboard() {
           </li>
         </ul>
 
-        <div className="side-logout" onClick={logout}>
+        <div className="side-logout" onClick={handleLogout}>
           Logout
         </div>
       </aside>
 
       {/* MAIN */}
       <main className="dash-main">
-        <h2>Courses & Videos</h2>
+        {/* TOP BAR */}
+        <div className="dash-top">
+          <h2>Dashboard</h2>
 
-        {/* UPLOAD */}
-        <div className="video-box">
-          <h3>HTML Videos</h3>
+          <div className="top-right">
+            <div className="search-box">
+              🔍 <input placeholder="Search..." />
+            </div>
 
-          <input
-            type="text"
-            placeholder="Video title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
+            <span className="notify">🔔</span>
 
-          <input
-            type="file"
-            accept="video/*"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
+            {/* SETTINGS DROPDOWN */}
+            <div className="settings-wrapper" ref={menuRef}>
+              <FaCog
+                className="settings-icon"
+                onClick={() => setShowMenu(!showMenu)}
+              />
 
-          <button onClick={uploadVideo} disabled={loading}>
-            {loading ? "Uploading..." : "Upload"}
-          </button>
+              {showMenu && (
+                <div className="settings-dropdown">
+                  <p><b>{adminName}</b></p>
+                  <p>{adminEmail}</p>
+                  <hr />
+                  <p className="login-time">
+                    🕒 Logged in at<br />
+                    <small>{loginTime}</small>
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
 
-          {/* LIST */}
-          {videos.length === 0 ? (
-            <p>No videos uploaded</p>
-          ) : (
-            <ul className="video-list">
-              {videos.map((v) => (
-                <li key={v._id}>
-                  <span>{v.title}</span>
-                  <FaTrash
-                    className="delete-icon"
-                    onClick={() => deleteVideo(v._id)}
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
+        {/* HEADER */}
+        <h3>Welcome back, {adminName}!</h3>
+        <p className="date">
+          {new Date().toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
+
+        {/* STAT CARDS */}
+        <div className="stat-grid">
+          <Stat title="Total Orders" value="1,234" color="blue" />
+          <Stat title="Active Students" value="892" color="sky" />
+          <Stat title="Total Revenue" value="$45,678" color="purple" />
+        </div>
+
+        {/* PANELS */}
+        <div className="panel-grid">
+          <div className="panel-box">
+            <h4>Recent Orders</h4>
+            <Order name="John Doe" kit="Arduino Starter Kit" price="$149" />
+            <Order name="Jane Smith" kit="Raspberry Pi Kit" price="$199" />
+            <Order name="Mike Johnson" kit="ESP32 Bundle" price="$89" />
+            <Order name="Sarah Wilson" kit="Complete IoT Kit" price="$299" />
+          </div>
+
+          <div className="panel-box">
+            <h4>Performance Overview</h4>
+            <Perf label="Approval Rate" value="94.5%" />
+            <Perf label="Course Completion" value="78.2%" />
+            <Perf label="Avg. Response Time" value="2.4 hrs" />
+          </div>
         </div>
       </main>
+    </div>
+  );
+}
+
+/* COMPONENTS */
+
+function Stat({ title, value, color }) {
+  return (
+    <div className={`stat-card ${color}`}>
+      <div className="stat-left">
+        <span>{title}</span>
+        <h2>{value}</h2>
+        <p>+ from last month</p>
+      </div>
+      <div className="stat-icon">📊</div>
+    </div>
+  );
+}
+
+function Order({ name, kit, price }) {
+  return (
+    <div className="order-row">
+      <div>
+        <b>{name}</b>
+        <small>{kit}</small>
+      </div>
+      <span>{price}</span>
+    </div>
+  );
+}
+
+function Perf({ label, value }) {
+  return (
+    <div className="perf-row">
+      <span>{label}</span>
+      <b>{value}</b>
     </div>
   );
 }
