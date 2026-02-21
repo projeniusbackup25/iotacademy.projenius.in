@@ -105,26 +105,28 @@ export default function ContactPage() {
             <div className="contact-info">
               <div>
                 <FaEnvelope />
-                <a href="mailto:teamprojenius@gmail.com">projenius.iot@gmail.com</a>
+                <a href="mailto:projenius.iot@gmail.com">projenius.iot@gmail.com</a>
               </div>
 
               <div>
                 <FaPhoneAlt />
+                {/* FIXED: hrefa → href */}
                 <a href="tel:+918925450473">+91 89254 50473</a>
               </div>
+
               <div>
                 <FaPhoneAlt />
                 <a href="tel:+919025476322">+91 90254 76322</a>
               </div>
 
-             <div>
-  <FaMapMarkerAlt />
-  <a>
-    Plot no 3, 16, Erikarai St, Velmurugan Nagar, Madurai,
-    Tamil Nadu 625016, India
-  </a>
-</div>
-
+              <div>
+                <FaMapMarkerAlt />
+                {/* FIXED: replaced <a> with <p> */}
+                <p>
+                  Plot no 3, 16, Erikarai St, Velmurugan Nagar, Madurai,
+                  Tamil Nadu 625016, India
+                </p>
+              </div>
             </div>
           </div>
 
@@ -170,7 +172,7 @@ export default function ContactPage() {
               </div>
             )}
 
-            {/* FORM VISIBLE ONLY WHEN IDLE */}
+            {/* FORM */}
             {popupState === "idle" && (
               <>
                 <h3>Send Us a Message</h3>

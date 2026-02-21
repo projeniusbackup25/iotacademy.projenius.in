@@ -16,7 +16,7 @@ export default function AdminDashboard() {
   const [videoFile, setVideoFile] = useState(null);
 
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
   const menuRef = useRef(null);
 
   const token = localStorage.getItem("token");
