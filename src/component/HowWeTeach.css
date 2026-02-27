@@ -6,14 +6,18 @@
 
 .teach-container {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 60px;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 50px;
   align-items: center;
+
+  max-width: 1200px;
+  margin: auto;
 }
 
 /* ================= VIDEO ================= */
 .video-box {
   position: relative;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,6 +55,7 @@
   border-radius: 22px;
   border: 2px solid transparent;
   overflow: hidden;
+  width: 100%;
   transition: all 0.35s ease;
 }
 

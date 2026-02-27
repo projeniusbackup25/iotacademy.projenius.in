@@ -21,56 +21,54 @@ export default function Login() {
 
     try {
       // ===========================
-      // TEMPORARY DUPLICATE LOGIN
+      // ✅ DUMMY LOGIN SYSTEM
       // ===========================
-      // Example: Both admin and user share the same phone "9999999999"
-      if (
-        phone === "9999999999" &&
-        (password === "admin123" || password === "user123")
-      ) {
-        if (password === "admin123") {
-          // ADMIN LOGIN
-          localStorage.setItem("token", "dummyToken");
-          localStorage.setItem("role", "admin");
-          localStorage.setItem("adminName", "Admin Name");
-          localStorage.setItem("adminEmail", "admin@example.com");
-          localStorage.setItem("loginTime", new Date().toLocaleString());
-          navigate("/admindashboard");
-        } else {
-          // USER LOGIN
-          localStorage.setItem("token", "dummyToken");
-          localStorage.setItem("role", "user");
-          localStorage.setItem("userName", "User Name");
-          localStorage.setItem("userPhone", phone);
-          localStorage.setItem("loginTime", new Date().toLocaleString());
-          navigate("/userdashboard");
-        }
-      } else {
-        // ===========================
-        // NORMAL API LOGIN
-        // ===========================
+
+      // 🔑 ADMIN LOGIN
+      if (phone === "1" && password === "1") {
+        localStorage.setItem("token", "dummyAdminToken");
+        localStorage.setItem("role", "admin");
+        localStorage.setItem("adminName", "Admin Name");
+        localStorage.setItem("adminEmail", "admin@projenius.com");
+        localStorage.setItem("loginTime", new Date().toLocaleString());
+
+        navigate("/admindashboard");
+      }
+
+      // 👤 USER LOGIN
+      else if (phone === "2" && password === "2") {
+        localStorage.setItem("token", "dummyUserToken");
+        localStorage.setItem("role", "user");
+        localStorage.setItem("userName", "User Name");
+        localStorage.setItem("userPhone", phone);
+        localStorage.setItem("loginTime", new Date().toLocaleString());
+
+        navigate("/userdashboard");
+      }
+
+      // ===========================
+      // 🌐 REAL API LOGIN
+      // ===========================
+      else {
         const res = await axios.post(
           `${process.env.REACT_APP_API_BASE_URL}/api/auth/login`,
           { phone, password }
         );
 
-        // 🔐 Save common auth data
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("role", res.data.role);
 
-        // 🔑 ADMIN LOGIN
         if (res.data.role === "admin") {
           localStorage.setItem("adminName", res.data.admin.name);
           localStorage.setItem("adminEmail", res.data.admin.email);
           localStorage.setItem("loginTime", new Date().toLocaleString());
-          navigate("/admindashboard");
-        }
 
-        // 👤 USER LOGIN
-        else {
+          navigate("/admindashboard");
+        } else {
           localStorage.setItem("userName", res.data.user.name);
           localStorage.setItem("userPhone", res.data.user.phone);
           localStorage.setItem("loginTime", new Date().toLocaleString());
+
           navigate("/userdashboard");
         }
       }
@@ -85,8 +83,11 @@ export default function Login() {
     <div className="login-page">
       {/* LEFT */}
       <div className="login-left">
-        <h2>Projenius IoT Login</h2>
+        <h2>ProJenius IoT Login</h2>
         <p className="sub-text">Login to start your smart learning journey</p>
+
+        {/* 👉 Show dummy credentials */}
+        
 
         <form onSubmit={handleLogin}>
           <input

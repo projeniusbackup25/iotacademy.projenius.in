@@ -48,39 +48,39 @@
   border-radius: 26px;
   padding: 32px;
   text-align: left;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.08);
   transition:
-    transform 0.45s cubic-bezier(.4,0,.2,1),
-    box-shadow 0.45s ease;
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
   position: relative;
   z-index: 1;
-  border: 1.5px solid #000;
+  border: 1px solid rgba(0,0,0,0.05);
 }
 
+/* ✅ SUBTLE HOVER */
 .product-card:hover {
-  transform: translateY(-14px) scale(1.02);
-  box-shadow: 0 40px 90px rgba(0,0,0,0.15);
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 22px 50px rgba(0,0,0,0.12);
 }
 
-
-/* ===== PREMIUM ANIMATED BORDER ===== */
+/* ===== PREMIUM SOFT BORDER ===== */
 .product-card::before {
   content: "";
   position: absolute;
-  inset: -3px;
-  border-radius: 30px;
-  opacity: 0.5;
+  inset: -2px;
+  border-radius: 28px;
+  opacity: 0.25;
   transition: opacity 0.4s ease;
   background-size: 300% 300%;
-  animation: borderFlow 5s linear infinite;
+  animation: borderFlow 8s linear infinite;
   z-index: -1;
 }
 
 .product-card:hover::before {
-  opacity: 1;
+  opacity: 0.5;
 }
 
-/* COLOR THEMES FOR BORDER */
+/* COLOR THEMES */
 .product-card.blue::before {
   background-image: linear-gradient(120deg, #2563eb, #38bdf8, #2563eb);
 }
@@ -113,6 +113,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.35s ease;
+}
+
+/* SOFT ICON HOVER */
+.product-card:hover .icon-box {
+  transform: rotate(-3deg) scale(1.05);
 }
 
 /* BADGE */
@@ -123,7 +129,7 @@
   font-weight: 600;
 }
 
-/* LIST */
+/* TEXT */
 .product-card h3 {
   margin: 25px 0 15px;
   font-size: 22px;
@@ -159,9 +165,10 @@
   border-radius: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.25s ease;
 }
 
+/* SOFT BUTTON HOVER */
 .outline-btn:hover {
   background: currentColor;
   color: white !important;
@@ -185,42 +192,4 @@
   .product-grid {
     grid-template-columns: 1fr;
   }
-}
-
-/* Animate content */
-.product-card h3,
-.product-card ul,
-.product-card .outline-btn {
-  transition: transform 0.45s ease, opacity 0.45s ease;
-}
-
-.product-card:hover h3 {
-  transform: translateY(-6px);
-}
-
-.product-card:hover ul {
-  transform: translateY(-4px);
-}
-
-.product-card:hover .outline-btn {
-  transform: translateY(6px);
-}
-
-.icon-box {
-  transition: transform 0.45s ease;
-}
-
-.product-card:hover .icon-box {
-  transform: rotate(-8deg) scale(1.15);
-}
-.outline-btn {
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-.product-card:hover .outline-btn {
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-}
-.product-card:hover::before {
-  opacity: 1;
-  animation: borderFlow 3s linear infinite;
 }

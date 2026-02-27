@@ -1,248 +1,284 @@
-/* ================= WORKSHOP SECTION ================= */
+  /* ================= WORKSHOP SECTION ================= */
 
-.workshop-section {
-  padding: 90px 20px;
-  background: radial-gradient(circle at top, #f7fbff, #ffffff);
-  text-align: center;
-  margin: 0;
-  border: 0;
-}
+  .workshop-section {
+    padding: 90px 20px;
+    background: radial-gradient(circle at top, #f7fbff, #ffffff);
+    text-align: center;
+    margin: 0;
+    border: 0;
+  }
 
-/* ================= TAG ================= */
+  /* ================= TAG ================= */
 
-.workshop-tag {
-  color: #2563eb;
-  font-weight: 1000;
-  letter-spacing: 1px;
-  font-size: 30px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
+  .workshop-tag {
+    color: #2563eb;
+    font-weight: 1000;
+    letter-spacing: 1px;
+    font-size: 30px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
 
-/* ================= TITLES ================= */
+  /* ================= TITLES ================= */
 
-.workshop-title {
-  font-size: 42px;
-  font-weight: 800;
-  margin-bottom: 10px;
-}
+  .workshop-title {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
 
-.workshop-title span {
-  color: #22c55e;
-}
+  .workshop-title span {
+    color: #22c55e;
+  }
 
-.workshop-subtitle {
-  max-width: 720px;
-  margin: 0 auto 70px;
-  color: #6b7280;
-  font-size: 16px;
-  line-height: 1.6;
-}
+  .workshop-subtitle {
+    max-width: 720px;
+    margin: 0 auto 70px;
+    color: #6b7280;
+    font-size: 16px;
+    line-height: 1.6;
+  }
 
-/* ================= GRID ================= */
+  /* ================= GRID ================= */
 
 .workshop-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 35px;
-  max-width: 1200px;
-  margin: auto;
+
+  width: 100%;
+  max-width: 100%;   /* removes restriction */
+  padding: 0 40px;   /* keeps spacing from edges */
 }
 
-/* ================= CARD ================= */
-
-.kit-card {
-  border-radius: 22px;
-  padding: 40px 35px;
-  text-align: left;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.35s ease;
+.workshop-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-.kit-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top right, rgba(255,255,255,.35), transparent 60%);
-  pointer-events: none;
+ 
+  @media (max-width: 1024px) {
+  .workshop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.kit-card:hover {
-  transform: translateY(-12px) scale(1.02);
+@media (max-width: 640px) {
+  .workshop-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-/* ================= THEMES ================= */
+  /* ================= CARD ================= */
+
+  .kit-card {
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,0.6);
+    backdrop-filter: blur(6px);
+    padding: 40px 35px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s ease;
+  }
+
+  .kit-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.15);
+    pointer-events: none;
+  }
+
+  .kit-card:hover {
+    transform: translateY(-12px) scale(1.02);
+  }
+
+  /* ================= THEMES ================= */
+
+  /* ================= THEMES (BRIGHT VERSION) ================= */
 
 .beginner {
-  background: linear-gradient(180deg, #fff7ed, #fff);
-  box-shadow: 0 15px 40px rgba(245, 158, 11, 0.25);
+  background: linear-gradient(180deg, #fff1c2, #ffffff);
+  box-shadow: 0 30px 60px rgba(255, 193, 7, 0.35);
 }
 
 .intermediate {
-  background: linear-gradient(180deg, #ecfeff, #fff);
-  box-shadow: 0 15px 40px rgba(56, 189, 248, 0.25);
+  background: linear-gradient(180deg, #d9faff, #ffffff);
+  box-shadow: 0 30px 60px rgba(14, 165, 233, 0.35);
 }
 
 .advanced {
-  background: linear-gradient(180deg, #0f172a, #020617);
-  box-shadow: 0 15px 40px rgba(168, 85, 247, 0.45);
+  background: linear-gradient(180deg, #1e293b, #020617);
+  box-shadow: 0 30px 70px rgba(168, 85, 247, 0.6);
   color: #fff;
 }
 
-/* ================= ICON ================= */
+  /* ================= ICON ================= */
 
-.kit-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  margin-bottom: 18px;
+  .kit-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+.yellow { 
+  background: linear-gradient(135deg, #facc15, #f97316); 
+  color: #fff; 
 }
 
-.yellow { background: linear-gradient(135deg, #facc15, #fb923c); color: #fff; }
-.blue   { background: linear-gradient(135deg, #0ea5e9, #22d3ee); color: #fff; }
-.purple { background: linear-gradient(135deg, #8b5cf6, #ec4899); color: #fff; }
-
-/* ================= TEXT ================= */
-
-.kit-card h3 {
-  font-size: 26px;
-  font-weight: 700;
+.blue { 
+  background: linear-gradient(135deg, #0284c7, #22d3ee); 
+  color: #fff; 
 }
 
-.kit-role {
-  font-size: 14px;
-  color: #9ca3af;
-  margin-bottom: 12px;
+.purple { 
+  background: linear-gradient(135deg, #7c3aed, #ec4899); 
+  color: #fff; 
 }
 
-.advanced .kit-role { color: #cbd5f5; }
-
-.kit-desc {
-  font-size: 15px;
-  color: #6b7280;
-  margin-bottom: 20px;
-}
-
-.advanced .kit-desc { color: #cbd5f5; }
-
-/* ================= LIST ALIGN FIX ================= */
-
-.kit-card ul {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 30px;
-}
-
-.kit-card li {
-  display: grid;
-  grid-template-columns: 20px 1fr;
-  gap: 10px;
-  margin-bottom: 14px;
-  font-size: 14px;
-  color: #4b5563;
-}
-
-.advanced li { color: #dbeafe; }
-
-.kit-card li::before {
-  content: "✦";
-  color: #38bdf8;
-  font-weight: bold;
-  margin-top: 2px;
-}
-
-/* ================= BUTTON ================= */
-
-.btn-gradient {
-  width: 100%;
-  padding: 14px;
-  border-radius: 14px;
-  border: none;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-  transition: 0.3s ease;
-  color: #fff;
-}
-
-.btn-gradient.yellow { background: linear-gradient(90deg, #facc15, #22c55e); }
-.btn-gradient.blue   { background: linear-gradient(90deg, #0ea5e9, #22d3ee); }
-.btn-gradient.purple { background: linear-gradient(90deg, #8b5cf6, #ec4899); }
-
-.btn-gradient:hover {
-  transform: scale(1.04);
-  filter: brightness(1.1);
-}
-
-/* ================= TABLET ================= */
-
-@media (max-width: 1024px) {
-
-  .workshop-section {
-    padding: 70px 18px;
-  }
-
-  .workshop-title {
-    font-size: 34px;
-  }
-
-  .workshop-tag {
-    font-size: 24px;
-  }
-
-  .workshop-subtitle {
-    margin-bottom: 50px;
-  }
-
-  .workshop-grid {
-    gap: 24px;
-  }
-
-  .kit-card {
-    padding: 30px 26px;
-  }
-}
-
-/* ================= MOBILE ================= */
-
-@media (max-width: 640px) {
-
-  .workshop-section {
-    padding: 60px 16px;
-  }
-
-  .workshop-title {
-    font-size: 26px;
-  }
-
-  .workshop-tag {
-    font-size: 20px;
-  }
-
-  .workshop-subtitle {
-    font-size: 14px;
-    margin-bottom: 36px;
-  }
-
-  .kit-card {
-    padding: 26px 20px;
-  }
+  /* ================= TEXT ================= */
 
   .kit-card h3 {
-    font-size: 20px;
+    font-size: 26px;
+    font-weight: 700;
   }
+
+  .kit-role {
+    font-size: 14px;
+    color: #9ca3af;
+    margin-bottom: 12px;
+  }
+
+  .advanced .kit-role { color: #cbd5f5; }
 
   .kit-desc {
-    font-size: 14px;
+    font-size: 15px;
+    color: #6b7280;
+    margin-bottom: 20px;
   }
 
-  .btn-gradient {
-    font-size: 14px;
-    padding: 12px;
+  .advanced .kit-desc { color: #cbd5f5; }
+
+  /* ================= LIST ALIGN FIX ================= */
+
+  .kit-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
   }
-}
+
+  .kit-card li {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    color: #4b5563;
+  }
+
+  .advanced li { color: #dbeafe; }
+
+  .kit-card li::before {
+    content: "✦";
+    color: #38bdf8;
+    font-weight: bold;
+    margin-top: 2px;
+  }
+
+  /* ================= BUTTON ================= */
+
+  .btn-gradient {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    color: #fff;
+  }
+
+  .btn-gradient.yellow { background: linear-gradient(90deg, #facc15, #22c55e); }
+  .btn-gradient.blue   { background: linear-gradient(90deg, #0ea5e9, #22d3ee); }
+  .btn-gradient.purple { background: linear-gradient(90deg, #8b5cf6, #ec4899); }
+
+  .btn-gradient:hover {
+    transform: scale(1.04);
+    filter: brightness(1.1);
+  }
+
+  /* ================= TABLET ================= */
+
+  @media (max-width: 1024px) {
+
+    .workshop-section {
+      padding: 70px 18px;
+    }
+
+    .workshop-title {
+      font-size: 34px;
+    }
+
+    .workshop-tag {
+      font-size: 24px;
+    }
+
+    .workshop-subtitle {
+      margin-bottom: 50px;
+    }
+
+    .workshop-grid {
+      gap: 24px;
+    }
+
+    .kit-card {
+      padding: 30px 26px;
+    }
+  }
+
+  /* ================= MOBILE ================= */
+
+  @media (max-width: 640px) {
+
+    .workshop-section {
+      padding: 60px 16px;
+    }
+
+    .workshop-title {
+      font-size: 26px;
+    }
+
+    .workshop-tag {
+      font-size: 20px;
+    }
+
+    .workshop-subtitle {
+      font-size: 14px;
+      margin-bottom: 36px;
+    }
+
+    .kit-card {
+      padding: 26px 20px;
+    }
+
+    .kit-card h3 {
+      font-size: 20px;
+    }
+
+    .kit-desc {
+      font-size: 14px;
+    }
+
+    .btn-gradient {
+      font-size: 14px;
+      padding: 12px;
+    }
+  }

@@ -28,9 +28,10 @@ export default function PromoPopup({ onClose }) {
         />
 
         <div className="promo-content">
+          <div className="promo-content1">
           <h2>Start Your IoT Journey 🚀</h2>
           <p>Click below to enroll in our IoT course today.</p>
-
+          </div>
           <button 
             className="promo-btn"
             onClick={handleWhatsAppRedirect}

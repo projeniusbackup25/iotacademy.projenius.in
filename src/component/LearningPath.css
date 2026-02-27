@@ -139,14 +139,16 @@
 
 /* TEXT */
 
+/* TEXT */
+
 .lp-step h4 {
   margin-top: 18px;
-  font-size: 18px;
+  font-size: clamp(20px, 1.5vw, 26px);
   font-weight: 700;
 }
 
 .lp-step p {
-  font-size: 14px;
+  font-size: clamp(14px, 1.1vw, 18px);
   color: #64748b;
 }
 

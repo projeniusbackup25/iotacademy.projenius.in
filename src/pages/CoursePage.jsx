@@ -12,19 +12,19 @@ const coursesData = [
     title: "Beginner IoT Fundamentals",
     description: "Learn the basics of IoT, sensors, and microcontrollers",
     level: "Beginner",
-    subCategory: "html",
+    subCategory: "beginner",
   },
   {
     title: "Intermediate Sensor Integration",
     description: "Deep dive into sensor data collection and processing",
     level: "Intermediate",
-    subCategory: "css",
+    subCategory: "intermediate",
   },
   {
     title: "Advanced Cloud IoT Systems",
     description: "Build enterprise-grade IoT solutions with cloud integration",
     level: "Advanced",
-    subCategory: "js",
+    subCategory: "advanced",
   },
 ];
 

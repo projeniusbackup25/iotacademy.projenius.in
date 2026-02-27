@@ -106,7 +106,7 @@ const handleSubscribe = async () => {
         {/* CONTACT */}
         <div className="foot-contact">
           <h4>Contact Us</h4>
-          <p><FaEnvelope /> <a href="mailto:teamprojenius@gmail.com">teamprojenius@gmail.com</a></p>
+          <p><FaEnvelope /> <a href="mailto:projenius.iot@gmail.com">projenius.iot@gmail.com</a></p>
           <p><FaPhoneAlt /> <a href="tel:+918925450473">+91 89254 50473</a></p>
           <p><FaPhoneAlt /> <a href="tel:+919025476322">+91 90254 76322</a></p>
           <p><FaMapMarkerAlt /> Madurai, Tamil Nadu, India</p>
