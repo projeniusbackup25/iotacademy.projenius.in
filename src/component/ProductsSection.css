@@ -168,10 +168,25 @@
   transition: all 0.25s ease;
 }
 
-/* SOFT BUTTON HOVER */
-.outline-btn:hover {
-  background: currentColor;
-  color: white !important;
+/* BLUE */
+.blue .outline-btn:hover {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+/* PURPLE */
+.purple .outline-btn:hover {
+  background: #7c3aed;
+  color: white;
+  border-color: #7c3aed;
+}
+
+/* GOLD */
+.gold .outline-btn:hover {
+  background: #f59e0b;
+  color: white;
+  border-color: #f59e0b;
 }
 
 /* COLOR THEMES */
