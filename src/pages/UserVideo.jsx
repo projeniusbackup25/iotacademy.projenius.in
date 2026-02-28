@@ -4,7 +4,7 @@ import "./UserVideo.css";
 const API = "https://iotacademy-backend.onrender.com";
 
 /* 🔗 SUBCATEGORIES TO FETCH */
-const SUB_CATEGORIES = ["beginner", "intermediate", "advanced"];
+// const SUB_CATEGORIES = ["beginner", "intermediate", "advanced"];
 
 export default function UserVideo() {
   const [videos, setVideos] = useState([]);
