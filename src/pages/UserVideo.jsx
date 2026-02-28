@@ -12,32 +12,33 @@ export default function UserVideo() {
   const [loading, setLoading] = useState(true);
 
   /* 🎥 FETCH ALL VIDEOS */
-  useEffect(() => {
-    const fetchAllVideos = async () => {
-      try {
-        let allVideos = [];
+ useEffect(() => {
+  const fetchVideos = async () => {
+    try {
+      const token = localStorage.getItem("token");
 
-        for (const category of SUB_CATEGORIES) {
-          const res = await fetch(
-            `${API}/api/videos?subCategory=${category}`
-          );
-
-          if (!res.ok) continue;
-
-          const data = await res.json();
-          allVideos = [...allVideos, ...data];
+      const res = await fetch(
+        `${API}/api/videos/user`,
+        {
+          headers: {
+            Authorization: token,
+          },
         }
+      );
 
-        setVideos(allVideos);
-      } catch (err) {
-        console.error("Error fetching videos:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+      if (!res.ok) throw new Error("Fetch failed");
 
-    fetchAllVideos();
-  }, []);
+      const data = await res.json();
+      setVideos(data);
+    } catch (err) {
+      console.error("Error fetching videos:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchVideos();
+}, []);
 
   /* 🔍 SEARCH FILTER */
   const filteredVideos = videos.filter((v) =>
