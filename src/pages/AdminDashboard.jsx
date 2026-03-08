@@ -1,206 +1,186 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./AdminDashboard.css";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { FaCog } from "react-icons/fa";
+import "./OrderPage.css";
+import "./AdminDashboard.css";
 
-export default function AdminDashboard() {
+const API = "https://iotacademy-backend.onrender.com";
+
+export default function OrderPage() {
+  const [activeTab, setActiveTab] = useState("All");
+  const [orders, setOrders] = useState([]);
   const [collapse, setCollapse] = useState(false);
-  const [adminName, setAdminName] = useState("");
-  const [adminEmail, setAdminEmail] = useState("");
-  const [loginTime, setLoginTime] = useState("");
-  const [showMenu, setShowMenu] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
-  const menuRef = useRef(null);
 
-  /* 🔐 Load admin data */
+  /* ================= FETCH ORDERS ================= */
   useEffect(() => {
-    const role = localStorage.getItem("role");
-    if (role !== "admin") {
-      navigate("/login");
-      return;
-    }
+    const fetchOrders = async () => {
+      try {
+        const token = localStorage.getItem("token");
 
-    setAdminName(localStorage.getItem("adminName") || "Admin");
-    setAdminEmail(localStorage.getItem("adminEmail") || "");
-    setLoginTime(localStorage.getItem("loginTime") || "Unknown");
-  }, [navigate]);
+        const res = await fetch(`${API}/api/orders/admin`, {
+          headers: {
+            Authorization: token,
+          },
+        });
 
-  /* ❌ Close dropdown on outside click */
-  useEffect(() => {
-    const handler = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setShowMenu(false);
+        if (!res.ok) throw new Error("Failed to fetch orders");
+
+        const data = await res.json();
+
+        setOrders(data);
+      } catch (err) {
+        console.error("Order fetch error:", err);
       }
     };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+
+    fetchOrders();
   }, []);
 
-  /* 🚪 Logout */
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate("/login");
-  };
-
-  /* 🚀 Navigation helper */
-  const goTo = (path) => {
-    navigate(path);
-  };
+  /* ================= FILTER TABS ================= */
+  const filteredData =
+    activeTab === "All"
+      ? orders
+      : orders.filter(
+          (item) =>
+            item.level.toLowerCase() === activeTab.toLowerCase()
+        );
 
   return (
     <div className="dash-layout">
-      {/* SIDEBAR */}
+      {/* ================= ADMIN SIDEBAR ================= */}
       <aside className={`dash-sidebar ${collapse ? "mini" : ""}`}>
         <div className="side-head">
           <div className="logo-box">⚙</div>
           {!collapse && <span>IoT Learn</span>}
+
           <button onClick={() => setCollapse(!collapse)}>❮</button>
         </div>
 
         <ul className="side-menu">
           <li
             className={location.pathname === "/admindashboard" ? "active" : ""}
-            onClick={() => goTo("/admindashboard")}
+            onClick={() => navigate("/admindashboard")}
           >
             Dashboard
           </li>
 
           <li
             className={location.pathname === "/orders" ? "active" : ""}
-            onClick={() => goTo("/orders")}
+            onClick={() => navigate("/orders")}
           >
             Order History
           </li>
 
           <li
             className={location.pathname === "/coursepage" ? "active" : ""}
-            onClick={() => goTo("/coursepage")}
+            onClick={() => navigate("/coursepage")}
           >
             Courses & Videos
           </li>
 
           <li
             className={location.pathname === "/reportspage" ? "active" : ""}
-            onClick={() => goTo("/reportspage")}
+            onClick={() => navigate("/reportspage")}
           >
             Reports
           </li>
         </ul>
 
-        <div className="side-logout" onClick={handleLogout}>
+        <div
+          className="side-logout"
+          onClick={() => {
+            localStorage.clear();
+            navigate("/login");
+          }}
+        >
           Logout
         </div>
       </aside>
 
-      {/* MAIN */}
+      {/* ================= MAIN CONTENT ================= */}
       <main className="dash-main">
-        {/* TOP BAR */}
-        <div className="dash-top">
-          <h2>Dashboard</h2>
+        <h2>Order History</h2>
+        <p className="subtitle">View and manage all student orders</p>
 
-          <div className="top-right">
-            <div className="search-box">
-              🔍 <input placeholder="Search..." />
-            </div>
+        {/* ================= TABS ================= */}
+        <div className="tabs">
+          {["All", "Beginner", "Intermediate", "Advanced"].map((tab) => (
+            <button
+              key={tab}
+              className={activeTab === tab ? "tab active" : "tab"}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
 
-            <span className="notify">🔔</span>
+        {/* ================= TABLE ================= */}
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Course</th>
+                <th>Level</th>
+                <th>Date Joined</th>
+                <th>Status</th>
+              </tr>
+            </thead>
 
-            {/* SETTINGS DROPDOWN */}
-            <div className="settings-wrapper" ref={menuRef}>
-              <FaCog
-                className="settings-icon"
-                onClick={() => setShowMenu(!showMenu)}
-              />
+            <tbody>
+              {filteredData.length === 0 ? (
+                <tr>
+                  <td colSpan="5" style={{ textAlign: "center" }}>
+                    No orders found
+                  </td>
+                </tr>
+              ) : (
+                filteredData.map((item, index) => (
+                  <tr key={item.id || index}>
+                    <td>
+                      <div className="student">
+                        <div className="avatar">
+                          {item.name?.charAt(0)}
+                        </div>
 
-              {showMenu && (
-                <div className="settings-dropdown">
-                  <p><b>{adminName}</b></p>
-                  <p>{adminEmail}</p>
-                  <hr />
-                  <p className="login-time">
-                    🕒 Logged in at<br />
-                    <small>{loginTime}</small>
-                  </p>
-                </div>
+                        <div>
+                          <strong>{item.name}</strong>
+                          <span>{item.email}</span>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td>{item.course}</td>
+
+                    <td>
+                      <span
+                        className={`badge ${item.level.toLowerCase()}`}
+                      >
+                        {item.level}
+                      </span>
+                    </td>
+
+                    <td>
+                      {new Date(item.dateJoined).toLocaleDateString()}
+                    </td>
+
+                    <td>
+                      <span
+                        className={`status ${item.status.toLowerCase()}`}
+                      >
+                        {item.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))
               )}
-            </div>
-          </div>
-        </div>
-
-        {/* HEADER */}
-        <h3>Welcome back, {adminName}!</h3>
-        <p className="date">
-          {new Date().toLocaleDateString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </p>
-
-        {/* STAT CARDS */}
-        <div className="stat-grid">
-          <Stat title="Total Orders" value="1,234" color="blue" />
-          <Stat title="Active Students" value="892" color="sky" />
-          <Stat title="Total Revenue" value="$45,678" color="purple" />
-        </div>
-
-        {/* PANELS */}
-        <div className="panel-grid">
-          <div className="panel-box">
-            <h4>Recent Orders</h4>
-            <Order name="John Doe" kit="Arduino Starter Kit" price="$149" />
-            <Order name="Jane Smith" kit="Raspberry Pi Kit" price="$199" />
-            <Order name="Mike Johnson" kit="ESP32 Bundle" price="$89" />
-            <Order name="Sarah Wilson" kit="Complete IoT Kit" price="$299" />
-          </div>
-
-          <div className="panel-box">
-            <h4>Performance Overview</h4>
-            <Perf label="Approval Rate" value="94.5%" />
-            <Perf label="Course Completion" value="78.2%" />
-            <Perf label="Avg. Response Time" value="2.4 hrs" />
-          </div>
+            </tbody>
+          </table>
         </div>
       </main>
-    </div>
-  );
-}
-
-/* COMPONENTS */
-
-function Stat({ title, value, color }) {
-  return (
-    <div className={`stat-card ${color}`}>
-      <div className="stat-left">
-        <span>{title}</span>
-        <h2>{value}</h2>
-        <p>+ from last month</p>
-      </div>
-      <div className="stat-icon">📊</div>
-    </div>
-  );
-}
-
-function Order({ name, kit, price }) {
-  return (
-    <div className="order-row">
-      <div>
-        <b>{name}</b>
-        <small>{kit}</small>
-      </div>
-      <span>{price}</span>
-    </div>
-  );
-}
-
-function Perf({ label, value }) {
-  return (
-    <div className="perf-row">
-      <span>{label}</span>
-      <b>{value}</b>
     </div>
   );
 }
