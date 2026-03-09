@@ -1,8 +1,20 @@
-.course-page {
-  background: #f6f9ff;
+/* Layout */
+
+.dashboard-layout {
+  display: flex;
+}
+
+/* Main content */
+
+.dashboard-main {
+  flex: 1;
+  margin-left: 240px;
   padding: 24px;
+  background: #f6f9ff;
   min-height: 100vh;
 }
+
+/* Title */
 
 h2 {
   margin-bottom: 4px;
@@ -14,33 +26,39 @@ h2 {
 }
 
 /* Tabs */
+
 .tabs {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 20px;
+  flex-wrap: nowrap;   /* prevents vertical stacking */
 }
 
+/* Tab buttons */
+
 .tab {
-  padding: 8px 16px;
+  padding: 10px 22px;
   border-radius: 20px;
   border: none;
   background: #e5edff;
   color: #2563eb;
   cursor: pointer;
   font-weight: 500;
+  white-space: nowrap; /* keeps text in one line */
 }
 
 .tab.active {
   background: #2563eb;
-  color: #fff;
+  color: white;
 }
 
 /* Table */
+
 .table-container {
-  background: #fff;
+  background: white;
   border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  overflow-x: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 table {
@@ -63,7 +81,8 @@ tbody tr {
   border-top: 1px solid #e5e7eb;
 }
 
-/* Student cell */
+/* Student */
+
 .student {
   display: flex;
   align-items: center;
@@ -89,6 +108,7 @@ tbody tr {
 }
 
 /* Badges */
+
 .badge {
   padding: 6px 12px;
   border-radius: 20px;
@@ -112,6 +132,7 @@ tbody tr {
 }
 
 /* Status */
+
 .status {
   padding: 6px 14px;
   border-radius: 20px;
@@ -134,3 +155,45 @@ tbody tr {
   color: #b91c1c;
 }
 
+/* No Data */
+
+.no-data {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+  .dashboard-main {
+    margin-left: 0;
+    padding: 16px;
+  }
+
+  th,
+  td {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .tabs {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+}

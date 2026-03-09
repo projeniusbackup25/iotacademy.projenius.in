@@ -1,0 +1,152 @@
+.sidebar{
+    width:240px;
+    height:100%;
+    background:linear-gradient(180deg,#081a3a,#020b1d);
+    color:white;
+    position:fixed;
+    /* left:0;
+    top:0; */
+    display:flex;
+    flex-direction:column;
+    padding:20px;
+    transition:0.5s;
+}
+
+/* Collapse */
+
+.sidebar.closed{
+    width:70px;
+}
+
+/* Logo */
+
+.logo-section{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:35px;
+}
+
+.logo-section img{
+    width:36px;
+}
+
+.logo-section h2{
+    font-size:18px;
+}
+
+/* Toggle button */
+
+.toggle-btn{
+    margin-left:auto;
+    background:rgba(255,255,255,0.1);
+    border:none;
+    color:white;
+    width:28px;
+    height:28px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* Menu */
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    width:100%;
+}
+
+.menu-item{
+    text-decoration:none;
+    color:#c7d2fe;
+    display:block;
+    width:100%;
+    padding:14px 20px;
+    border-radius:14px;
+    font-size:15px;
+    font-weight:500;
+    box-sizing:border-box;
+    transition:0.25s;
+}
+
+/* Hover + Active same size */
+.menu-item:hover,
+.menu-item.active{
+    background:#3b73e0;
+    color:white;
+    width:100%;
+    padding:14px 20px;
+    border-radius:14px;
+}
+
+
+/* Logout */
+
+.logout{
+    margin-top:auto;
+}
+
+.logout button{
+
+    width:100%;
+    padding:10px;
+
+    background:rgba(255,255,255,0.08);
+    color:rgb(99, 37, 37);
+
+    border:1px solid rgba(255,255,255,0.2);
+
+    border-radius:8px;
+
+    cursor:pointer;
+    transition:0.25s;
+
+}
+
+.logout button:hover{
+    background:#ef4444;
+    border-color:#ef4444;
+}
+
+
+/* MOBILE */
+
+.mobile-topbar{
+    display:none;
+}
+
+
+@media(max-width:768px){
+
+.sidebar{
+    transform:translateX(-100%);
+    z-index:1000;
+}
+
+.sidebar.active{
+    transform:translateX(0);
+}
+
+.mobile-topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#081a3a;
+    padding:14px 18px;
+    color:white;
+}
+
+.mobile-logo{
+    width:32px;
+}
+
+.menu-btn{
+    font-size:22px;
+    background:none;
+    border:none;
+    color:white;
+    cursor:pointer;
+}
+
+}

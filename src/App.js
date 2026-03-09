@@ -13,6 +13,7 @@ import ResetPassword from "./pages/ResetPassword";
 import AboutPage from "./pages/AboutPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import AdminLayout from "./component/Sidebar";
 
 import UserVideo from "./pages/UserVideo";
 import UserProject from "./pages/UserProject";
@@ -49,6 +50,7 @@ function App() {
       <Route path="/userproject" element={<UserProject />} />
       <Route path="/userdownload" element={<UserDownload />} />
       <Route path="/certificate" element={<Certificate />} />
+      <Route path="/admin" element={<AdminLayout />} />
       <Route path="/orders" element={<OrderHistory />} />
       <Route path="/coursepage" element={<CoursesPage />} /> 
       <Route path="/reportspage" element={<ReportsPage />} /> 

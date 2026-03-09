@@ -1,63 +1,17 @@
-import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React from "react";
+import Sidebar from "../component/Sidebar";
 import "./ReportsPage.css";
-import "./AdminDashboard.css";
 
 const ReportsPage = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [collapse, setCollapse] = useState(false);
-
   return (
-    <div className="admin-layout">
-      {/* ================= ADMIN SIDEBAR ================= */}
-      <aside className={`dash-sidebar ${collapse ? "mini" : ""}`}>
-        <div className="side-head">
-          <div className="logo-box">⚙</div>
-          {!collapse && <span>IoT Learn</span>}
+    <div className="dashboard-layout">
 
-          <button onClick={() => setCollapse(!collapse)}>
-            ❮
-          </button>
-        </div>
+      {/* Sidebar */}
+      <Sidebar />
 
-        <ul className="side-menu">
-          <li
-            className={location.pathname === "/admindashboard" ? "active" : ""}
-            onClick={() => navigate("/admindashboard")}
-          >
-            Dashboard
-          </li>
+      {/* Main Content */}
+      <main className="dashboard-main">
 
-          <li
-            className={location.pathname === "/orders" ? "active" : ""}
-            onClick={() => navigate("/orders")}
-          >
-            Order History
-          </li>
-
-          <li
-            className={location.pathname === "/coursepage" ? "active" : ""}
-            onClick={() => navigate("/coursepage")}
-          >
-            Courses & Videos
-          </li>
-
-          <li
-            className={location.pathname === "/reportspage" ? "active" : ""}
-            onClick={() => navigate("/reportspage")}
-          >
-            Reports
-          </li>
-        </ul>
-
-        <div className="side-logout" onClick={() => navigate("/login")}>
-          Logout
-        </div>
-      </aside>
-
-      {/* ================= MAIN CONTENT ================= */}
-      <main className="admin-content">
         <div className="reports-header">
           <div>
             <h2>Reports</h2>
@@ -70,7 +24,10 @@ const ReportsPage = () => {
           </div>
         </div>
 
+        {/* Stats */}
+
         <div className="stats-grid">
+
           <div className="stat-card">
             <p>Total Enrollments</p>
             <h3>2,847</h3>
@@ -88,17 +45,24 @@ const ReportsPage = () => {
             <h3>$124,580</h3>
             <span className="positive">+23.1% from last month</span>
           </div>
+
         </div>
 
+        {/* Charts */}
+
         <div className="charts-grid">
+
           <div className="chart-card">
+
             <h4>Enrollment by Course Level</h4>
 
             <div className="donut-placeholder">
+
               <div className="donut-center">
                 <h3>2,847</h3>
                 <small>Total</small>
               </div>
+
             </div>
 
             <div className="legend">
@@ -106,9 +70,11 @@ const ReportsPage = () => {
               <span className="blue">● Intermediate 35%</span>
               <span className="orange">● Advanced 20%</span>
             </div>
+
           </div>
 
           <div className="chart-card">
+
             <h4>Monthly Revenue</h4>
 
             <div className="line-placeholder">
@@ -116,17 +82,23 @@ const ReportsPage = () => {
             </div>
 
             <div className="revenue-footer">
+
               <div>
                 <p>Average Monthly</p>
                 <h3>$20,763</h3>
               </div>
+
               <div>
                 <p>Best Month</p>
                 <h3 className="positive">May - $23,680</h3>
               </div>
+
             </div>
+
           </div>
+
         </div>
+
       </main>
     </div>
   );

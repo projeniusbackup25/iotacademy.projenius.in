@@ -20,57 +20,27 @@ export default function Login() {
     setLoading(true);
 
     try {
-      // ===========================
-      // ✅ DUMMY LOGIN SYSTEM
-      // ===========================
+      // 🌐 REAL API LOGIN
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/api/auth/login`,
+        { phone, password }
+      );
 
-      // 🔑 ADMIN LOGIN
-      if (phone === "1" && password === "1") {
-        localStorage.setItem("token", "dummyAdminToken");
-        localStorage.setItem("role", "admin");
-        localStorage.setItem("adminName", "Admin Name");
-        localStorage.setItem("adminEmail", "admin@projenius.com");
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", res.data.role);
+
+      if (res.data.role === "admin") {
+        localStorage.setItem("adminName", res.data.admin.name);
+        localStorage.setItem("adminEmail", res.data.admin.email);
         localStorage.setItem("loginTime", new Date().toLocaleString());
 
         navigate("/admindashboard");
-      }
-
-      // 👤 USER LOGIN
-      else if (phone === "2" && password === "2") {
-        localStorage.setItem("token", "dummyUserToken");
-        localStorage.setItem("role", "user");
-        localStorage.setItem("userName", "User Name");
-        localStorage.setItem("userPhone", phone);
+      } else {
+        localStorage.setItem("userName", res.data.user.name);
+        localStorage.setItem("userPhone", res.data.user.phone);
         localStorage.setItem("loginTime", new Date().toLocaleString());
 
         navigate("/userdashboard");
-      }
-
-      // ===========================
-      // 🌐 REAL API LOGIN
-      // ===========================
-      else {
-        const res = await axios.post(
-          `${process.env.REACT_APP_API_BASE_URL}/api/auth/login`,
-          { phone, password }
-        );
-
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("role", res.data.role);
-
-        if (res.data.role === "admin") {
-          localStorage.setItem("adminName", res.data.admin.name);
-          localStorage.setItem("adminEmail", res.data.admin.email);
-          localStorage.setItem("loginTime", new Date().toLocaleString());
-
-          navigate("/admindashboard");
-        } else {
-          localStorage.setItem("userName", res.data.user.name);
-          localStorage.setItem("userPhone", res.data.user.phone);
-          localStorage.setItem("loginTime", new Date().toLocaleString());
-
-          navigate("/userdashboard");
-        }
       }
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
@@ -85,9 +55,6 @@ export default function Login() {
       <div className="login-left">
         <h2>ProJenius IoT Login</h2>
         <p className="sub-text">Login to start your smart learning journey</p>
-
-        {/* 👉 Show dummy credentials */}
-        
 
         <form onSubmit={handleLogin}>
           <input

@@ -1,123 +1,87 @@
-import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import "./OrderPage.css"; // keep your existing css
-import "./AdminDashboard.css"; // IMPORTANT: admin sidebar styles
+import React, { useState, useEffect } from "react";
+import "./OrderPage.css";
+import Sidebar from "../component/Sidebar";
 
-const ordersData = [
-  {
-    name: "Alex Johnson",
-    email: "alex@example.com",
-    course: "Beginner IoT Basics",
-    level: "Beginner",
-    date: "2024-01-15",
-    status: "Paid",
-  },
-  {
-    name: "Sarah Williams",
-    email: "sarah@example.com",
-    course: "Intermediate Sensors",
-    level: "Intermediate",
-    date: "2024-01-14",
-    status: "Paid",
-  },
-  {
-    name: "Mike Chen",
-    email: "mike@example.com",
-    course: "Advanced Robotics",
-    level: "Advanced",
-    date: "2024-01-13",
-    status: "Pending",
-  },
-  {
-    name: "James Wilson",
-    email: "james@example.com",
-    course: "Intermediate Networks",
-    level: "Intermediate",
-    date: "2024-01-11",
-    status: "Failed",
-  },
-];
+const API = "https://iotacademy-backend.onrender.com";
 
-export default function CoursePage() {
+export default function OrderPage() {
   const [activeTab, setActiveTab] = useState("All");
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [collapse, setCollapse] = useState(false);
+  const [orders, setOrders] = useState([]);
 
+  /* ================= FETCH ORDERS ================= */
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const res = await fetch(`${API}/api/orders/admin`, {
+          headers: {
+            Authorization: token,
+          },
+        });
+
+        if (!res.ok) throw new Error("Failed to fetch orders");
+
+        const data = await res.json();
+
+        setOrders(data);
+      } catch (err) {
+        console.error("Order fetch error:", err);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  /* ================= FILTER DATA ================= */
 
   const filteredData =
     activeTab === "All"
-      ? ordersData
-      : ordersData.filter((item) => item.level === activeTab);
+      ? orders
+      : orders.filter(
+          (item) =>
+            item.level.toLowerCase() === activeTab.toLowerCase()
+        );
 
   return (
-    <div className="dash-layout">
-      {/* ================= ADMIN SIDEBAR ================= */}
-      <aside className={`dash-sidebar ${collapse ? "mini" : ""}`}>
-  <div className="side-head">
-    <div className="logo-box">⚙</div>
-    {!collapse && <span>IoT Learn</span>}
+    <div className="dashboard-layout">
 
-    <button onClick={() => setCollapse(!collapse)}>
-      ❮
-    </button>
-  </div>
+      {/* Sidebar */}
+      <Sidebar />
 
-  <ul className="side-menu">
-    <li
-      className={location.pathname === "/admindashboard" ? "active" : ""}
-      onClick={() => navigate("/admindashboard")}
-    >
-      Dashboard
-    </li>
+      {/* Main Content */}
+      <main className="dashboard-main">
 
-    <li
-      className={location.pathname === "/orders" ? "active" : ""}
-      onClick={() => navigate("/orders")}
-    >
-      Order History
-    </li>
-
-    <li
-      className={location.pathname === "/coursepage" ? "active" : ""}
-      onClick={() => navigate("/coursepage")}
-    >
-      Courses & Videos
-    </li>
-
-    <li
-      className={location.pathname === "/reportspage" ? "active" : ""}
-      onClick={() => navigate("/reportspage")}
-    >
-      Reports
-    </li>
-  </ul>
-
-  <div className="side-logout" onClick={() => navigate("/login")}>
-    Logout
-  </div>
-</aside>
-
-
-      {/* ================= MAIN CONTENT ================= */}
-      <main className="dash-main">
         <h2>Order History</h2>
-        <p className="subtitle">View and manage all student orders</p>
+        <p className="subtitle">
+          View and manage all student orders
+        </p>
+
+        {/* Tabs */}
 
         <div className="tabs">
-          {["All", "Beginner", "Intermediate", "Advanced"].map((tab) => (
-            <button
-              key={tab}
-              className={activeTab === tab ? "tab active" : "tab"}
-              onClick={() => setActiveTab(tab)}
-            >
-              {tab}
-            </button>
-          ))}
+          {["All", "Beginner", "Intermediate", "Advanced"].map(
+            (tab) => (
+              <button
+                key={tab}
+                className={
+                  activeTab === tab ? "tab active" : "tab"
+                }
+                onClick={() => setActiveTab(tab)}
+              >
+                {tab}
+              </button>
+            )
+          )}
         </div>
 
+        {/* Table */}
+
         <div className="table-container">
+
           <table>
+
             <thead>
               <tr>
                 <th>Student</th>
@@ -129,36 +93,66 @@ export default function CoursePage() {
             </thead>
 
             <tbody>
-              {filteredData.map((item, index) => (
-                <tr key={index}>
-                  <td>
-                    <div className="student">
-                      <div className="avatar">
-                        {item.name.charAt(0)}
-                      </div>
-                      <div>
-                        <strong>{item.name}</strong>
-                        <span>{item.email}</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>{item.course}</td>
-                  <td>
-                    <span className={`badge ${item.level.toLowerCase()}`}>
-                      {item.level}
-                    </span>
-                  </td>
-                  <td>{item.date}</td>
-                  <td>
-                    <span className={`status ${item.status.toLowerCase()}`}>
-                      {item.status}
-                    </span>
+
+              {filteredData.length === 0 ? (
+                <tr>
+                  <td colSpan="5" className="no-data">
+                    No orders found
                   </td>
                 </tr>
-              ))}
+              ) : (
+                filteredData.map((item, index) => (
+                  <tr key={item.id || index}>
+
+                    <td>
+                      <div className="student">
+
+                        <div className="avatar">
+                          {item.name?.charAt(0)}
+                        </div>
+
+                        <div>
+                          <strong>{item.name}</strong>
+                          <span>{item.email}</span>
+                        </div>
+
+                      </div>
+                    </td>
+
+                    <td>{item.course}</td>
+
+                    <td>
+                      <span
+                        className={`badge ${item.level.toLowerCase()}`}
+                      >
+                        {item.level}
+                      </span>
+                    </td>
+
+                    <td>
+                      {new Date(
+                        item.dateJoined
+                      ).toLocaleDateString()}
+                    </td>
+
+                    <td>
+                      <span
+                        className={`status ${item.status.toLowerCase()}`}
+                      >
+                        {item.status}
+                      </span>
+                    </td>
+
+                  </tr>
+                ))
+              )}
+
             </tbody>
+
           </table>
+
         </div>
+
       </main>
     </div>
   );
