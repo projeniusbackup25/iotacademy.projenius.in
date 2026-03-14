@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { FaCog } from "react-icons/fa";
 import Sidebar from "../component/Sidebar";
 
+const API = "https://iotacademy-backend.onrender.com";
+
 export default function AdminDashboard() {
 
   const [adminName, setAdminName] = useState("");
@@ -11,11 +13,16 @@ export default function AdminDashboard() {
   const [loginTime, setLoginTime] = useState("");
   const [showMenu, setShowMenu] = useState(false);
 
+  /* 📊 Dashboard Stats */
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [activeStudents, setActiveStudents] = useState(0);
+
   const navigate = useNavigate();
   const menuRef = useRef(null);
 
   /* 🔐 Load admin data */
   useEffect(() => {
+
     const role = localStorage.getItem("role");
 
     if (role !== "admin") {
@@ -29,13 +36,51 @@ export default function AdminDashboard() {
 
   }, [navigate]);
 
+
+
+  /* 📊 FETCH DASHBOARD STATS */
+  useEffect(() => {
+
+    const fetchStats = async () => {
+
+      try {
+
+        const token = localStorage.getItem("token");
+
+        const res = await fetch(`${API}/api/orders/stats`, {
+          headers: {
+            Authorization: token
+          }
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          setTotalOrders(data.totalOrders);
+          setActiveStudents(data.activeStudents);
+        }
+
+      } catch (err) {
+        console.error("Dashboard stats fetch error:", err);
+      }
+
+    };
+
+    fetchStats();
+
+  }, []);
+
+
+
   /* ❌ Close dropdown outside click */
   useEffect(() => {
 
     const handler = (e) => {
+
       if (menuRef.current && !menuRef.current.contains(e.target)) {
         setShowMenu(false);
       }
+
     };
 
     document.addEventListener("mousedown", handler);
@@ -43,6 +88,8 @@ export default function AdminDashboard() {
     return () => document.removeEventListener("mousedown", handler);
 
   }, []);
+
+
 
   return (
 
@@ -119,8 +166,8 @@ export default function AdminDashboard() {
 
         <div className="stat-grid">
 
-          <Stat title="Total Orders" value="1,234" color="blue" />
-          <Stat title="Active Students" value="892" color="sky" />
+          <Stat title="Total Orders" value={totalOrders} color="blue" />
+          <Stat title="Active Students" value={activeStudents} color="sky" />
           <Stat title="Total Revenue" value="$45,678" color="purple" />
 
         </div>
@@ -158,6 +205,7 @@ export default function AdminDashboard() {
 
   );
 }
+
 
 
 /* COMPONENTS */
