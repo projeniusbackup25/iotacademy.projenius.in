@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../component/Sidebar";
 import "./ReportsPage.css";
 
@@ -18,46 +18,69 @@ import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
-/* BAR CHART DATA */
-
-const barData = [
-  { level: "Beginner", students: 5 },
-  { level: "Intermediate", students: 6 },
-  { level: "Advanced", students: 4 }
-];
-
-/* PIE CHART DATA */
-
-const pieData = [
-  { name: "IoT Fundamentals", value: 3 },
-  { name: "Arduino & Sensors", value: 3 },
-  { name: "Raspberry Pi Mastery", value: 3 },
-  { name: "Smart Home Automation", value: 2 },
-  { name: "Industrial IoT", value: 2 },
-  { name: "Edge Computing", value: 2 }
-];
+const API = "https://iotacademy-backend.onrender.com";
 
 const COLORS = [
   "#22c55e",
   "#3b82f6",
-  "#f59e0b",
-  "#a855f7",
-  "#ef4444",
-  "#06b6d4"
-];
-
-/* REPORT TABLE DATA */
-
-const reportTable = [
-  ["Student Name","Course","Payment","Status","Progress","Reg Date"],
-  ["Aarav Sharma","IoT Fundamentals","4999","Paid","85%","2025-12-01"],
-  ["Priya Patel","Arduino & Sensors","5999","Paid","92%","2025-11-15"],
-  ["Rohan Gupta","Raspberry Pi Mastery","6999","Pending","45%","2026-01-10"],
-  ["Sneha Reddy","Smart Home Automation","7999","Paid","100%","2025-10-20"],
-  ["Vikram Singh","Industrial IoT","8999","Failed","12%","2026-02-05"]
+  "#f59e0b"
 ];
 
 export default function ReportsPage() {
+
+  const [stats, setStats] = useState({
+    totalRegistrations: 0,
+    totalCourses: 0,
+    totalRevenue: 0,
+    activeStudents: 0,
+    completedStudents: 0
+  });
+
+  const [barData, setBarData] = useState([]);
+  const [pieData, setPieData] = useState([]);
+
+  useEffect(() => {
+
+    fetchReports();
+
+  }, []);
+
+
+  const fetchReports = async () => {
+
+    try {
+
+      const res = await fetch(`${API}/api/reports/dashboard`);
+      const data = await res.json();
+
+      setStats(data);
+
+      const levels = [
+        { level: "Beginner", students: data.levelDistribution.beginner },
+        { level: "Intermediate", students: data.levelDistribution.intermediate },
+        { level: "Advanced", students: data.levelDistribution.advanced }
+      ];
+
+      setBarData(levels);
+
+      const pie = [
+        { name: "Beginner", value: data.levelDistribution.beginner },
+        { name: "Intermediate", value: data.levelDistribution.intermediate },
+        { name: "Advanced", value: data.levelDistribution.advanced }
+      ];
+
+      setPieData(pie);
+
+    }
+
+    catch (err) {
+
+      console.error("REPORT FETCH ERROR:", err);
+
+    }
+
+  };
+
 
   /* PDF DOWNLOAD */
 
@@ -65,18 +88,29 @@ export default function ReportsPage() {
 
     const doc = new jsPDF();
 
-    doc.text("ProJenius IoT Academy - Report",20,20);
+    doc.text("IoT Academy Reports",20,20);
 
-    reportTable.forEach((row,i)=>{
-      doc.text(row.join("   "),20,40+(i*10));
-    });
+    doc.text(`Total Registrations: ${stats.totalRegistrations}`,20,40);
+    doc.text(`Total Revenue: ₹${stats.totalRevenue}`,20,50);
+    doc.text(`Active Students: ${stats.activeStudents}`,20,60);
+    doc.text(`Completed Students: ${stats.completedStudents}`,20,70);
 
     doc.save("report.pdf");
+
   };
+
 
   /* EXCEL DOWNLOAD */
 
   const downloadExcel = () => {
+
+    const reportTable = [
+      ["Metric","Value"],
+      ["Total Registrations",stats.totalRegistrations],
+      ["Total Revenue",stats.totalRevenue],
+      ["Active Students",stats.activeStudents],
+      ["Completed Students",stats.completedStudents]
+    ];
 
     const ws = XLSX.utils.aoa_to_sheet(reportTable);
     const wb = XLSX.utils.book_new();
@@ -88,11 +122,21 @@ export default function ReportsPage() {
     const data = new Blob([excelBuffer],{type:"application/octet-stream"});
 
     saveAs(data,"report.xlsx");
+
   };
+
 
   /* CSV DOWNLOAD */
 
   const downloadCSV = () => {
+
+    const reportTable = [
+      ["Metric","Value"],
+      ["Total Registrations",stats.totalRegistrations],
+      ["Total Revenue",stats.totalRevenue],
+      ["Active Students",stats.activeStudents],
+      ["Completed Students",stats.completedStudents]
+    ];
 
     const ws = XLSX.utils.aoa_to_sheet(reportTable);
     const csv = XLSX.utils.sheet_to_csv(ws);
@@ -100,7 +144,9 @@ export default function ReportsPage() {
     const blob = new Blob([csv],{type:"text/csv;charset=utf-8;"});
 
     saveAs(blob,"report.csv");
+
   };
+
 
   return (
 
@@ -117,12 +163,15 @@ export default function ReportsPage() {
           <h2>Reports & Analytics</h2>
 
           <div className="export-buttons">
+
             <button onClick={downloadPDF}>PDF</button>
             <button onClick={downloadExcel}>EXCEL</button>
             <button onClick={downloadCSV}>CSV</button>
+
           </div>
 
         </div>
+
 
         {/* FILTERS */}
 
@@ -153,36 +202,38 @@ export default function ReportsPage() {
 
         </div>
 
+
         {/* STATS */}
 
         <div className="stats-grid">
 
           <div className="stat-card">
             <p>Total Registrations</p>
-            <h3>15</h3>
+            <h3>{stats.totalRegistrations}</h3>
           </div>
 
           <div className="stat-card">
             <p>Total Courses</p>
-            <h3>6</h3>
+            <h3>{stats.totalCourses}</h3>
           </div>
 
           <div className="stat-card">
             <p>Total Revenue</p>
-            <h3>₹73,489</h3>
+            <h3>₹{stats.totalRevenue}</h3>
           </div>
 
           <div className="stat-card">
             <p>Active Students</p>
-            <h3>12</h3>
+            <h3>{stats.activeStudents}</h3>
           </div>
 
           <div className="stat-card">
             <p>Completed Students</p>
-            <h3>3</h3>
+            <h3>{stats.completedStudents}</h3>
           </div>
 
         </div>
+
 
         {/* CHARTS */}
 
@@ -195,15 +246,25 @@ export default function ReportsPage() {
             <h4>Course Level Registrations</h4>
 
             <ResponsiveContainer width="100%" height={300}>
+
               <BarChart data={barData}>
+
                 <XAxis dataKey="level"/>
                 <YAxis/>
                 <Tooltip/>
-                <Bar dataKey="students" fill="#3b82f6" radius={[6,6,0,0]} />
+
+                <Bar
+                dataKey="students"
+                fill="#3b82f6"
+                radius={[6,6,0,0]}
+                />
+
               </BarChart>
+
             </ResponsiveContainer>
 
           </div>
+
 
           {/* PIE CHART */}
 
@@ -212,6 +273,7 @@ export default function ReportsPage() {
             <h4>Student Distribution</h4>
 
             <ResponsiveContainer width="100%" height={300}>
+
               <PieChart>
 
                 <Pie
@@ -233,6 +295,7 @@ export default function ReportsPage() {
                 <Tooltip/>
 
               </PieChart>
+
             </ResponsiveContainer>
 
           </div>
