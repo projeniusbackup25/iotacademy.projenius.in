@@ -7,13 +7,13 @@ export default function UserProject() {
 
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [uploading, setUploading] = useState(false);
+  // const [uploading, setUploading] = useState(false);
 
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetchProjects();
-  }, []);
+  fetchProjects();
+}, [fetchProjects]);
 
   async function fetchProjects() {
     try {
