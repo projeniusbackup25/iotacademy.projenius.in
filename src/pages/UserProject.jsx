@@ -7,17 +7,12 @@ export default function UserProject() {
 
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const [uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-  fetchProjects();
-}, [fetchProjects]);
-
   async function fetchProjects() {
     try {
-
       const res = await fetch(`${API}/api/projects/my-projects`, {
         headers: {
           Authorization: token
@@ -33,6 +28,11 @@ export default function UserProject() {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    fetchProjects();
+    // eslint-disable-next-line
+  }, []);
 
   async function submitProject(title, level, file) {
 
@@ -54,7 +54,6 @@ export default function UserProject() {
       });
 
       const data = await res.json();
-
       alert(data.message);
 
       fetchProjects();
@@ -180,6 +179,8 @@ export default function UserProject() {
         </div>
 
         )}
+
+        {uploading && <p style={{marginTop:"15px"}}>Uploading project...</p>}
 
       </main>
 
