@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Workshop.css";
 
-import img1 from "../images/projenius_logo.png";
-import img2 from "../images/projenius_logo.png";
+import img1 from "../images/liveworkshop1.jpeg";
+import img2 from "../images/liveworkshop2.jpeg";
 import img3 from "../images/SRM.jpeg";
 
 /* GET COMING SUNDAY */
@@ -34,18 +34,18 @@ Current time: ${time}`;
 
 /* DATA */
 const onlineWorkshops = [
-  {
-    level: "BEGINNER",
-    title: "IoT Fundamentals: Sensors to Cloud",
-    desc: "Learn IoT architecture, sensors, and cloud connectivity.",
+   {
+    level: "FREE SESSION",
+    title: "Free Hackathon Tips & Career Guidance",
+    desc: "Learn how to build winning hackathon projects, get career guidance, and understand how IoT innovation works in real industry.",
     date: getComingSunday(),
     time: "11:00 AM - 12:00 PM",
     img: img1,
   },
   {
-    level: "ADVANCED",
-    title: "Advanced Circuit Design & PCB",
-    desc: "Master PCB layout and circuit design techniques.",
+    level: "IOT WORKSHOP",
+    title: "IoT Basic Workshop",
+    desc: "Hands-on IoT learning with Arduino, sensors, and real-world embedded system projects.",
     date: getComingSunday(),
     time: "11:00 AM - 12:00 PM",
     img: img2,
@@ -83,11 +83,11 @@ export default function WorkshopsSection() {
 
   return (
     <section className="ws-section" ref={sectionRef}>
-      <h2 className="ws-title">⚡ Live Workshops & Training</h2>
+      <h2 className="ws-title">Live IoT Workshops & Training</h2>
 
       <p className="ws-sub">
-        Expert-led workshops to master IoT, embedded systems and electronics.
-      </p>
+        Expert-led workshops to master IoT, embedded systems, Arduino, ESP32, and electronics through practical learning.
+         </p>
 
       <div className="ws-toggle">
         <button
@@ -101,19 +101,17 @@ export default function WorkshopsSection() {
           className={type === "offline" ? "active" : ""}
           onClick={() => setType("offline")}
         >
-          In-Person Workshops
+          In-Person IoT Workshops
         </button>
       </div>
 
       <div className="ws-grid">
         {data.map((item, i) => (
           <div className="ws-card" key={i}>
-            <div
-              className="ws-img"
-              style={{ backgroundImage: `url(${item.img})` }}
-            >
-              <span className="ws-badge">{item.level}</span>
-            </div>
+            <div className="ws-img">
+  <img src={item.img} alt={item.title} />
+  <span className="ws-badge">{item.level}</span>
+</div>
 
             <div className="ws-body">
               <h3>{item.title}</h3>

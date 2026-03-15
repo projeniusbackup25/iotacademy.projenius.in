@@ -88,16 +88,15 @@ export default function HomePage() {
 
         <div className="hero-overlay">
           <h1>
-            ProJenius — <span>Build the Future with IoT</span>
+            ProJenius — <span>Build the Future with IoT Learing </span>
           </h1>
 
           <p className="hero-tagline">
-            Learn IoT Like Chitti — From Basics to Advanced
+           Learn IoT Like ProGenius — From Basics to Advanced IoT Projects
           </p>
 
           <p className="hero-desc">
-            A complete learning ecosystem combining IoT kits, structured video
-            courses, and live workshops to build real-world smart solutions.
+            A complete IoT learning ecosystem combining IoT kits, Arduino and ESP32-based projects, structured video courses, and live IoT workshops to help students build real-world smart solutions.
           </p>
 
           <div className="hero-actions">
@@ -109,7 +108,7 @@ export default function HomePage() {
                 })
               }
             >
-              Explore Learning Kits →
+              Explore IoT Learning Kits
             </button>
 
             <button
@@ -120,14 +119,14 @@ export default function HomePage() {
                 })
               }
             >
-              ▶ Watch Demo
+             Watch IoT Demo 
             </button>
           </div>
 
           <div className="hero-stats">
-            <Stat value="1000+" label="Students" />
-            <Stat value="50+" label="Projects" />
-            <Stat value="100%" label="Hands-on" />
+            <Stat value="100+" label="Students Learning IoT" />
+            <Stat value="50+" label="IoT Projects" />
+            <Stat value="100%" label="Hands-on IoT Training" />
           </div>
         </div>
       </section>

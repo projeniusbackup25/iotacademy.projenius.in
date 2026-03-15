@@ -8,15 +8,14 @@ const WorkshopKit = () => {
 
   return (
     <section className="workshop-section">
-      <p className="workshop-tag">Choose Your Path</p>
+      <p className="workshop-tag">Choose Your Learning Path</p>
 
       <h2 className="workshop-title">
-        Workshop <span>Levels</span>
+        IoT Workshop <span>Levels</span>
       </h2>
 
       <p className="workshop-subtitle">
-        Select the perfect starting point for your IoT journey. Each level is
-        crafted to match your current skills and help you progress confidently.
+       Select the perfect starting point for your IoT learning journey. Each workshop level is designed to match your current skills and help you progress confidently in IoT development and real-world projects.
       </p>
 
       <div className="workshop-grid">
@@ -31,16 +30,15 @@ const WorkshopKit = () => {
           <p className="kit-role">Young Explorers</p>
 
           <p className="kit-desc">
-            Perfect for curious minds aged 8–14 who want to discover the magic
-            of electronics!
+           Perfect for curious young learners aged 8–14 who want to explore the basics of electronics and IoT technology.
           </p>
 
           <ul>
             <li>Learn basic electronics with fun experiments</li>
-            <li>Build colorful LED projects</li>
+            <li>Build LED projects using Arduino</li>
             <li>Create simple sensor-based gadgets</li>
-            <li>Understand how circuits work</li>
-            <li>Earn your first IoT certificate!</li>
+            <li>Understand how electronic circuits work</li>
+            <li>Earn your first IoT learning certificate!</li>
           </ul>
 
           <button
@@ -57,20 +55,19 @@ const WorkshopKit = () => {
             <FaRocket />
           </div>
 
-          <h3>Intermediate</h3>
+          <h3>Intermediate IoT Workshop</h3>
           <p className="kit-role">College Innovators</p>
 
           <p className="kit-desc">
-            Ideal for students and enthusiasts ready to build practical IoT
-            solutions.
+            Ideal for students and enthusiasts ready to build practical IoT solutions using Arduino and ESP32.
           </p>
 
           <ul>
-            <li>Master Arduino & ESP32 programming</li>
+            <li>Master Arduino & ESP32 IoT programming</li>
             <li>Build smart home automation systems</li>
-            <li>Create IoT dashboards with real-time data</li>
-            <li>Learn cloud integration techniques</li>
-            <li>Industry-relevant project portfolio</li>
+            <li>Create IoT dashboards with real-time sensor data</li>
+            <li>Learn cloud integration for IoT systems</li>
+            <li>Build an industry-ready IoT project portfolio</li>
           </ul>
 
           <button
@@ -87,20 +84,19 @@ const WorkshopKit = () => {
             <FaCrown />
           </div>
 
-          <h3>Advanced</h3>
+          <h3>Advanced IoT Workshop</h3>
           <p className="kit-role">Pro Engineers</p>
 
           <p className="kit-desc">
-            For professionals seeking cutting-edge AI-IoT integration and
-            industrial solutions.
+           For professionals seeking advanced AI-IoT integration and industrial IoT solutions.
           </p>
 
           <ul>
-            <li>AI & Machine Learning on edge devices</li>
-            <li>Industrial IoT protocols & security</li>
-            <li>Custom PCB design & manufacturing</li>
-            <li>Cloud-native IoT architecture</li>
-            <li>Capstone project with mentorship</li>
+            <li>AI and Machine Learning for IoT edge devices</li>
+            <li>Industrial IoT protocols and security</li>
+            <li>Custom PCB design and IoT hardware development</li>
+            <li>Cloud-based IoT system architecture</li>
+            <li>Capstone IoT project with mentorship</li>
           </ul>
 
           <button

@@ -5,17 +5,18 @@ const testimonials = [
   {
     name: "Arun Kumar",
     text:
-      "The hands-on approach made learning IoT extremely practical and engaging. The step-by-step guidance and real-world projects helped me build my first smart home system within weeks. I now feel confident working with sensors, microcontrollers, and cloud integrations.",
+      "The hands-on approach made learning IoT extremely practical and engaging. The step-by-step guidance and real-world projects helped me build my first smart home system within weeks. I now feel confident working with sensors, Arduino, microcontrollers, and cloud integrations.",
   },
   {
     name: "Priya Sharma",
     text:
-      "This platform completely changed the way I teach IoT concepts. The practical examples, live demonstrations, and project-based learning modules made it easy for my students to understand complex topics. It has become an essential tool in my classroom.",
+      "This platform completely changed the way I teach IoT concepts. The practical examples, live demonstrations, and project-based IoT learning modules made it easy for my students to understand complex electronics and embedded systems topics."
+
   },
   {
     name: "Vikram Rajan",
     text:
-      "The quality of the IoT kits and tutorials exceeded my expectations. Everything was well-structured, beginner-friendly, and supported with clear explanations. It is one of the best investments I’ve made for building a strong foundation in hardware and embedded systems.",
+      "The quality of the IoT kits and tutorials exceeded my expectations. Everything was well-structured, beginner-friendly, and supported with clear explanations. It helped me build a strong foundation in hardware, IoT systems, and embedded development.",
   },
   {
     name: "Sanjay Kumar",

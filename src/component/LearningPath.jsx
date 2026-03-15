@@ -15,11 +15,11 @@ export default function LearningPath() {
   }, []);
 
   const steps = [
-    { id: 1, title: "Beginner", sub: "Fundamentals", icon: "📘", color: "blue" },
-    { id: 2, title: "Intermediate", sub: "Components", icon: "🧱", color: "purple" },
+    { id: 1, title: "Beginner", sub: "IoT Fundamentals", icon: "📘", color: "blue" },
+    { id: 2, title: "Intermediate", sub: "IoT Components & Programming", icon: "🧱", color: "purple" },
     { id: 3, title: "Advanced", sub: "IoT & Cloud", icon: "🚀", color: "yellow" },
-    { id: 4, title: "Certificate", sub: "Recognition", icon: "🏅", color: "blue" },
-    { id: 5, title: "Real Projects", sub: "Experience", icon: "🛠️", color: "purple" },
+    { id: 4, title: "IoT Certificate", sub: "Professional Recognition", icon: "🏅", color: "blue" },
+    { id: 5, title: "Real IoT Projects", sub: "Hands-on Experience", icon: "🛠️", color: "purple" },
   ];
 
   /* ✅ SCROLLS TO WorkshopKit SECTION IN HomePage */
@@ -34,7 +34,7 @@ export default function LearningPath() {
       <p className="lp-tag">YOUR PATH</p>
 
       <h2 className="lp-title">
-        Your IoT <span>Learning Journey</span>
+        Your IoT <span>Learning Journey Roadmap</span>
       </h2>
 
       <div className="lp-wrapper">
@@ -58,7 +58,7 @@ export default function LearningPath() {
       </div>
 
       <button className="lp-cta-btn" onClick={scrollToWorkshopKit}>
-        Choose Your Learning Plan →
+        Choose Your IoT Learning Plan →
       </button>
     </section>
   );

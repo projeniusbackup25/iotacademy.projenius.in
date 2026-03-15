@@ -1,14 +1,14 @@
 .footer {
   background: #050b1f;
   color: #cbd5f5;
-  padding: 70px 130px 30px;
+  padding: 50px 110px 20px;
 }
 
 /* ================= GRID ================= */
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 60px;
+ grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  gap: 40px;
 }
 
 /* ================= BRAND ================= */
@@ -28,8 +28,7 @@
 }
 
 .foot-brand p {
-  margin: 18px 0;
-  line-height: 1.6;
+  margin: 12px 0;
 }
 
 /* ================= SOCIAL ================= */
@@ -163,9 +162,8 @@
 
 /* ================= FOOTER BOTTOM ================= */
 .footer-bottom {
-  margin-top: 50px;
-  padding-top: 30px;
-  border-top: 1px solid #1e293b;
+  margin-top: 35px;
+  padding-top: 20px;
 }
 
 .footer-bottom-row {
@@ -329,4 +327,10 @@
     margin: 0 10px;
   }
 
+}
+
+
+.footer-grid > div h3,
+.footer-grid > div h4 {
+  margin-top: 0;
 }

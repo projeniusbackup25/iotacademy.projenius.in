@@ -76,8 +76,9 @@ const handleSubscribe = async () => {
           
 
           <p>
-            Empowering the next generation with hands-on IoT education.
-            Learn by building real projects.
+            Empowering the next generation with practical IoT education. 
+Learn Internet of Things, Arduino, ESP32, and embedded systems by building real-world projects and smart solutions.
+
           </p>
 
           <div className="socials">
@@ -115,7 +116,7 @@ const handleSubscribe = async () => {
         {/* SUBSCRIBE */}
         <div className="foot-news">
           <h4>Stay Updated</h4>
-          <p>Subscribe to get updates on new kits and workshops.</p>
+          <p>Subscribe to get updates on new IoT workshops, learning kits, and project tutorials.</p>
 
           <div className="sub-box">
             <input
@@ -139,7 +140,7 @@ const handleSubscribe = async () => {
 <div className="footer-bottom">
 
   <div className="footer-bottom-row">
-    <p>© 2025 ProJenius. All rights reserved.</p>
+    <p>© 2025 ProJenius IoT Academy. All rights reserved. </p>
 
     <div className="footer-links">
       <Link to="/privacypolicy">Privacy Policy</Link>

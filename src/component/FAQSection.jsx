@@ -4,43 +4,43 @@ import "./FAQSection.css";
 const faqs = [
   {
     q: "What is IoT and why should I learn it?",
-    a: "IoT (Internet of Things) connects everyday devices to the internet. Learning IoT helps you build smart systems and prepares you for future technology careers.",
+    a: "IoT (Internet of Things) is a technology that connects physical devices like sensors, microcontrollers, and machines to the internet. Learning IoT helps students build smart systems such as home automation, smart agriculture, and real-time monitoring solutions using platforms like Arduino and ESP32.",
   },
   {
     q: "Who can join our IoT programs?",
-    a: "Students, beginners, hobbyists, and professionals can join. No prior coding or electronics knowledge is required to start.",
+    a: "Our IoT programs are designed for school students, college students, beginners, and tech enthusiasts who want to learn electronics, embedded systems, and IoT development from basics to advanced levels.",
   },
   {
     q: "What age groups are your courses designed for?",
-    a: "Our programs are suitable for school students, college students, and working professionals. We offer beginner-friendly learning paths.",
+    a: "Our IoT learning programs are suitable for students aged 10+ as well as college learners and beginners who want to explore electronics, coding, and IoT technologies through hands-on projects.",
   },
   {
     q: "Will I receive hardware kits for practice?",
-    a: "Yes, physical IoT kits will be delivered to your home depending on the course or workshop you enroll in.",
+    a: "Yes, students receive IoT hardware kits that include components like sensors, microcontrollers (Arduino / ESP32), and electronic modules to practice and build real-world IoT projects.",
   },
   {
     q: "How does online learning work?",
-    a: "You will get structured video lessons, guided projects, downloadable materials, and live mentor support sessions.",
+    a: "After registration, students receive access to structured IoT lessons including recorded videos, project tutorials, and guidance to build IoT systems step-by-step at their own pace.",
   },
   {
     q: "Are there live workshops and training sessions?",
-    a: "Yes, we conduct both online and in-person workshops with hands-on activities and real-time interaction with trainers.",
+    a: "Yes, we conduct live IoT workshops and training sessions for schools, colleges, and individual learners to provide hands-on experience with IoT hardware and real-world applications.",
   },
   {
     q: "Will I get a certificate after completion?",
-    a: "Yes, you will receive an industry-recognized certificate after completing the course modules and projects.",
+    a: "Yes, students receive an IoT course completion certificate after successfully finishing the training program and project activities.",
   },
   {
     q: "Can parents track student progress?",
-    a: "Yes, parents and institutions can monitor learning progress through our dashboard and regular performance updates.",
+    a: "Yes, parents can monitor student learning progress, project completion, and skill development through structured course milestones and guidance provided during the program.",
   },
   {
     q: "Are your courses aligned with education standards?",
-    a: "Yes, our programs follow skill-based learning aligned with NEP 2020 and industry requirements.",
+    a: "Yes, our IoT learning modules are designed to align with modern STEM education standards and focus on practical skills in electronics, embedded systems, and IoT development.",
   },
   {
     q: "What is your refund policy?",
-    a: "If a workshop or course is canceled or payment fails, refunds are processed within 5–7 business days.",
+    a: "Refund policies depend on the specific workshop or training program. Please contact our support team for detailed information before enrolling.",
   },
 ];
 

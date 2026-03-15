@@ -37,22 +37,20 @@ export default function HowWeTeach() {
         <div className="teach-content">
 
           <h2>
-            Our Teaching Method — <br />
-            <span>Learn by Building</span>
+            Our IoT Teaching Method <br />
+            <span>Learn by Building Real IoT Projects</span>
           </h2>
 
           <p>
-            We focus on hands-on learning with structured guidance and real
-            projects so students gain strong technical and problem-solving
-            skills.
+           We focus on hands-on IoT learning with structured guidance and real-world projects so students develop strong technical and problem-solving skills in IoT development.
           </p>
 
           <ul>
-            <li>Step-by-step structured learning</li>
+            <li>Step-by-step structured IoT learning</li>
             <li>Hands-on IoT kits delivered to home</li>
-            <li>Beginner to advanced roadmap</li>
-            <li>Real-world industry projects</li>
-            <li>Certificate after completion</li>
+            <li>Beginner to advanced IoT learning roadmap</li>
+            <li>Real-world IoT industry projects</li>
+            <li>IoT course completion certificate</li>
           </ul>
 
           <button
@@ -63,7 +61,7 @@ export default function HowWeTeach() {
                 ?.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            Start Your Learning Journey →
+            Start Your IoT Learning Journey →
           </button>
 
         </div>

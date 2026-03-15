@@ -38,20 +38,21 @@ export default function ProductsSection() {
             <span className="badge blue">Learning Platform</span>
           </div>
 
-          <h3>ProJenius Platform</h3>
+          <h3>IoT Workshops</h3>
 
           <ul>
-            <li>Learning management system</li>
-            <li>Video-based learning portal</li>
-            <li>Student dashboard</li>
-            <li>Progress tracking</li>
+             <li>Hands-on IoT workshops covering Arduino, ESP32, sensors, and real-world projects.</li>
+            <li>Suitable for beginners to advanced learners with expert guidance.</li>
+            <li>Beginner to advanced IoT workshops</li>
+            <li> Arduino & ESP32 programming</li>
+            <li>Sensor-based IoT projects</li>
+            <li> Workshops for schools and colleges</li>
             <li>Certificate system</li>
-            <li>Mobile friendly platform</li>
-            <li>Instructor-led live sessions</li>
-            <li>AI-powered personalized learning paths</li>
+            <li>Workshop completion certificate</li>
+           
           </ul>
 
-          <button className="outline-btn blue">Learn More →</button>
+          <button className="outline-btn blue">Explore Workshops →</button>
         </div>
 
         {/* CARD 2 */}
@@ -61,20 +62,20 @@ export default function ProductsSection() {
             <span className="badge purple">For Institutions</span>
           </div>
 
-          <h3>EduTech Solutions</h3>
+          <h3>Online & Offline IoT Classes</h3>
 
           <ul>
-            <li>Smart learning platforms</li>
-            <li>Digital education systems</li>
-            <li>Automation solutions</li>
-            <li>Learning analytics</li>
-            <li>Virtual classroom systems</li>
-            <li>Student performance dashboards</li>
-            <li>Virtual classroom systems</li>
-            <li>Student performance dashboards</li>
+            <li>Structured IoT learning programs available both online and offline with step-by-step guidance and project-based learning.</li>
+            <li>Online IoT learning sessions</li>
+            <li> In-person classroom training</li>
+            <li>Pre-recorded IoT video lessons after registration</li>
+            <li> Structured IoT curriculum</li>
+            <li>Hands-on hardware learning</li>
+            {/* <li>Virtual classroom systems</li>
+            <li>Student performance dashboards</li> */}
           </ul>
 
-          <button className="outline-btn purple">Learn More →</button>
+          <button className="outline-btn purple">View IoT Classes →</button>
         </div>
 
         {/* CARD 3 */}
@@ -84,20 +85,21 @@ export default function ProductsSection() {
             <span className="badge gold">Retail Solution</span>
           </div>
 
-          <h3>Projenius Jeweler</h3>
+          <h3>IoT Project Development</h3>
 
           <ul>
-            <li>Chit Fund Management</li>
-            <li>Advertisement Management</li>
-            <li>Add / Edit Jewellery Products</li>
-            <li>Gold & Silver Exchange</li>
-            <li>Payment History & Notifications</li>
-            <li>Razorpay Payment Gateway Integration</li>
-            <li>Live Gold Rate Updates</li>
-            <li>Live Process & Transaction Tracking</li>
+            <li>We help students and institutions build real-world IoT projects using Arduino, ESP32, and embedded systems.
+</li>
+            <li>Academic IoT projects</li>
+            <li>Smart automation systems</li>
+            <li>Final year project support</li>
+            <li>PCB design & prototyping</li>
+            <li>Custom IoT solutions</li>
+            {/* <li>Live Gold Rate Updates</li>
+            <li>Live Process & Transaction Tracking</li> */}
           </ul>
 
-          <button className="outline-btn gold">Learn More →</button>
+          <button className="outline-btn gold">Start Your Project →</button>
         </div>
 
       </div>
