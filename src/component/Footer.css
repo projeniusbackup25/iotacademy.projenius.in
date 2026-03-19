@@ -66,10 +66,15 @@
 }
 
 .foot-links h4 {
-  width: 100%;
-  text-align: center;
   margin-bottom: 16px;
   color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* ✅ ensures perfect center */
+
+  min-height: 60px;         /* keep alignment */
+  margin: 0;
 }
 
 .foot-links ul {
@@ -333,4 +338,53 @@
 .footer-grid > div h3,
 .footer-grid > div h4 {
   margin-top: 0;
+}
+
+
+/* ================= ALIGN ALL TOP HEADINGS ================= */
+
+.footer-grid > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Force same starting alignment */
+.footer-grid > div > *:first-child {
+  margin-top: 0;
+}
+
+/* 🔥 Fix brand section alignment */
+.foot-brand {
+  padding-top: 8px; /* try 4px–10px range */
+}
+
+/* 🔥 Ensure headings align perfectly */
+.foot-links h4,
+.foot-contact h4,
+.foot-news h4 {
+  margin-top: 6px; /* match brand alignment */
+}
+
+/* ================= FORCE SAME TOP ALIGNMENT ================= */
+
+.footer-grid > div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🔥 KEY FIX: Reserve same height for top row */
+.brand-row {
+  min-height: 60px;   /* match height of other headings */
+  align-items: center;
+}
+
+/* Make all headings take same vertical space */
+.foot-links h4,
+.foot-contact h4,
+.foot-news h4 {
+  min-height: 60px;   /* SAME as brand-row */
+  display: flex;
+  align-items: center;
+  margin: 0;
 }

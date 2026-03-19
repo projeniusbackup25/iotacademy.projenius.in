@@ -55,7 +55,28 @@
   border: 1px solid rgba(0,0,0,0.04);
   backdrop-filter: blur(6px);
 
+  /* ✅ ADD THESE */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+.outline-btn {
+  margin-top: auto; /* ✅ aligns all buttons */
+}
+
+
+
+
 /* ✅ SUBTLE HOVER */
 .product-card:hover {
   transform: translateY(-6px) scale(1.01);

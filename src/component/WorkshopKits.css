@@ -46,7 +46,8 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 35px;
 
-  width: 100%;
+  width: 80%;
+  /* height: 70%; */
   max-width: 100%;   /* removes restriction */
   padding: 0 40px;   /* keeps spacing from edges */
 }
@@ -82,6 +83,27 @@
     overflow: hidden;
     transition: all 0.35s ease;
   }
+
+  .kit-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.btn-gradient {
+  margin-top: auto;
+}
+
 
   .kit-card::before {
     content: "";

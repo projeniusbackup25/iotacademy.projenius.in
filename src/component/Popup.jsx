@@ -29,7 +29,7 @@ export default function PromoPopup({ onClose }) {
 
         <div className="promo-content">
           <div className="promo-content1">
-          <h2>Start Your IoT Learning Journey 🚀</h2>
+          <h3>Start Your IoT Learning Journey🚀</h3>
           <p>Enroll in our IoT workshop and start building smart IoT systems today.</p>
           </div>
           <button 
