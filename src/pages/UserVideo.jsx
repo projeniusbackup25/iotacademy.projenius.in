@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./UserVideo.css";
+import UserSidebar from "../component/UserSidebar"; // ✅ IMPORT
 
 const API = "https://iotacademy-backend.onrender.com";
-
-/* 🔗 SUBCATEGORIES TO FETCH */
-// const SUB_CATEGORIES = ["beginner", "intermediate", "advanced"];
 
 export default function UserVideo() {
   const [videos, setVideos] = useState([]);
@@ -12,33 +10,30 @@ export default function UserVideo() {
   const [loading, setLoading] = useState(true);
 
   /* 🎥 FETCH ALL VIDEOS */
- useEffect(() => {
-  const fetchVideos = async () => {
-    try {
-      const token = localStorage.getItem("token");
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const token = localStorage.getItem("token");
 
-      const res = await fetch(
-        `${API}/api/videos/user`,
-        {
+        const res = await fetch(`${API}/api/videos/user`, {
           headers: {
             Authorization: token,
           },
-        }
-      );
+        });
 
-      if (!res.ok) throw new Error("Fetch failed");
+        if (!res.ok) throw new Error("Fetch failed");
 
-      const data = await res.json();
-      setVideos(data);
-    } catch (err) {
-      console.error("Error fetching videos:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+        const data = await res.json();
+        setVideos(data);
+      } catch (err) {
+        console.error("Error fetching videos:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchVideos();
-}, []);
+    fetchVideos();
+  }, []);
 
   /* 🔍 SEARCH FILTER */
   const filteredVideos = videos.filter((v) =>
@@ -46,39 +41,13 @@ export default function UserVideo() {
   );
 
   return (
-    <div className="vd-layout">
-      {/* SIDEBAR */}
-      <aside className="ud-sidebar">
-        <div className="ud-logo">
-          <div className="logo-box">⚙</div>
-          <div>
-            <b>IoT Learn</b>
-            <small>Student Portal</small>
-          </div>
-        </div>
-
-        <ul className="ud-menu">
-          <li onClick={() => (window.location.href = "/userdashboard")}>
-            📘 My Course
-          </li>
-          <li className="active">🎥 Videos</li>
-          <li onClick={() => (window.location.href = "/userproject")}>
-            🛠 Projects
-          </li>
-          <li onClick={() => (window.location.href = "/userdownload")}>
-            ⬇ Downloads
-          </li>
-          <li onClick={() => (window.location.href = "/certificate")}>
-            🎓 Certificate
-          </li>
-          <li>❓ Support</li>
-        </ul>
-
-        <button className="upgrade-btn">✨ Upgrade Bundle</button>
-      </aside>
+    <div style={{ display: "flex" }}>
+      
+      {/* ✅ COMMON SIDEBAR */}
+      <UserSidebar />
 
       {/* MAIN */}
-      <main className="vd-main">
+      <main className="vd-main" style={{ marginLeft: "240px", width: "100%" }}>
         <h2>Video Lessons</h2>
         <p className="vd-sub">
           Watch and learn from our comprehensive video library.
@@ -106,7 +75,7 @@ export default function UserVideo() {
               key={video._id}
               title={video.title}
               videoUrl={video.videoUrl}
-              level={video.subCategory.toUpperCase()}
+              level={video.subCategory?.toUpperCase()}
               status="Pending"
             />
           ))}

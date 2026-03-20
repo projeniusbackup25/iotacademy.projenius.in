@@ -16,6 +16,10 @@
   margin-bottom: 4px;
 }
 
+.ud-main {
+  padding: 20px;
+}
+
 .ud-sidebar small {
   color: #64748b;
 }

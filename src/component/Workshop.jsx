@@ -34,12 +34,13 @@ Current time: ${time}`;
 
 /* DATA */
 const onlineWorkshops = [
-   {
+  {
     level: "FREE SESSION",
     title: "Free Hackathon Tips & Career Guidance",
     desc: "Learn how to build winning hackathon projects, get career guidance, and understand how IoT innovation works in real industry.",
     date: getComingSunday(),
     time: "11:00 AM - 12:00 PM",
+    duration: "1 Hour",   // ✅ ADD THIS
     img: img1,
   },
   {
@@ -48,6 +49,7 @@ const onlineWorkshops = [
     desc: "Hands-on IoT learning with Arduino, sensors, and real-world embedded system projects.",
     date: getComingSunday(),
     time: "11:00 AM - 12:00 PM",
+    duration: "1 Hour",   // ✅ ADD THIS
     img: img2,
   },
 ];
@@ -120,6 +122,7 @@ export default function WorkshopsSection() {
               <div className="ws-meta">
                 <span>📅 {item.date}</span>
                 <span>⏰ {item.time}</span>
+                <span>⏳ {item.duration}</span>
               </div>
 
               {/* ✅ ONLY CHANGE IS HERE */}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./UserProject.css";
+import UserSidebar from "../component/UserSidebar"; // ✅ IMPORT
 
 const API = "https://iotacademy-backend.onrender.com";
 
@@ -98,34 +99,13 @@ export default function UserProject() {
   const submitted = projects.filter(p => p.status === "submitted").length;
 
   return (
-    <div className="up-layout">
+    <div style={{ display: "flex" }}>
 
-      {/* SIDEBAR */}
-      <aside className="ud-sidebar">
-
-        <div className="ud-logo">
-          <div className="logo-box">⚙</div>
-          <div>
-            <b>IoT Learn</b>
-            <small>Student Portal</small>
-          </div>
-        </div>
-
-        <ul className="ud-menu">
-          <li onClick={() => window.location.href="/userdashboard"}>📘 My Course</li>
-          <li onClick={() => window.location.href="/uservideo"}>🎥 Videos</li>
-          <li className="active">🛠 Projects</li>
-          <li onClick={() => window.location.href="/userdownload"}>⬇ Downloads</li>
-          <li onClick={() => window.location.href="/certificate"}>🎓 Certificate</li>
-          <li>❓ Support</li>
-        </ul>
-
-        <button className="upgrade-btn">✨ Upgrade Bundle</button>
-
-      </aside>
+      {/* ✅ COMMON SIDEBAR */}
+      <UserSidebar />
 
       {/* MAIN */}
-      <main className="up-main">
+      <main className="up-main" style={{ marginLeft: "240px", width: "100%" }}>
 
         <h2>Projects - Beginner</h2>
 

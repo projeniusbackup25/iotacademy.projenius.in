@@ -1,0 +1,118 @@
+/* ===== SIDEBAR ===== */
+.sidebar {
+    width:240px;
+    height:100%;
+    background:#ffffff;
+    color:#1e293b;
+    position:fixed;
+    top:0;
+    left:0;
+    display:flex;
+    flex-direction:column;
+    padding:20px;
+    border-right:1px solid #e5e7eb;
+    transition:0.3s;
+    z-index:1000;
+}
+
+/* LOGO */
+.logo-section{
+    margin-bottom:30px;
+}
+
+.logo-section h2{
+    font-size:18px;
+    font-weight:600;
+}
+
+.portal-text{
+    font-size:13px;
+    color:#64748b;
+}
+
+/* MENU */
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.menu-item{
+    text-decoration:none;
+    color:#475569;
+    padding:12px 16px;
+    border-radius:10px;
+    font-size:14px;
+    transition:0.2s;
+}
+
+.menu-item:hover{
+    background:#e0ecff;
+    color:#2563eb;
+}
+
+.menu-item.active{
+    background:#2563eb;
+    color:white;
+    font-weight:600;
+}
+
+/* UPGRADE BUTTON */
+.upgrade{
+    margin-top:auto;
+}
+
+.upgrade button{
+    width:100%;
+    padding:12px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* ===== MOBILE ===== */
+.mobile-topbar{
+    display:none;
+}
+
+/* OVERLAY */
+.overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.4);
+    top:0;
+    left:0;
+    z-index:999;
+}
+
+/* MOBILE VIEW */
+@media(max-width:768px){
+
+.sidebar{
+    transform:translateX(-100%);
+}
+
+.sidebar.active{
+    transform:translateX(0);
+}
+
+.mobile-topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#2563eb;
+    padding:12px 16px;
+    color:white;
+}
+
+.menu-btn{
+    font-size:22px;
+    background:none;
+    border:none;
+    color:white;
+    cursor:pointer;
+}
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./UserDashboard.css";
 import { useNavigate } from "react-router-dom";
 import { FaCog } from "react-icons/fa";
+import UserSidebar from "../component/UserSidebar"; // ✅ IMPORT SIDEBAR
 
 export default function UserDashboard() {
   const navigate = useNavigate();
@@ -44,64 +45,13 @@ export default function UserDashboard() {
   };
 
   return (
-    <div className="ud-layout">
-
-     <aside className="ud-sidebar">
-
-  <div className="ud-logo">
-    <div className="logo-box">⚙</div>
-    <div>
-      <b>IoT Learn</b>
-      <small>Student Portal</small>
-    </div>
-  </div>
-
-  <ul className="ud-menu">
-    <li
-      className={window.location.pathname === "/userdashboard" ? "active" : ""}
-      onClick={() => (window.location.href = "/userdashboard")}
-    >
-      📘 My Course
-    </li>
-
-    <li
-      className={window.location.pathname === "/uservideo" ? "active" : ""}
-      onClick={() => (window.location.href = "/uservideo")}
-    >
-      🎥 Videos
-    </li>
-
-    <li
-      className={window.location.pathname === "/userproject" ? "active" : ""}
-      onClick={() => (window.location.href = "/userproject")}
-    >
-      🛠 Projects
-    </li>
-
-    <li
-      className={window.location.pathname === "/userdownload" ? "active" : ""}
-      onClick={() => (window.location.href = "/userdownload")}
-    >
-      ⬇ Downloads
-    </li>
-
-    <li
-      className={window.location.pathname === "/certificate" ? "active" : ""}
-      onClick={() => (window.location.href = "/certificate")}
-    >
-      🎓 Certificate
-    </li>
-
-    <li>❓ Support</li>
-  </ul>
-
-  <button className="upgrade-btn">✨ Upgrade Bundle</button>
-
-</aside>
-
+    <div style={{ display: "flex" }}>
+      
+      {/* ✅ COMMON SIDEBAR */}
+      <UserSidebar />
 
       {/* ================= MAIN ================= */}
-      <main className="ud-main">
+      <main className="ud-main" style={{ marginLeft: "240px", width: "100%" }}>
 
         {/* TOP BAR */}
         <div className="ud-top">

@@ -71,7 +71,6 @@ export default function ContactPage() {
     }
   };
 
-  // AUTO-DISMISS SUCCESS OR ERROR AFTER 4 SECONDS
   useEffect(() => {
     if (popupState === "success" || popupState === "error") {
       const timer = setTimeout(() => {
@@ -88,40 +87,49 @@ export default function ContactPage() {
 
       <section className="contact-section">
         <div className="contact-container">
-
           {/* LEFT SECTION */}
           <div className="contact-left">
             <span className="contact-tag">CONTACT US</span>
 
             <h1>
-              Let’s Build <span>Something</span><br />Together
+              Let’s Build <span>Something</span>
+              <br />
+              Together
             </h1>
 
             <p className="contact-desc">
-              Have questions about our IoT courses, kits, workshops, or collaborations?
-              Our team is here to help you.
+              Have questions about our IoT courses, kits, workshops, or
+              collaborations? Our team is here to help you.
             </p>
 
             <div className="contact-info">
-              <div>
-                <FaEnvelope />
-                <a href="mailto:projenius.iot@gmail.com">projenius.iot@gmail.com</a>
+              <div className="contact-info-item">
+                <span className="contact-icon">
+                  <FaEnvelope />
+                </span>
+                <a href="mailto:projenius.iot@gmail.com">
+                  projenius.iot@gmail.com
+                </a>
               </div>
 
-              <div>
-                <FaPhoneAlt />
-                {/* FIXED: hrefa → href */}
+              <div className="contact-info-item">
+                <span className="contact-icon">
+                  <FaPhoneAlt />
+                </span>
                 <a href="tel:+918925450473">+91 89254 50473</a>
               </div>
 
-              <div>
-                <FaPhoneAlt />
+              <div className="contact-info-item">
+                <span className="contact-icon">
+                  <FaPhoneAlt />
+                </span>
                 <a href="tel:+919025476322">+91 90254 76322</a>
               </div>
 
-              <div>
-                <FaMapMarkerAlt />
-                {/* FIXED: replaced <a> with <p> */}
+              <div className="contact-info-item address-item">
+                <span className="contact-icon">
+                  <FaMapMarkerAlt />
+                </span>
                 <p>
                   Plot no 3, 16, Erikarai St, Velmurugan Nagar, Madurai,
                   Tamil Nadu 625016, India
@@ -132,13 +140,9 @@ export default function ContactPage() {
 
           {/* RIGHT FORM CARD */}
           <div className="contact-card">
-
-            {/* POPUP OVERLAY */}
             {popupState !== "idle" && (
               <div className="popup-overlay">
                 <div className="popup-card">
-
-                  {/* LOADING */}
                   {popupState === "loading" && (
                     <>
                       <div className="popup-loader">
@@ -151,7 +155,6 @@ export default function ContactPage() {
                     </>
                   )}
 
-                  {/* SUCCESS */}
                   {popupState === "success" && (
                     <>
                       <div className="success-emoji">🎉✨</div>
@@ -160,7 +163,6 @@ export default function ContactPage() {
                     </>
                   )}
 
-                  {/* ERROR */}
                   {popupState === "error" && (
                     <>
                       <div className="error-emoji">❌😢</div>
@@ -172,7 +174,6 @@ export default function ContactPage() {
               </div>
             )}
 
-            {/* FORM */}
             {popupState === "idle" && (
               <>
                 <h3>Send Us a Message</h3>
@@ -180,6 +181,7 @@ export default function ContactPage() {
                 <div className="input-group">
                   <FaUser />
                   <input
+                    type="text"
                     name="name"
                     value={form.name}
                     onChange={handleChange}
@@ -190,6 +192,7 @@ export default function ContactPage() {
                 <div className="input-group">
                   <FaPhoneAlt />
                   <input
+                    type="text"
                     name="phone"
                     value={form.phone}
                     onChange={handleChange}
@@ -200,6 +203,7 @@ export default function ContactPage() {
                 <div className="input-group">
                   <FaEnvelope />
                   <input
+                    type="email"
                     name="email"
                     value={form.email}
                     onChange={handleChange}
@@ -208,7 +212,11 @@ export default function ContactPage() {
                 </div>
 
                 <div className="input-group select">
-                  <select name="category" value={form.category} onChange={handleChange}>
+                  <select
+                    name="category"
+                    value={form.category}
+                    onChange={handleChange}
+                  >
                     <option value="">Select Category</option>
                     <option>Courses & Learning</option>
                     <option>IoT Kits</option>
@@ -234,7 +242,6 @@ export default function ContactPage() {
                 </button>
               </>
             )}
-
           </div>
         </div>
       </section>

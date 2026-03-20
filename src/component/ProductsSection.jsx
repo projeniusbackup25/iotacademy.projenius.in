@@ -21,13 +21,13 @@ export default function ProductsSection() {
   return (
     <section className="products-section" ref={sectionRef}>
 
-      <p className="section-tag">OUR SOLUTIONS</p>
+      <p className="section-tag">OUR SERVICES</p>
       <h2 className="section-title">
-        Our <span>Products</span>
+       IoT Learning Programs <span>& Project Solutions</span>
       </h2>
-      <p className="section-sub">
-        Powerful platforms and solutions to transform education and business.
-      </p>
+      {/* <p className="section-sub">
+        Explore our hands-on IoT learning programs, workshops, and project development services designed to help students and innovators build real-world smart systems using Arduino, ESP32, sensors, and embedded technologies.
+      </p> */}
 
       <div className="product-grid">
 
@@ -36,10 +36,10 @@ export default function ProductsSection() {
           <div className="card-content">
             <div className="card-top">
               <div className="icon-box blue">📘</div>
-              <span className="badge blue">Learning Platform</span>
+              <span className="badge blue">Learning Programs</span>
             </div>
 
-            <h3>IoT Workshops</h3>
+            <h3>IoT Workshops & Hands-on Training</h3>
 
             <ul>
               <li>Suitable for beginners to advanced learners with expert guidance.</li>
@@ -51,7 +51,7 @@ export default function ProductsSection() {
             </ul>
           </div>
 
-          <button className="outline-btn blue">Explore Workshops →</button>
+          <button className="outline-btn blue">Explore IoT Workshops →</button>
         </div>
 
         {/* CARD 2 */}
@@ -59,7 +59,7 @@ export default function ProductsSection() {
           <div className="card-content">
             <div className="card-top">
               <div className="icon-box purple">💡</div>
-              <span className="badge purple">For Institutions</span>
+              <span className="badge purple">Structured Learning</span>
             </div>
 
             <h3>Online & Offline IoT Classes</h3>
@@ -82,7 +82,7 @@ export default function ProductsSection() {
           <div className="card-content">
             <div className="card-top">
               <div className="icon-box gold">💍</div>
-              <span className="badge gold">Retail Solution</span>
+              <span className="badge gold">Project Solutions</span>
             </div>
 
             <h3>IoT Project Development</h3>

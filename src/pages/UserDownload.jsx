@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
 import "./UserDownload.css";
+import UserSidebar from "../component/UserSidebar"; // ✅ IMPORT
 
 const files = [
   {
@@ -43,7 +43,6 @@ const files = [
 
 export default function UserDownloads() {
   const [filter, setFilter] = useState("All");
-  
 
   const filteredFiles =
     filter === "All"
@@ -51,64 +50,13 @@ export default function UserDownloads() {
       : files.filter((item) => item.type === filter);
 
   return (
-    <div className="ud-layout">
+    <div style={{ display: "flex" }}>
 
-     <aside className="ud-sidebar">
-
-  <div className="ud-logo">
-    <div className="logo-box">⚙</div>
-    <div>
-      <b>IoT Learn</b>
-      <small>Student Portal</small>
-    </div>
-  </div>
-
-  <ul className="ud-menu">
-    <li
-      className={window.location.pathname === "/userdashboard" ? "active" : ""}
-      onClick={() => (window.location.href = "/userdashboard")}
-    >
-      📘 My Course
-    </li>
-
-    <li
-      className={window.location.pathname === "/uservideo" ? "active" : ""}
-      onClick={() => (window.location.href = "/uservideo")}
-    >
-      🎥 Videos
-    </li>
-
-    <li
-      className={window.location.pathname === "/userproject" ? "active" : ""}
-      onClick={() => (window.location.href = "/userproject")}
-    >
-      🛠 Projects
-    </li>
-
-    <li
-      className={window.location.pathname === "/userdownload" ? "active" : ""}
-      onClick={() => (window.location.href = "/userdownload")}
-    >
-      ⬇ Downloads
-    </li>
-
-    <li
-      className={window.location.pathname === "/certificate" ? "active" : ""}
-      onClick={() => (window.location.href = "/certificate")}
-    >
-      🎓 Certificate
-    </li>
-
-    <li>❓ Support</li>
-  </ul>
-
-  <button className="upgrade-btn">✨ Upgrade Bundle</button>
-
-</aside>
-
+      {/* ✅ COMMON SIDEBAR */}
+      <UserSidebar />
 
       {/* MAIN */}
-      <main className="ud-main">
+      <main className="ud-main" style={{ marginLeft: "240px", width: "100%" }}>
 
         <h2>Downloads</h2>
         <p className="ud-sub">

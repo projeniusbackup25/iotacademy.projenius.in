@@ -15,7 +15,7 @@ const WorkshopKit = () => {
       </h2>
 
       <p className="workshop-subtitle">
-        Select the perfect starting point for your IoT learning journey. Each workshop level is designed to match your current skills and help you progress confidently in IoT development and real-world projects.
+        Select the perfect starting point for your IoT learning journey.Each workshop level is designed to match your current skills and help you progress confidently in IoT development and real-world projects.
       </p>
 
       <div className="workshop-grid">
@@ -27,7 +27,7 @@ const WorkshopKit = () => {
               <FaStar />
             </div>
 
-            <h3>Beginner</h3>
+            <h3>Beginner IoT Workshop</h3>
             <p className="kit-role">Young Explorers</p>
 
             <p className="kit-desc">

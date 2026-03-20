@@ -1,76 +1,26 @@
 import React from "react";
-
 import "./Certificate.css";
+import UserSidebar from "../component/UserSidebar"; // ✅ IMPORT
 
 export default function Certificate() {
 
   const overallProgress = 68;
 
   return (
-    <div className="cert-layout">
-      {/* SIDEBAR */}
-      <aside className="ud-sidebar">
+    <div style={{ display: "flex" }}>
 
-  <div className="ud-logo">
-    <div className="logo-box">⚙</div>
-    <div>
-      <b>IoT Learn</b>
-      <small>Student Portal</small>
-    </div>
-  </div>
-
-  <ul className="ud-menu">
-    <li
-      className={window.location.pathname === "/userdashboard" ? "active" : ""}
-      onClick={() => (window.location.href = "/userdashboard")}
-    >
-      📘 My Course
-    </li>
-
-    <li
-      className={window.location.pathname === "/uservideo" ? "active" : ""}
-      onClick={() => (window.location.href = "/uservideo")}
-    >
-      🎥 Videos
-    </li>
-
-    <li
-      className={window.location.pathname === "/userproject" ? "active" : ""}
-      onClick={() => (window.location.href = "/userproject")}
-    >
-      🛠 Projects
-    </li>
-
-    <li
-      className={window.location.pathname === "/userdownload" ? "active" : ""}
-      onClick={() => (window.location.href = "/userdownload")}
-    >
-      ⬇ Downloads
-    </li>
-
-    <li
-      className={window.location.pathname === "/certificate" ? "active" : ""}
-      onClick={() => (window.location.href = "/certificate")}
-    >
-      🎓 Certificate
-    </li>
-
-    <li>❓ Support</li>
-  </ul>
-
-  <button className="upgrade-btn">✨ Upgrade Bundle</button>
-
-</aside>
-
+      {/* ✅ COMMON SIDEBAR */}
+      <UserSidebar />
 
       {/* MAIN CONTENT */}
-      <main className="cert-main">
+      <main className="cert-main" style={{ marginLeft: "240px", width: "100%" }}>
         <h1>Certificate</h1>
         <p className="cert-sub">
           Complete all requirements to earn your IoT Academy certificate.
         </p>
 
         <div className="cert-content">
+          
           <div className="cert-preview">
             <div className="cert-overlay">
               <h3>Certificate Pending</h3>
@@ -86,6 +36,7 @@ export default function Certificate() {
                 <span>Overall Progress</span>
                 <strong>{overallProgress}%</strong>
               </div>
+
               <div className="progress-bar">
                 <div
                   className="progress-fill"
@@ -98,6 +49,7 @@ export default function Certificate() {
               ⬇ Complete All Requirements
             </button>
           </div>
+
         </div>
       </main>
     </div>

@@ -41,9 +41,9 @@ export default function HowWeTeach() {
             <span>Learn by Building Real IoT Projects</span>
           </h2>
 
-          <p>
+          {/* <p>
            We focus on hands-on IoT learning with structured guidance and real-world projects so students develop strong technical and problem-solving skills in IoT development.
-          </p>
+          </p> */}
 
           <ul>
             <li>Step-by-step structured IoT learning</li>

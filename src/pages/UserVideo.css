@@ -12,6 +12,14 @@
   padding: 24px;
 }
 
+.vd-main {
+  padding: 20px;
+}
+
+.up-main {
+  padding: 20px;
+}
+
 .vd-logo {
   display: flex;
   gap: 12px;

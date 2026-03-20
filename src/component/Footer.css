@@ -388,3 +388,18 @@
   align-items: center;
   margin: 0;
 }
+
+
+
+.foot-links,
+.foot-contact,
+.foot-news {
+  margin-top: 10px;   /* 🔥 adjust this value */
+}
+
+/* 🔥 SAME COLOR FOR ALL HEADINGS */
+.foot-links h4,
+.foot-contact h4,
+.foot-news h4 {
+  color: #d1d3f1fb;   /* pure white */
+}
